@@ -8,6 +8,7 @@ import Card from '../components/ui/Card';
 import Button from '../components/ui/Button';
 import Breadcrumbs from '../components/seo/Breadcrumbs';
 import { COMPANY_INFO } from '../data/companyInfo';
+import { sendContactEmail } from '../services/emailService';
 
 // Import reusable Contact components
 import ContactHero from '../components/contact/ContactHero';
@@ -58,8 +59,8 @@ const useContactForm = (onSuccess) => {
     return null;
   };
 
-  const handleSubmit = async (e, accessKey) => {
-    e.preventDefault();
+  const handleSubmit = async (e) => {
+    if (e) e.preventDefault();
     const validationError = validate();
     if (validationError) {
       setSubmitError(validationError);
@@ -70,31 +71,25 @@ const useContactForm = (onSuccess) => {
     setSubmitError(null);
 
     try {
-      const response = await fetch('https://api.web3forms.com/submit', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          Accept: 'application/json',
-        },
-        body: JSON.stringify({
-          access_key: accessKey,
-          subject: 'New Consultation Inquiry - ClearFiling',
-          from_name: `${formData.name} (ClearFiling Contact Form)`,
-          ...formData
-        }),
-      });
+      // Map 'city' from the form to 'company' as required by EmailJS templates mapping
+      const emailPayload = {
+        name: formData.name,
+        email: formData.email,
+        phone: formData.phone,
+        company: formData.city,
+        service: formData.service,
+        message: formData.message,
+      };
 
-      const result = await response.json();
+      const result = await sendContactEmail(emailPayload);
       if (result.success) {
         setSubmitted(true);
         setFormData({ name: '', phone: '', email: '', city: '', service: '', message: '' });
         if (onSuccess) onSuccess();
         setTimeout(() => setSubmitted(false), 5000);
-      } else {
-        setSubmitError(result.message || 'Something went wrong. Please try again.');
       }
     } catch (err) {
-      setSubmitError('Something went wrong. Please try again.');
+      setSubmitError(err.message || 'Unable to submit your inquiry right now. Please try again or contact us directly.');
     } finally {
       setSubmitting(false);
     }
@@ -112,7 +107,6 @@ const useContactForm = (onSuccess) => {
 };
 
 const Contact = () => {
-  const ACCESS_KEY = import.meta.env.VITE_WEB3FORMS_ACCESS_KEY;
   const {
     formData,
     submitting,
@@ -125,7 +119,7 @@ const Contact = () => {
   const [openFaq, setOpenFaq] = useState(null);
 
   const onSubmit = (e) => {
-    handleSubmit(e, ACCESS_KEY);
+    handleSubmit(e);
   };
 
   const inputClass = 'w-full bg-slate-50 border border-slate-200 focus:border-brand-primary focus:ring-4 focus:ring-brand-primary/10 rounded-xl px-4 py-3 text-sm text-slate-800 outline-none transition-all placeholder-slate-400 font-sans';
@@ -207,11 +201,6 @@ const Contact = () => {
               </div>
 
               <form onSubmit={onSubmit} className="space-y-4" noValidate>
-                <input
-                  type="hidden"
-                  name="access_key"
-                  value={ACCESS_KEY || ''}
-                />
 
                 {submitError && (
                   <div className="p-3.5 bg-red-50 border border-red-200 text-red-600 text-xs font-semibold rounded-xl flex items-center gap-2" role="alert">
@@ -256,6 +245,7 @@ const Contact = () => {
                     <option>Website Development</option>
                     <option>E-Commerce Website Development</option>
                     <option>Custom Web Applications</option>
+                    <option>Digital Signature (DSC)</option>
                     <option>Other</option>
                   </select>
                 </div>

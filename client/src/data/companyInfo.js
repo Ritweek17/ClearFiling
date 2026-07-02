@@ -6,7 +6,7 @@
 export const COMPANY_INFO = {
   brandName: 'ClearFiling',
   legalName: 'ClearFiling & Compliance LLP',
-  tagline: 'Integrity • Sincerity • Dedication',
+  tagline: 'Integrity • Sanctity • Dedication',
   shortDescription:
     'Clear Filing is a modern corporate advisory and compliance firm helping startups, MSMEs and enterprises with company registration, taxation, legal compliance and business advisory services across India.',
   established: 2020,
@@ -42,6 +42,17 @@ export const COMPANY_INFO = {
         'Asha Complex, 30 Feet Road,',
         'Near Nahar, Bhikhampur Road,',
         'Deoria, Uttar Pradesh – 274001',
+      ],
+      mapsUrl: null,
+    },
+    {
+      id: 'gorakhpur',
+      city: 'Gorakhpur',
+      label: 'Gorakhpur Office',
+      address: '100D, Surajkund Colony, Gorakhpur, Uttar Pradesh – 273015',
+      lines: [
+        '100D, Surajkund Colony,',
+        'Gorakhpur, Uttar Pradesh – 273015',
       ],
       mapsUrl: null,
     },

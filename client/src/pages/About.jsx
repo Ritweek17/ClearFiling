@@ -15,7 +15,7 @@ import { COMPANY_INFO } from '../data/companyInfo';
 // ─── Data ──────────────────────────────────────────────────────────────────
 const CORE_VALUES = [
   { icon: ShieldCheck, title: 'Integrity', desc: 'We deliver honest, unbiased advisory — even when the answer is not what the client hoped to hear. Transparency is non-negotiable.' },
-  { icon: HeartHandshake, title: 'Sincerity', desc: 'Every client engagement is treated with the same dedication we would apply to our own business. No shortcuts.' },
+  { icon: HeartHandshake, title: 'Sanctity', desc: 'Every client engagement is treated with the same dedication we would apply to our own business. No shortcuts.' },
   { icon: Star, title: 'Dedication', desc: 'We stay committed to every case from the first consultation to final approval delivery — and beyond, through post-registration support.' },
 ];
 
@@ -39,7 +39,7 @@ const STATS = [
   { value: '10,000+', label: 'Clients Served', icon: Users },
   { value: '6+ Years', label: 'Industry Experience', icon: Clock },
   { value: '5', label: 'Qualified Professionals', icon: Briefcase },
-  { value: '2', label: 'Active Offices', icon: MapPin },
+  { value: '3', label: 'Active Offices', icon: MapPin },
 ];
 
 // ─── Component ──────────────────────────────────────────────────────────────
@@ -60,7 +60,7 @@ const About = () => {
             About ClearFiling
           </Badge>
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold font-heading tracking-tight text-white leading-tight max-w-4xl mx-auto">
-            Integrity. Sincerity. Dedication.
+            Integrity. Sanctity. Dedication.
           </h1>
           <p className="text-slate-300 max-w-2xl mx-auto text-base md:text-lg font-sans leading-relaxed">
             Since 2020, ClearFiling & Compliance LLP has helped over 10,000 businesses across India with company registration, taxation, trademark, and compliance advisory — with full transparency and expert precision.
@@ -137,7 +137,7 @@ const About = () => {
             <Card className="p-5 bg-slate-50 border border-slate-100 space-y-3">
               <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Core Values</span>
               <div className="flex flex-wrap gap-2">
-                {['Integrity', 'Sincerity', 'Dedication'].map(v => (
+                {['Integrity', 'Sanctity', 'Dedication'].map(v => (
                   <div key={v} className="flex items-center gap-1.5 px-3 py-1.5 bg-brand-bg border border-brand-primary/10 rounded-full text-xs font-bold text-brand-primary">
                     <ShieldCheck className="w-3.5 h-3.5" />{v}
                   </div>

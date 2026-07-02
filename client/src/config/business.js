@@ -8,7 +8,7 @@ const BUSINESS = {
   // Brand
   name: 'Clear Filing',
   legalName: 'Clear Filing & Compliance LLP',
-  tagline: 'Integrity • Sincerity • Dedication',
+  tagline: 'Integrity • Sanctity • Dedication',
   abbreviation: 'CF',
   established: 2020,
   description:
@@ -19,7 +19,7 @@ const BUSINESS = {
     clientsServed: '10,000+',
     yearsExperience: '6+',
     professionals: 5,
-    officesCount: 2,
+    officesCount: 3,
   },
 
   // SEO / Schema

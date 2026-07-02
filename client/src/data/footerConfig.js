@@ -9,7 +9,7 @@
 export const FOOTER_COMPANY = {
   brandName: 'ClearFiling',
   legalName: 'ClearFiling & Compliance LLP',
-  tagline: 'Integrity • Sincerity • Dedication',
+  tagline: 'Integrity • Sanctity • Dedication',
   established: 2020,
   description:
     'Clear Filing is a modern corporate advisory and compliance firm helping startups, MSMEs and enterprises with company registration, taxation, legal compliance and business advisory services across India.',
@@ -46,6 +46,15 @@ export const FOOTER_OFFICES = [
     ],
     mapsUrl: null,
   },
+  {
+    id: 'gorakhpur',
+    label: 'Gorakhpur Office',
+    lines: [
+      '100D, Surajkund Colony,',
+      'Gorakhpur, Uttar Pradesh – 273015',
+    ],
+    mapsUrl: null,
+  },
 ];
 
 // ─── SOCIAL ───────────────────────────────────────────────────────────────────
@@ -74,10 +83,24 @@ export const FOOTER_QUICK_LINKS = [
   { label: 'Home', to: '/' },
   { label: 'About Us', to: '/about' },
   { label: 'Services', to: '/services' },
+  { label: 'Documentation', to: '/', section: 'documentation' },
   { label: 'Why Choose Us', to: '/', section: 'why-choose' },
   { label: 'Testimonials', to: '/', section: 'testimonials' },
   { label: 'FAQ', to: '/', section: 'faq' },
   { label: 'Contact Us', to: '/contact' },
+];
+
+export const FOOTER_LOANS = [
+  { label: 'Personal Loan',             slug: null },
+  { label: 'Home Loan',                 slug: null },
+  { label: 'Business Loan',             slug: 'business-loan' },
+  { label: 'MSME Loan',                 slug: null },
+  { label: 'Working Capital Loan',      slug: null },
+  { label: 'Startup Loan',              slug: null },
+  { label: 'Education Loan',            slug: null },
+  { label: 'Vehicle Loan',              slug: null },
+  { label: 'Loan Against Property',     slug: null },
+  { label: 'View All Loan Services',    slug: null },
 ];
 
 // ─── POPULAR SERVICES ─────────────────────────────────────────────────────────
@@ -95,6 +118,7 @@ export const FOOTER_SERVICES = [
   { label: 'Income Tax Filing',         slug: null },
   { label: 'Annual Compliance',         slug: null },
   { label: 'Business Advisory',         slug: null },
+  { label: 'Digital Signature',         slug: null },
 ];
 
 // ─── RESOURCES ────────────────────────────────────────────────────────────────

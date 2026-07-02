@@ -11,6 +11,7 @@ const NAV_LINKS = [
   { label: 'Home', targetId: 'home' },
   { label: 'About', targetId: 'about' },
   { label: 'Services', targetId: 'services' },
+  { label: 'Documentation', targetId: 'documentation' },
   { label: 'Why Choose Us', targetId: 'why-choose' },
   { label: 'Testimonials', targetId: 'testimonials' },
   { label: 'FAQ', targetId: 'faq' },

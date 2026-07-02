@@ -63,7 +63,7 @@ const AboutSection = () => {
           <div className="pt-2">
             <span className="text-xs font-bold text-slate-400 uppercase tracking-widest block mb-3">Our Core Values</span>
             <div className="flex flex-wrap gap-3">
-              {['Integrity', 'Sincerity', 'Dedication'].map((value) => (
+              {['Integrity', 'Sanctity', 'Dedication'].map((value) => (
                 <div 
                   key={value}
                   className="flex items-center gap-2 px-4 py-2 bg-brand-bg/50 border border-brand-primary/10 rounded-full text-xs font-bold text-brand-primary tracking-wide"
@@ -96,7 +96,7 @@ const AboutSection = () => {
                 <div className="text-[10px] text-slate-400 font-bold uppercase tracking-wider mt-1">Professionals</div>
               </div>
               <div className="p-4 bg-slate-50 rounded-xl border border-slate-100 col-span-2 sm:col-span-1">
-                <div className="text-lg font-black font-heading text-brand-primary leading-none mt-1">Delhi & Deoria</div>
+                <div className="text-sm font-black font-heading text-brand-primary leading-none mt-1.5">Delhi, Deoria & Gorakhpur</div>
                 <div className="text-[10px] text-slate-400 font-bold uppercase tracking-wider mt-2.5">Active Offices</div>
               </div>
             </div>

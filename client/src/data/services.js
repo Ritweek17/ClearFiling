@@ -30,7 +30,8 @@ export const CATEGORIES = [
   'Income Tax Services',
   'Corporate Compliance',
   'International Business Services',
-  'Digital Solutions'
+  'Digital Solutions',
+  'Loan Services'
 ];
 
 export const SERVICES = [
@@ -1517,6 +1518,45 @@ export const SERVICES = [
     futurePage: '/services/international-advisory'
   },
   {
+    id: 'digital-signature',
+    slug: 'digital-signature',
+    category: 'Digital Solutions',
+    title: 'Digital Signature',
+    subtitle: 'Certificate (DSC)',
+    shortDescription: 'Obtain Class 3 Digital Signature Certificate (DSC) online. Secure, verified, and mandatory for e-filings in India.',
+    description: 'A Class 3 Digital Signature Certificate (DSC) is the highest level of security certificate issued under the Information Technology Act. It is mandatory for company incorporation, GST registration, income tax filing, and government e-tenders.',
+    longDescription: 'Get your secure Class 3 Digital Signature Certificate (DSC) issued in under 24 hours. The process is completely paperless and relies on video/Aadhaar verification. ClearFiling helps you secure your USB token and signature files quickly so you can proceed with MCA, GST, or tax filing. A digital signature establishes the signer\'s identity legally and guarantees document integrity.',
+    metaTitle: 'Class 3 Digital Signature Certificate (DSC) Online | ClearFiling',
+    metaDescription: 'Get your secure Class 3 Digital Signature Certificate (DSC) online with ClearFiling. 100% paperless verification. USB token delivery across India.',
+    keywords: ['digital signature', 'dsc online', 'class 3 dsc', 'usb token signature', 'signature', 'digital signature certificate', 'dsc', 'class 3 dsc', 'usb token'],
+    iconName: 'FileCheck2',
+    featured: true,
+    processingTime: '1 - 2 Business Days',
+    requiredDocuments: [
+      'PAN Card of applicant',
+      'Aadhaar Card or Address Proof',
+      'Mobile number linked with Aadhaar',
+      'Email address'
+    ],
+    benefits: [
+      'Legally valid under the Information Technology Act',
+      'Class 3 security grade for MCA, GST, and Income Tax portals',
+      'Paperless paper-free Aadhaar-based application',
+      'Fast video verification support from our experts'
+    ],
+    faqReference: [
+      { q: 'What is a Class 3 Digital Signature?', a: 'Class 3 DSC is the highest level of digital signature used for e-filing, e-tenders, MCA, and GST portal actions.' },
+      { q: 'How long is the DSC valid?', a: 'Typically, Digital Signature Certificates are issued with a validity of 2 years, after which they must be renewed.' }
+    ],
+    relatedServices: [
+      { id: 'private-limited-company', title: 'Private Limited Company' },
+      { id: 'gst-registration', title: 'GST Registration' },
+      { id: 'trademark-registration', title: 'Trademark Registration' }
+    ],
+    canonicalSlug: 'https://clearfiling.in/services/digital-signature',
+    futurePage: '/services/digital-signature'
+  },
+  {
     id: 'website-development',
     slug: 'website-development',
     category: 'Digital Solutions',
@@ -1613,6 +1653,567 @@ export const SERVICES = [
     ],
     canonicalSlug: 'https://clearfiling.in/services/custom-web-applications',
     futurePage: '/services/custom-web-applications'
+  },
+  {
+    id: 'personal-loan',
+    slug: 'personal-loan',
+    category: 'Loan Services',
+    title: 'Personal Loan',
+    shortDescription: 'Unsecured personal financing to meet immediate individual capital requirements with flexible repayment options.',
+    description: 'Obtain quick personal financing for personal, medical, or urgent needs. Hassle-free online verification and quick disbursal.',
+    iconName: 'UserCheck',
+    processingTime: '2 - 4 Business Days',
+    keywords: ['personal loan', 'unsecured loan', 'personal finance', 'quick loan'],
+    benefits: [
+      'No collateral or security required',
+      'Flexible tenures up to 60 months',
+      'Instant online eligibility check',
+      'Direct bank account transfer'
+    ],
+    requiredDocuments: [
+      'PAN Card and Aadhaar Card',
+      'Salary slips for the last 3 months',
+      'Bank statement for the last 6 months',
+      'Address proof'
+    ],
+    faqReference: [
+      { q: 'What is the minimum credit score for a Personal Loan?', a: 'Most banks prefer a credit score of 750 or above for unsecured personal loans.' }
+    ],
+    canonicalSlug: 'https://clearfiling.in/services/personal-loan',
+    futurePage: '/services/personal-loan'
+  },
+  {
+    id: 'home-loan',
+    slug: 'home-loan',
+    category: 'Loan Services',
+    title: 'Home Loan',
+    shortDescription: 'Long-term housing finance solutions for purchasing, constructing, or renovating residential properties.',
+    description: 'Long-term housing finance solutions to help you purchase your dream home, construct a new house, or renovate an existing property.',
+    iconName: 'Building2',
+    processingTime: '7 - 15 Business Days',
+    keywords: ['home loan', 'housing finance', 'home construction', 'property loan'],
+    benefits: [
+      'Attractive interest rates with tax benefits under Sec 24 & 80C',
+      'Repayment tenure up to 30 years',
+      'Simple step-by-step documentation',
+      'Balance transfer option available'
+    ],
+    requiredDocuments: [
+      'Identity and Address Proofs',
+      'Income proof (Salaried or Self-Employed)',
+      'Property title deeds & chain documents',
+      'No Objection Certificate (NOC) from authority'
+    ],
+    faqReference: [
+      { q: 'Can I get tax benefits on a Home Loan?', a: 'Yes, you can claim deductions on principal under Section 80C and interest under Section 24.' }
+    ],
+    canonicalSlug: 'https://clearfiling.in/services/home-loan',
+    futurePage: '/services/home-loan'
+  },
+  {
+    id: 'business-loan',
+    slug: 'business-loan',
+    category: 'Loan Services',
+    title: 'Business Loan',
+    shortDescription: 'Customized funding solutions for company expansion, commercial upgrades, and inventory investment.',
+    description: 'Secure capital for corporate expansion, technology upgrades, working capital, or inventory purchase. ClearFiling helps you prepare project reports, assess eligibility, and process loan applications with leading banks.',
+    iconName: 'Landmark',
+    featured: true,
+    processingTime: '7 - 14 Business Days',
+    keywords: ['business loan', 'corporate finance', 'secured loan', 'unsecured business credit', 'bank loan company', 'business funding'],
+    benefits: [
+      'Competitive interest rates from leading public & private banks',
+      'Flexible repayment tenures up to 5 years',
+      'Professional project report preparation by experienced CAs',
+      'End-to-end application tracking and bank coordination'
+    ],
+    requiredDocuments: [
+      'Last 2 years ITR and Audited Financials',
+      'Bank statement for the last 6 months',
+      'KYC documents of Promoters/Directors',
+      'GST Returns (GSTR-3B) for the last 1 year',
+      'Project report and fund utilization plan'
+    ],
+    faqReference: [
+      { q: 'What is the eligibility for a Business Loan?', a: 'Eligibility depends on business vintage (typically min 2 years), annual turnover, credit score, and financial health shown in tax returns.' },
+      { q: 'Do you guarantee loan approval?', a: 'While we structure your application to maximize approval chances, the final sanction depends on the bank\'s internal credit assessment.' }
+    ],
+    relatedServices: [
+      { id: 'msme-registration', title: 'MSME Registration' },
+      { id: 'private-limited-company', title: 'Private Limited Company' }
+    ],
+    canonicalSlug: 'https://clearfiling.in/services/business-loan',
+    futurePage: '/services/business-loan'
+  },
+  {
+    id: 'msme-loan',
+    slug: 'msme-loan',
+    category: 'Loan Services',
+    title: 'MSME Loan',
+    shortDescription: 'Specialized government-backed credit schemes to support micro, small, and medium enterprises.',
+    description: 'Avail government-backed schemes like CGTMSE, PMEGP, or Mudra loans. Specially designed to boost the MSME sector with low interest rates.',
+    iconName: 'Briefcase',
+    processingTime: '5 - 10 Business Days',
+    keywords: ['msme loan', 'cgtmse', 'mudra loan', 'small business loan', 'government loan'],
+    benefits: [
+      'Collateral-free options under government schemes',
+      'Subsidized interest rates and processing fees',
+      'Priority sector lending benefits',
+      'Quick approval process'
+    ],
+    requiredDocuments: [
+      'Udyam Registration Certificate',
+      'Business KYC and entity proof',
+      'ITR and GST returns',
+      'Project profile and quotation for machinery'
+    ],
+    faqReference: [
+      { q: 'Is Udyam Registration mandatory for MSME loans?', a: 'Yes, a valid Udyam Registration Certificate is required to claim MSME interest subsidies.' }
+    ],
+    canonicalSlug: 'https://clearfiling.in/services/msme-loan',
+    futurePage: '/services/msme-loan'
+  },
+  {
+    id: 'startup-loan',
+    slug: 'startup-loan',
+    category: 'Loan Services',
+    title: 'Startup Loan',
+    shortDescription: 'Seed funding and initial capital solutions designed specifically to launch high-potential startups.',
+    description: 'Access seed capital and specialized funding programs designed to help early-stage startups establish operations and scale.',
+    iconName: 'Zap',
+    processingTime: '10 - 20 Business Days',
+    keywords: ['startup loan', 'seed funding', 'venture loan', 'startup capital'],
+    benefits: [
+      'Funding options tailored for non-revenue or early-revenue models',
+      'Advisory on government startup grant programs',
+      'Mentorship and business validation support',
+      'Flexible restructuring options'
+    ],
+    requiredDocuments: [
+      'DPIIT Startup Recognition Certificate',
+      'Pitch deck and business model blueprint',
+      'Founder profile and credit reports',
+      'Incorporation certificate & tax registrations'
+    ],
+    faqReference: [
+      { q: 'Can a newly registered company apply for a startup loan?', a: 'Yes, startup-specific credit schemes evaluate business feasibility and promoter profile rather than historic financials.' }
+    ],
+    canonicalSlug: 'https://clearfiling.in/services/startup-loan',
+    futurePage: '/services/startup-loan'
+  },
+  {
+    id: 'working-capital-loan',
+    slug: 'working-capital-loan',
+    category: 'Loan Services',
+    title: 'Working Capital Loan',
+    shortDescription: 'Short-term funding to manage daily operational expenses, payroll, and maintain healthy cash flow.',
+    description: 'Ensure smooth operational flow. Short-term funds to finance raw materials, inventory, payroll, and other daily running costs.',
+    iconName: 'TrendingUp',
+    processingTime: '5 - 10 Business Days',
+    keywords: ['working capital', 'inventory funding', 'short term business loan', 'cash flow loan'],
+    benefits: [
+      'Maintains uninterrupted business operations',
+      'Short-term commitment with quick payback cycles',
+      'Improves credit standing with suppliers',
+      'Customized limits based on turnover'
+    ],
+    requiredDocuments: [
+      'Audited financial statements',
+      'Stock and debtors statement',
+      'GST returns and bank statement',
+      'Existing loan track record'
+    ],
+    faqReference: [
+      { q: 'What is the limit based on?', a: 'The limit is calculated using the holding period of inventory, debtors, and creditors.' }
+    ],
+    canonicalSlug: 'https://clearfiling.in/services/working-capital-loan',
+    futurePage: '/services/working-capital-loan'
+  },
+  {
+    id: 'education-loan',
+    slug: 'education-loan',
+    category: 'Loan Services',
+    title: 'Education Loan',
+    shortDescription: 'Comprehensive student financial aid to cover domestic and international academic tuition fees.',
+    description: 'Finance your higher education in India or abroad. Covers tuition fees, exam fees, travel, and accommodation.',
+    iconName: 'BookOpen',
+    processingTime: '4 - 7 Business Days',
+    keywords: ['education loan', 'student loan', 'abroad study finance', 'higher education'],
+    benefits: [
+      'Covers up to 100% of education costs',
+      'Moratorium period during the course duration + 1 year',
+      'Tax benefit on interest paid under Section 80E',
+      'Co-applicant flexibility'
+    ],
+    requiredDocuments: [
+      'Admission letter from university/college',
+      'Fee structure document',
+      'Academic marksheets (10th, 12th, Graduation)',
+      'KYC & Income proof of co-borrower/parent'
+    ],
+    faqReference: [
+      { q: 'When does the repayment start?', a: 'Repayment typically begins 6 months to 1 year after course completion or upon securing a job, whichever is earlier.' }
+    ],
+    canonicalSlug: 'https://clearfiling.in/services/education-loan',
+    futurePage: '/services/education-loan'
+  },
+  {
+    id: 'vehicle-loan',
+    slug: 'vehicle-loan',
+    category: 'Loan Services',
+    title: 'Vehicle Loan',
+    shortDescription: 'Flexible financing options for purchasing corporate and private transportation fleets.',
+    description: 'Get attractive terms for commercial or private vehicles. Cover new or pre-owned vehicles with easy EMIs.',
+    iconName: 'Award',
+    processingTime: '2 - 4 Business Days',
+    keywords: ['vehicle loan', 'auto loan', 'car finance', 'commercial vehicle'],
+    benefits: [
+      'Funding up to 90% of on-road price',
+      'Competitive interest rates with quick processing',
+      'Minimal paperwork and fast disbursal',
+      'Flexible tenures up to 7 years'
+    ],
+    requiredDocuments: [
+      'KYC and address proof of applicant',
+      'Salary slip or ITR files',
+      'Vehicle quotation invoice',
+      'Bank statement for the last 6 months'
+    ],
+    faqReference: [
+      { q: 'Is collateral needed for a vehicle loan?', a: 'No, the vehicle itself acts as hypothecated collateral for the bank.' }
+    ],
+    canonicalSlug: 'https://clearfiling.in/services/vehicle-loan',
+    futurePage: '/services/vehicle-loan'
+  },
+  {
+    id: 'car-loan',
+    slug: 'car-loan',
+    category: 'Loan Services',
+    title: 'Car Loan',
+    shortDescription: 'Affordable auto loans with attractive interest rates for personal and executive vehicles.',
+    description: 'Drive home your preferred car. Finance packages covering new launches, hatchbacks, sedans, and SUVs.',
+    iconName: 'Award',
+    processingTime: '2 - 3 Business Days',
+    keywords: ['car loan', 'auto finance', 'new car loan', 'used car loan'],
+    benefits: [
+      'High-value financing on top models',
+      'Customized monthly payment (EMI) programs',
+      'Exclusive dealer ties and offers',
+      'Fast digital validation'
+    ],
+    requiredDocuments: [
+      'Proof of identity and address',
+      'Bank statement & salary slips/ITR',
+      'Proforma invoice from car dealer'
+    ],
+    faqReference: [
+      { q: 'Can I get a loan for a used car?', a: 'Yes, pre-owned car financing is widely available at slightly different rates.' }
+    ],
+    canonicalSlug: 'https://clearfiling.in/services/car-loan',
+    futurePage: '/services/car-loan'
+  },
+  {
+    id: 'bike-loan',
+    slug: 'bike-loan',
+    category: 'Loan Services',
+    title: 'Bike Loan',
+    shortDescription: 'Quick and hassle-free two-wheeler finance solutions with minimal documentation requirements.',
+    description: 'Get instant approvals on two-wheeler loans. Cover sports bikes, commuter motorbikes, and electric scooters.',
+    iconName: 'Award',
+    processingTime: '1 - 2 Business Days',
+    keywords: ['bike loan', 'two wheeler loan', 'scooter finance', 'motorcycle loan'],
+    benefits: [
+      'Up to 95% funding on key models',
+      'Low down payment schemes',
+      'Super fast approvals within hours',
+      'Flexible tenures up to 4 years'
+    ],
+    requiredDocuments: [
+      'PAN card & Aadhaar Card',
+      'Recent passport size photographs',
+      'Income proof or banking history'
+    ],
+    faqReference: [
+      { q: 'Can I buy an electric scooter with a bike loan?', a: 'Yes, modern green vehicle loans cover electric two-wheelers.' }
+    ],
+    canonicalSlug: 'https://clearfiling.in/services/bike-loan',
+    futurePage: '/services/bike-loan'
+  },
+  {
+    id: 'gold-loan',
+    slug: 'gold-loan',
+    category: 'Loan Services',
+    title: 'Gold Loan',
+    shortDescription: 'Instant liquidity options by securing loans against gold ornaments with competitive rate margins.',
+    description: 'Instant liquidity against gold jewelry. Fast evaluations, maximum per-gram value, and low interest rates.',
+    iconName: 'DollarSign',
+    processingTime: '1 Business Day',
+    keywords: ['gold loan', 'loan against gold', 'instant gold finance', 'jewel loan'],
+    benefits: [
+      'Disbursal in under 60 minutes',
+      'Minimal documentation (only KYC needed)',
+      'No income proof or credit score verification',
+      'Secure locker storage with insurance'
+    ],
+    requiredDocuments: [
+      'KYC documents (Aadhaar/PAN)',
+      'Gold ornaments/jewelry to be pledged',
+      'Proof of address'
+    ],
+    faqReference: [
+      { q: 'What gold purity is accepted?', a: 'Banks accept gold ornaments with purity ranging from 18 to 22 karats.' }
+    ],
+    canonicalSlug: 'https://clearfiling.in/services/gold-loan',
+    futurePage: '/services/gold-loan'
+  },
+  {
+    id: 'loan-against-property',
+    slug: 'loan-against-property',
+    category: 'Loan Services',
+    title: 'Loan Against Property',
+    shortDescription: 'Unlocking equity value from commercial or residential properties for major capital needs.',
+    description: 'Leverage the value of your commercial or residential property to raise high-value long-term funds at lower rates.',
+    iconName: 'Building2',
+    processingTime: '10 - 20 Business Days',
+    keywords: ['loan against property', 'lap', 'property mortgage', 'secured finance'],
+    benefits: [
+      'Lower interest rates compared to personal loans',
+      'Longer repayment tenure up to 15 years',
+      'High loan value based on property valuation',
+      'Continue using the mortgaged property'
+    ],
+    requiredDocuments: [
+      'Property title deeds & NOCs',
+      'Income proof & bank statement',
+      'Approved building plan & layout',
+      'Tax receipts of the property'
+    ],
+    faqReference: [
+      { q: 'Which properties are eligible?', a: 'Clear, freehold, and non-disputed residential, commercial, or industrial properties are eligible.' }
+    ],
+    canonicalSlug: 'https://clearfiling.in/services/loan-against-property',
+    futurePage: '/services/loan-against-property'
+  },
+  {
+    id: 'machinery-loan',
+    slug: 'machinery-loan',
+    category: 'Loan Services',
+    title: 'Machinery Loan',
+    shortDescription: 'Asset-backed financing to acquire advanced industrial machinery and expand production capacity.',
+    description: 'Acquire new or imported manufacturing machines to scale production. Asset-based mortgage structure.',
+    iconName: 'Briefcase',
+    processingTime: '7 - 14 Business Days',
+    keywords: ['machinery loan', 'equipment loan', 'manufacturing finance', 'factory setup'],
+    benefits: [
+      'Financing up to 80% of machinery value',
+      'No collateral requirement other than the machine itself',
+      'Structured repayment aligning with production capacity',
+      'Customized import financing options'
+    ],
+    requiredDocuments: [
+      'Proforma invoice from machinery supplier',
+      'Business financials & ITR',
+      'GST registration and filing sheets',
+      'Factory/workshop ownership details'
+    ],
+    faqReference: [
+      { q: 'Can I finance imported machinery?', a: 'Yes, we facilitate Letter of Credit (LC) and trade finance for imported industrial machinery.' }
+    ],
+    canonicalSlug: 'https://clearfiling.in/services/machinery-loan',
+    futurePage: '/services/machinery-loan'
+  },
+  {
+    id: 'equipment-finance',
+    slug: 'equipment-finance',
+    category: 'Loan Services',
+    title: 'Equipment Finance',
+    shortDescription: 'Tailored commercial finance to lease or purchase operational tools and tech equipment.',
+    description: 'Flexible funding options for medical equipment, IT hardware, office assets, or specialized lab tools.',
+    iconName: 'Briefcase',
+    processingTime: '5 - 10 Business Days',
+    keywords: ['equipment finance', 'it equipment loan', 'medical tools lease', 'asset funding'],
+    benefits: [
+      'Preserves cash reserves by spreading asset costs',
+      'Enables technology upgrades without high initial costs',
+      'Potential tax depreciation benefits',
+      'Easy loan structure'
+    ],
+    requiredDocuments: [
+      'Equipment quotation and catalog details',
+      'Business tax records & entity proof',
+      'Banking transaction records'
+    ],
+    faqReference: [
+      { q: 'Is there a lease option available?', a: 'Yes, we advise on both equipment lease models and direct purchase finance.' }
+    ],
+    canonicalSlug: 'https://clearfiling.in/services/equipment-finance',
+    futurePage: '/services/equipment-finance'
+  },
+  {
+    id: 'project-loan',
+    slug: 'project-loan',
+    category: 'Loan Services',
+    title: 'Project Loan',
+    shortDescription: 'Large-scale project financing solutions for infrastructure development and commercial ventures.',
+    description: 'Fund greenfield or brownfield infrastructure projects, commercial real estate, or industrial expansions.',
+    iconName: 'FileCheck2',
+    processingTime: '15 - 30 Business Days',
+    keywords: ['project loan', 'infrastructure finance', 'commercial funding', 'project report'],
+    benefits: [
+      'Structured term loans with moratorium periods',
+      'Consolidated funding for construction & setup',
+      'Customized interest structures',
+      'Professional project report preparation support'
+    ],
+    requiredDocuments: [
+      'Detailed Project Report (DPR) & TEV study',
+      'Statutory permissions & environmental clearances',
+      'Promoters profile and equity contribution proof',
+      'Land records and layout maps'
+    ],
+    faqReference: [
+      { q: 'What is a TEV study?', a: 'Techno-Economic Viability (TEV) study validates the technical feasibility and financial success of the project.' }
+    ],
+    canonicalSlug: 'https://clearfiling.in/services/project-loan',
+    futurePage: '/services/project-loan'
+  },
+  {
+    id: 'cash-credit',
+    slug: 'cash-credit',
+    category: 'Loan Services',
+    title: 'Cash Credit',
+    shortDescription: 'Flexible cash credit limits against stocks and receivables to manage business capital cycles.',
+    description: 'Secure a revolving cash credit line based on inventory stocks and book debt receivables.',
+    iconName: 'DollarSign',
+    processingTime: '7 - 14 Business Days',
+    keywords: ['cash credit', 'cc limit', 'stock funding', 'working capital line'],
+    benefits: [
+      'Pay interest only on the utilized amount',
+      'Revolving credit line that updates with sales',
+      'Supports bulk stock purchases',
+      'Maintains daily corporate liquidity'
+    ],
+    requiredDocuments: [
+      'Monthly stock and debtors statements',
+      'Audited balance sheets & projections',
+      'GST returns & tax filings',
+      'Bank statement for the last 12 months'
+    ],
+    faqReference: [
+      { q: 'How is the draw-down limit calculated?', a: 'It is based on the value of paid stock plus debtors, minus a specified margin.' }
+    ],
+    canonicalSlug: 'https://clearfiling.in/services/cash-credit',
+    futurePage: '/services/cash-credit'
+  },
+  {
+    id: 'overdraft-facility',
+    slug: 'overdraft-facility',
+    category: 'Loan Services',
+    title: 'Overdraft Facility',
+    shortDescription: 'Temporary overdraft credit linked to corporate current accounts for short-term payment support.',
+    description: 'Set up an overdraft limit against bank fixed deposits, mutual funds, or business credit history.',
+    iconName: 'FileSpreadsheet',
+    processingTime: '2 - 5 Business Days',
+    keywords: ['overdraft', 'od limit', 'od against fd', 'current account credit'],
+    benefits: [
+      'Instant access to funds beyond account balance',
+      'No prepayment charges or commitments',
+      'High limit options against financial securities',
+      'Perfect for meeting temporary payroll gaps'
+    ],
+    requiredDocuments: [
+      'Current account statements',
+      'Pledge documentation for security (FD, MF, etc.)',
+      'KYC documents of the account holders'
+    ],
+    faqReference: [
+      { q: 'Can I get an OD without security?', a: 'Yes, clean overdraft limits are offered based on current account transaction volume.' }
+    ],
+    canonicalSlug: 'https://clearfiling.in/services/overdraft-facility',
+    futurePage: '/services/overdraft-facility'
+  },
+  {
+    id: 'professional-loan',
+    slug: 'professional-loan',
+    category: 'Loan Services',
+    title: 'Professional Loan',
+    shortDescription: 'Specialized credit offerings tailored for self-employed professionals including doctors, CAs, and architects.',
+    description: 'Customized credit lines designed for doctors, chartered accountants, company secretaries, architects, and consulting professionals.',
+    iconName: 'UserCheck',
+    processingTime: '3 - 5 Business Days',
+    keywords: ['professional loan', 'doctor loan', 'ca financing', 'consultant credit'],
+    benefits: [
+      'No security or collateral needed',
+      'Preferential interest rates for qualified professionals',
+      'Funding for office setup or clinic expansion',
+      'Flexible repayment schemes'
+    ],
+    requiredDocuments: [
+      'Professional qualification certificate & registration',
+      'Last 2 years ITR and bank statements',
+      'KYC and clinic/office address proof'
+    ],
+    faqReference: [
+      { q: 'Who is eligible for a Professional Loan?', a: 'Practicing doctors, CAs, CSs, and architects with valid license to practice are eligible.' }
+    ],
+    canonicalSlug: 'https://clearfiling.in/services/professional-loan',
+    futurePage: '/services/professional-loan'
+  },
+  {
+    id: 'commercial-vehicle-loan',
+    slug: 'commercial-vehicle-loan',
+    category: 'Loan Services',
+    title: 'Commercial Vehicle Loan',
+    shortDescription: 'Tailored financing solutions for purchasing commercial trucks, buses, and heavy logistics fleets.',
+    description: 'Finance commercial transit fleets. Tailored credit for logistics companies, operators, and fleet managers.',
+    iconName: 'Award',
+    processingTime: '3 - 7 Business Days',
+    keywords: ['commercial vehicle', 'truck loan', 'fleet finance', 'transit loan'],
+    benefits: [
+      'Customized funding for single vehicles or large fleets',
+      'Flexible structuring based on freight contracts',
+      'Quick approvals with specialized asset valuations',
+      'Long tenure limits'
+    ],
+    requiredDocuments: [
+      'Transport permit documents',
+      'KYC and income proofs',
+      'Vehicle proforma invoice and dealer details',
+      'Existing fleet ownership details (if any)'
+    ],
+    faqReference: [
+      { q: 'Are pre-owned commercial vehicles financed?', a: 'Yes, pre-owned trucks and buses can be financed based on their age and condition.' }
+    ],
+    canonicalSlug: 'https://clearfiling.in/services/commercial-vehicle-loan',
+    futurePage: '/services/commercial-vehicle-loan'
+  },
+  {
+    id: 'construction-loan',
+    slug: 'construction-loan',
+    category: 'Loan Services',
+    title: 'Construction Loan',
+    shortDescription: 'Project-based credit facilities to finance real estate development and building construction.',
+    description: 'Project-based credit facilities to finance real estate developers, contractors, and building construction costs.',
+    iconName: 'Building2',
+    processingTime: '10 - 20 Business Days',
+    keywords: ['construction loan', 'developer finance', 'building credit', 'contractor funding'],
+    benefits: [
+      'Tranche-wise disbursal based on stage of construction',
+      'Customized repayment maps matching unit sales',
+      'Competitive commercial building interest rates',
+      'Support for both residential and commercial builders'
+    ],
+    requiredDocuments: [
+      'Approved building plans and local authority clearances',
+      'Architect cost estimate and construction schedule',
+      'Project report and feasibility studies',
+      'Developer track record & company financials'
+    ],
+    faqReference: [
+      { q: 'How are disbursements handled?', a: 'Funds are disbursed in phases, corresponding directly with progress verified by bank engineers.' }
+    ],
+    canonicalSlug: 'https://clearfiling.in/services/construction-loan',
+    futurePage: '/services/construction-loan'
   }
 ];
 

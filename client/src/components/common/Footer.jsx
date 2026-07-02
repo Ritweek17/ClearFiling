@@ -23,6 +23,7 @@ import {
   FOOTER_OFFICES,
   FOOTER_SOCIAL,
   FOOTER_QUICK_LINKS,
+  FOOTER_LOANS,
   FOOTER_SERVICES,
   FOOTER_RESOURCES,
   FOOTER_LEGAL,
@@ -186,9 +187,9 @@ const Footer = () => {
       <div className="max-w-screen-xl mx-auto px-4 md:px-8 py-14 md:py-16">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-12 gap-10 lg:gap-12">
 
-          {/* ── Col 1: Company info + Contact + Social (spans 4 of 12) ── */}
+          {/* ── Col 1: Company info + Contact + Social (spans 3 of 12) ── */}
           <div
-            className="sm:col-span-2 lg:col-span-4 space-y-6"
+            className="sm:col-span-2 lg:col-span-3 space-y-6"
             itemScope
             itemType="https://schema.org/Organization"
           >
@@ -317,8 +318,8 @@ const Footer = () => {
             </div>
           </div>
 
-          {/* ── Col 2: Popular Services (spans 3 of 12) ── */}
-          <div className="lg:col-span-3">
+          {/* ── Col 2: Popular Services (spans 2 of 12) ── */}
+          <div className="lg:col-span-2">
             <FooterColumn title="Popular Services">
               {FOOTER_SERVICES.map((s) => (
                 <FooterNavLink key={s.label} label={s.label} to="/services" slug={s.slug} />
@@ -326,7 +327,16 @@ const Footer = () => {
             </FooterColumn>
           </div>
 
-          {/* ── Col 3: Quick Links (spans 2 of 12) ── */}
+          {/* ── Col 3: Loan Services (spans 2 of 12) ── */}
+          <div className="lg:col-span-2">
+            <FooterColumn title="Loan Services">
+              {FOOTER_LOANS.map((l) => (
+                <FooterNavLink key={l.label} label={l.label} to="/services" slug={l.slug} />
+              ))}
+            </FooterColumn>
+          </div>
+
+          {/* ── Col 4: Quick Links (spans 2 of 12) ── */}
           <div className="lg:col-span-2">
             <FooterColumn title="Quick Links">
               {FOOTER_QUICK_LINKS.map((l) => (

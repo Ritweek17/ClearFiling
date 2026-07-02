@@ -68,15 +68,38 @@ const TimelineStep = ({ step, index, isLast }) => {
       whileInView={{ opacity: 1, x: 0 }}
       viewport={{ once: true, margin: '-60px' }}
       transition={{ duration: 0.5, delay: index * 0.1, ease: [0.16, 1, 0.3, 1] }}
-      className={`relative flex gap-6 md:gap-8 ${index % 2 === 0 ? '' : 'md:flex-row-reverse'}`}
+      className="relative flex gap-6 md:grid md:grid-cols-[1fr_auto_1fr] md:gap-8 w-full"
     >
       {/* Step connector line */}
       {!isLast && (
         <div className="absolute left-6 md:left-1/2 top-14 w-[2px] h-[calc(100%+2rem)] bg-gradient-to-b from-brand-primary/30 to-transparent -translate-x-1/2 hidden sm:block" />
       )}
 
-      {/* Icon bubble */}
-      <div className="flex-shrink-0 relative z-10">
+      {/* Left Column (Desktop: Card for odd, empty for even) */}
+      <div className="hidden md:flex justify-end flex-1">
+        {index % 2 !== 0 && (
+          <div className="w-full pb-10">
+            <div className="bg-white border border-slate-200/60 rounded-2xl p-5 md:p-6 shadow-sm hover:shadow-md hover:border-brand-primary/15 transition-all duration-300">
+              <div className="flex items-start gap-3 mb-3">
+                <span
+                  className="text-[10px] font-black tracking-[0.15em] uppercase px-2 py-0.5 rounded-full bg-brand-primary/8 text-brand-primary"
+                >
+                  Step {step.step}
+                </span>
+              </div>
+              <h3 className="text-base font-bold font-heading text-brand-secondary mb-2">
+                {step.title}
+              </h3>
+              <p className="text-xs text-slate-500 font-sans leading-relaxed">
+                {step.description}
+              </p>
+            </div>
+          </div>
+        )}
+      </div>
+
+      {/* Middle Column: Icon bubble */}
+      <div className="flex-shrink-0 relative z-10 flex flex-col items-center">
         <div
           className={`w-12 h-12 rounded-2xl flex items-center justify-center shadow-md border-2
             ${isSuccess
@@ -88,23 +111,25 @@ const TimelineStep = ({ step, index, isLast }) => {
         </div>
       </div>
 
-      {/* Content card */}
+      {/* Right Column (Desktop: Card for even, empty for odd; Mobile: Card always here) */}
       <div className="flex-1 pb-10">
-        <div className="bg-white border border-slate-200/60 rounded-2xl p-5 md:p-6 shadow-sm hover:shadow-md hover:border-brand-primary/15 transition-all duration-300">
-          <div className="flex items-start gap-3 mb-3">
-            <span
-              className={`text-[10px] font-black tracking-[0.15em] uppercase px-2 py-0.5 rounded-full
-                ${isSuccess ? 'bg-brand-success/10 text-brand-success' : 'bg-brand-primary/8 text-brand-primary'}`}
-            >
-              Step {step.step}
-            </span>
+        <div className={`w-full ${index % 2 !== 0 ? 'md:hidden' : ''}`}>
+          <div className="bg-white border border-slate-200/60 rounded-2xl p-5 md:p-6 shadow-sm hover:shadow-md hover:border-brand-primary/15 transition-all duration-300">
+            <div className="flex items-start gap-3 mb-3">
+              <span
+                className={`text-[10px] font-black tracking-[0.15em] uppercase px-2 py-0.5 rounded-full
+                  ${isSuccess ? 'bg-brand-success/10 text-brand-success' : 'bg-brand-primary/8 text-brand-primary'}`}
+              >
+                Step {step.step}
+              </span>
+            </div>
+            <h3 className="text-base font-bold font-heading text-brand-secondary mb-2">
+              {step.title}
+            </h3>
+            <p className="text-xs text-slate-500 font-sans leading-relaxed">
+              {step.description}
+            </p>
           </div>
-          <h3 className="text-base font-bold font-heading text-brand-secondary mb-2">
-            {step.title}
-          </h3>
-          <p className="text-xs text-slate-500 font-sans leading-relaxed">
-            {step.description}
-          </p>
         </div>
       </div>
     </motion.div>

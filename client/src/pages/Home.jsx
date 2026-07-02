@@ -11,6 +11,8 @@ import WhyChooseSection from '../components/features/WhyChooseSection';
 import HowWeWorkSection from '../components/features/HowWeWorkSection';
 import IndustriesSection from '../components/features/IndustriesSection';
 import TestimonialsSection from '../components/features/TestimonialsSection';
+import TopClientsSection from '../components/features/TopClientsSection';
+import DocumentationSection from '../components/features/DocumentationSection';
 import FAQSection from '../components/features/FAQSection';
 import CTASection from '../components/features/CTASection';
 
@@ -38,7 +40,13 @@ const Home = () => {
       {/* 7. Client Testimonials */}
       <TestimonialsSection />
 
-      {/* 8. Frequently Asked Questions — 15 items */}
+      {/* 8. Our Top Clients */}
+      <TopClientsSection />
+
+      {/* 9. Resources & Documentation */}
+      <DocumentationSection />
+
+      {/* 10. Frequently Asked Questions — 15 items */}
       <FAQSection />
 
       {/* 9. Final CTA Section */}
