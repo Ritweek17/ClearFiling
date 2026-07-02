@@ -28,28 +28,28 @@ const Home = () => {
       {/* 3. Featured Services with Search & Categories */}
       <FeaturedServices />
 
-      {/* 4. Why Choose ClearFiling — 8 premium cards */}
+      {/* 4. Resources & Documentation */}
+      <DocumentationSection />
+
+      {/* 5. Why Choose ClearFiling — 8 premium cards */}
       <WhyChooseSection />
 
-      {/* 5. How We Work — 6-step professional timeline */}
+      {/* 6. How We Work — 6-step professional timeline */}
       <HowWeWorkSection />
 
-      {/* 6. Industries We Serve — 12 sector cards */}
+      {/* 7. Industries We Serve — 12 sector cards */}
       <IndustriesSection />
 
-      {/* 7. Client Testimonials */}
+      {/* 8. Client Testimonials */}
       <TestimonialsSection />
 
-      {/* 8. Our Top Clients */}
+      {/* 9. Our Top Clients */}
       <TopClientsSection />
-
-      {/* 9. Resources & Documentation */}
-      <DocumentationSection />
 
       {/* 10. Frequently Asked Questions — 15 items */}
       <FAQSection />
 
-      {/* 9. Final CTA Section */}
+      {/* 11. Final CTA Section */}
       <CTASection />
     </PageContainer>
   );

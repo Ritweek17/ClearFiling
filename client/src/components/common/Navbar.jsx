@@ -107,12 +107,14 @@ const Navbar = () => {
           }
         `}
       >
-        <MaxWidthContainer size="xl" className="flex items-center justify-between">
+        <MaxWidthContainer size="xl" className="flex items-center justify-between gap-6 xl:gap-8">
           {/* Logo element */}
-          <Logo />
+          <div className="flex-shrink-0">
+            <Logo />
+          </div>
 
           {/* Desktop inline nav links */}
-          <nav className="hidden lg:flex items-center gap-8">
+          <nav className="hidden lg:flex items-center justify-center gap-3.5 xl:gap-5 flex-1 max-w-4xl mx-auto px-2 xl:px-4">
             {NAV_LINKS.map((link) => (
               <NavLink
                 key={link.targetId}
@@ -124,11 +126,13 @@ const Navbar = () => {
           </nav>
 
           {/* Desktop action buttons */}
-          <CTAButtons
-            className="hidden lg:flex"
-            showCall={true}
-            buttonSize="sm"
-          />
+          <div className="flex-shrink-0">
+            <CTAButtons
+              className="hidden lg:flex"
+              showCall={true}
+              buttonSize="sm"
+            />
+          </div>
 
           {/* Mobile hamburger menu toggle */}
           <MobileMenu
