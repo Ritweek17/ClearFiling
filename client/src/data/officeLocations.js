@@ -27,7 +27,11 @@ const OFFICE_LOCATIONS = [
     countryCode: 'IN',
     phone: '+91 9250201718',
     phoneHref: 'tel:+919250201718',
-    email: 'clearfilling@zohomail.in',
+    email: 'clearfiling@zohomail.in',
+    emails: [
+      'clearfiling@zohomail.in',
+      'support.clearfiling@gmail.com'
+    ],
     // Geo coordinates — update when confirmed
     geo: { lat: 28.5659, lng: 77.2433 },
     // Google Maps — set to real URL when client provides
@@ -56,7 +60,11 @@ const OFFICE_LOCATIONS = [
     countryCode: 'IN',
     phone: '05568-450351',
     phoneHref: 'tel:05568450351',
-    email: 'clearfilling@zohomail.in',
+    email: 'clearfiling@zohomail.in',
+    emails: [
+      'clearfiling@zohomail.in',
+      'support.clearfiling@gmail.com'
+    ],
     geo: { lat: 26.5028, lng: 83.7804 },
     mapsUrl: null,
     mapsEmbed: null,
@@ -84,7 +92,11 @@ const OFFICE_LOCATIONS = [
     countryCode: 'IN',
     phone: '+91 9250201718',
     phoneHref: 'tel:+919250201718',
-    email: 'clearfilling@zohomail.in',
+    email: 'clearfiling@zohomail.in',
+    emails: [
+      'clearfiling@zohomail.in',
+      'support.clearfiling@gmail.com'
+    ],
     geo: { lat: 26.7606, lng: 83.3731 },
     mapsUrl: null,
     mapsEmbed: null,

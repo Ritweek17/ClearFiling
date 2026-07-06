@@ -33,7 +33,7 @@ export const PAGE_SEO = {
   },
   contact: {
     title: `Contact Clear Filing | CA, CS & Compliance Advisory — Delhi & Deoria`,
-    description: 'Get in touch with Clear Filing's compliance experts. Call +91 9250201718, WhatsApp, or email clearfilling@zohomail.in. Free consultation, 9 AM – 9 PM, 7 days.',
+    description: 'Get in touch with Clear Filing\'s compliance experts. Call +91 9250201718, WhatsApp, or email clearfiling@zohomail.in / support.clearfiling@gmail.com. Free consultation, 9 AM – 9 PM, 7 days.',
     canonical: `${BUSINESS.url}/contact`,
     keywords: 'contact CA firm Delhi, compliance advisor contact, company registration help, GST expert contact',
     ogImage: `${BUSINESS.url}/og-contact.jpg`,

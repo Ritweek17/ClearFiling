@@ -31,8 +31,12 @@ const CONTACT = {
 
   // Email
   email: {
-    display: 'clearfilling@zohomail.in',
-    href: 'mailto:clearfilling@zohomail.in',
+    display: 'clearfiling@zohomail.in',
+    href: 'mailto:clearfiling@zohomail.in',
+  },
+  email2: {
+    display: 'support.clearfiling@gmail.com',
+    href: 'mailto:support.clearfiling@gmail.com',
   },
 
   // Office Hours

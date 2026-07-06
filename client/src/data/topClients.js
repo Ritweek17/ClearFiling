@@ -28,8 +28,8 @@ export const TOP_CLIENTS = [
     website: '#'
   },
   {
-    id: 'nordanplas-inc',
-    name: 'Nordanplas Inc',
+    id: 'nordenplas-inc',
+    name: 'Nordenplas Inc',
     logo: 'NP',
     industry: 'Plastics & Packaging',
     location: 'India',

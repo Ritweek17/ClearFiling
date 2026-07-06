@@ -42,7 +42,7 @@ const ContactInfoCards = () => (
               viewport={{ once: true }}
               transition={{ duration: 0.35, delay: idx * 0.07 }}
             >
-              {item.href ? (
+              {item.href && item.id !== 'email' ? (
                 <a
                   href={item.href}
                   target={item.external ? '_blank' : undefined}
@@ -68,6 +68,28 @@ const ContactInfoCards = () => (
                     </div>
                   </Card>
                 </a>
+              ) : item.id === 'email' ? (
+                <Card className="h-full p-5 flex items-start gap-4">
+                  <div className={`flex-shrink-0 w-11 h-11 rounded-xl border flex items-center justify-center ${item.bgColorClass}`}>
+                    {IconComponent && <IconComponent className="w-5 h-5" aria-hidden="true" />}
+                  </div>
+                  <div className="min-w-0 w-full">
+                    <div className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">{item.label}</div>
+                    <div className="mt-1 flex flex-col gap-1">
+                      {item.emails.map((emailObj) => (
+                        <a
+                          key={emailObj.display}
+                          href={emailObj.href}
+                          className="text-sm font-bold text-brand-secondary hover:text-brand-primary transition-colors block truncate"
+                          aria-label={`Email us at ${emailObj.display}`}
+                        >
+                          {emailObj.display}
+                        </a>
+                      ))}
+                    </div>
+                    <div className="text-[10px] text-slate-400 font-sans mt-1.5">{item.subLabel}</div>
+                  </div>
+                </Card>
               ) : (
                 <Card className="h-full p-5 flex items-start gap-4">
                   <div className={`flex-shrink-0 w-11 h-11 rounded-xl border flex items-center justify-center ${item.bgColorClass}`}>

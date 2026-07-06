@@ -18,7 +18,11 @@ export const COMPANY_INFO = {
   contact: {
     mobile: { display: '+91 9250201718', href: 'tel:+919250201718' },
     landline: { display: '05568-450351', href: 'tel:05568450351' },
-    email: { display: 'clearfilling@zohomail.in', href: 'mailto:clearfilling@zohomail.in' },
+    email: { display: 'clearfiling@zohomail.in', href: 'mailto:clearfiling@zohomail.in' },
+    emails: [
+      { display: 'clearfiling@zohomail.in', href: 'mailto:clearfiling@zohomail.in' },
+      { display: 'support.clearfiling@gmail.com', href: 'mailto:support.clearfiling@gmail.com' },
+    ],
     whatsappNumber: '919250201718',
     whatsappHref: 'https://wa.me/919250201718',
     hours: '9:00 AM – 9:00 PM, Open 7 Days',

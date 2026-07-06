@@ -117,9 +117,26 @@ const OfficeLocations = () => (
                   <a href={office.phoneHref} className="flex items-center gap-2 text-xs text-slate-500 hover:text-brand-primary transition-colors">
                     <Phone className="w-3.5 h-3.5" aria-hidden="true" />{office.phone}
                   </a>
-                  <a href={`mailto:${office.email}`} className="flex items-center gap-2 text-xs text-slate-500 hover:text-brand-primary transition-colors">
-                    <Mail className="w-3.5 h-3.5" aria-hidden="true" />{office.email}
-                  </a>
+                  <div className="flex items-start gap-2 text-xs text-slate-500">
+                    <Mail className="w-3.5 h-3.5 mt-0.5 flex-shrink-0" aria-hidden="true" />
+                    <div className="flex flex-col gap-1">
+                      {office.emails ? (
+                        office.emails.map((emailAddr) => (
+                          <a
+                            key={emailAddr}
+                            href={`mailto:${emailAddr}`}
+                            className="hover:text-brand-primary transition-colors block"
+                          >
+                            {emailAddr}
+                          </a>
+                        ))
+                      ) : (
+                        <a href={`mailto:${office.email}`} className="hover:text-brand-primary transition-colors block">
+                          {office.email}
+                        </a>
+                      )}
+                    </div>
+                  </div>
                   {/* Maps CTA — ready for when URL is provided */}
                   {office.mapsUrl && (
                     <a

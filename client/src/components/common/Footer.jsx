@@ -279,17 +279,35 @@ const Footer = () => {
               </a>
 
               {/* Email */}
-              <a
-                href={FOOTER_CONTACT.email.href}
-                className="flex items-center gap-2.5 text-xs text-slate-300 hover:text-white transition-colors group"
-                aria-label={`Email us at ${FOOTER_CONTACT.email.display}`}
-                itemProp="email"
-              >
-                <div className="w-7 h-7 rounded-lg bg-slate-800 border border-slate-700/60 group-hover:bg-brand-accent group-hover:border-brand-accent flex items-center justify-center transition-all duration-200">
+              <div className="flex items-start gap-2.5 text-xs text-slate-300">
+                <div className="w-7 h-7 rounded-lg bg-slate-800 border border-slate-700/60 flex items-center justify-center transition-all duration-200 flex-shrink-0">
                   <Mail className="w-3 h-3" aria-hidden="true" />
                 </div>
-                <span>{FOOTER_CONTACT.email.display}</span>
-              </a>
+                <div className="flex flex-col gap-1 pt-0.5">
+                  {FOOTER_CONTACT.emails ? (
+                    FOOTER_CONTACT.emails.map((emailObj) => (
+                      <a
+                        key={emailObj.display}
+                        href={emailObj.href}
+                        className="hover:text-white transition-colors block"
+                        aria-label={`Email us at ${emailObj.display}`}
+                        itemProp="email"
+                      >
+                        {emailObj.display}
+                      </a>
+                    ))
+                  ) : (
+                    <a
+                      href={FOOTER_CONTACT.email.href}
+                      className="hover:text-white transition-colors block"
+                      aria-label={`Email us at ${FOOTER_CONTACT.email.display}`}
+                      itemProp="email"
+                    >
+                      {FOOTER_CONTACT.email.display}
+                    </a>
+                  )}
+                </div>
+              </div>
 
               {/* Office Hours */}
               <div className="flex items-center gap-2.5 text-xs text-slate-500 pt-0.5">

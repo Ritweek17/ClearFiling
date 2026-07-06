@@ -37,6 +37,10 @@ const CONTACT_DETAILS = [
     subLabel: 'Write to us anytime',
     value: CONTACT.email.display,
     href: CONTACT.email.href,
+    emails: [
+      { display: CONTACT.email.display, href: CONTACT.email.href },
+      { display: CONTACT.email2.display, href: CONTACT.email2.href }
+    ],
     actionText: 'Send Email',
     iconName: 'Mail',
     external: false,

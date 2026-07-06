@@ -19,7 +19,11 @@ export const FOOTER_COMPANY = {
 export const FOOTER_CONTACT = {
   mobile: { display: '+91 9250201718', href: 'tel:+919250201718' },
   landline: { display: '05568-450351', href: 'tel:05568450351' },
-  email: { display: 'clearfilling@zohomail.in', href: 'mailto:clearfilling@zohomail.in' },
+  email: { display: 'clearfiling@zohomail.in', href: 'mailto:clearfiling@zohomail.in' },
+  emails: [
+    { display: 'clearfiling@zohomail.in', href: 'mailto:clearfiling@zohomail.in' },
+    { display: 'support.clearfiling@gmail.com', href: 'mailto:support.clearfiling@gmail.com' }
+  ],
   whatsapp: {
     href: 'https://wa.me/919250201718?text=Hi%20ClearFiling%2C%20I%20need%20compliance%20assistance%20for%20my%20business.',
     display: 'WhatsApp Inquiry',

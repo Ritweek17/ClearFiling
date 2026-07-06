@@ -65,7 +65,7 @@ export const PRIVACY_POLICY = {
     {
       heading: 'Your Rights',
       content: [
-        'You have the right to access, correct, or request deletion of your personal information held by us. To exercise any of these rights, please contact us at clearfilling@zohomail.in or call us at +91 9250201718. We will respond to your request within a reasonable timeframe.',
+        'You have the right to access, correct, or request deletion of your personal information held by us. To exercise any of these rights, please contact us at clearfiling@zohomail.in or support.clearfiling@gmail.com or call us at +91 9250201718. We will respond to your request within a reasonable timeframe.',
       ],
     },
     {
@@ -84,7 +84,7 @@ export const PRIVACY_POLICY = {
       heading: 'Contact Us',
       content: [
         'If you have any questions, concerns, or requests regarding this Privacy Policy, please contact us:',
-        ['Email: clearfilling@zohomail.in', 'Phone: +91 9250201718 | Landline: 05568-450351', 'Delhi Office: E-20, Lajpat Nagar III, New Delhi – 110024', 'Deoria Office: Asha Complex, 30 Feet Road, Near Nahar, Bhikhampur Road, Deoria, Uttar Pradesh – 274001'],
+        ['Email: clearfiling@zohomail.in / support.clearfiling@gmail.com', 'Phone: +91 9250201718 | Landline: 05568-450351', 'Delhi Office: E-20, Lajpat Nagar III, New Delhi – 110024', 'Deoria Office: Asha Complex, 30 Feet Road, Near Nahar, Bhikhampur Road, Deoria, Uttar Pradesh – 274001'],
       ],
     },
   ],
@@ -169,7 +169,7 @@ export const TERMS_CONDITIONS = {
     {
       heading: 'Contact for Legal Queries',
       content: [
-        ['Email: clearfilling@zohomail.in', 'Phone: +91 9250201718', 'Delhi Office: E-20, Lajpat Nagar III, New Delhi – 110024'],
+        ['Email: clearfiling@zohomail.in / support.clearfiling@gmail.com', 'Phone: +91 9250201718', 'Delhi Office: E-20, Lajpat Nagar III, New Delhi – 110024'],
       ],
     },
   ],
