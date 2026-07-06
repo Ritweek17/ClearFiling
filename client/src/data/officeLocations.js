@@ -90,8 +90,8 @@ const OFFICE_LOCATIONS = [
     state: 'Uttar Pradesh',
     country: 'India',
     countryCode: 'IN',
-    phone: '+91 9250201718',
-    phoneHref: 'tel:+919250201718',
+    phone: '+91 9336379826',
+    phoneHref: 'tel:+919336379826',
     email: 'clearfiling@zohomail.in',
     emails: [
       'clearfiling@zohomail.in',
