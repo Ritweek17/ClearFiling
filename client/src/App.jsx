@@ -2,6 +2,7 @@ import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import MainLayout from './layouts/MainLayout';
 import ScrollToTop from './components/common/ScrollToTop';
+import GoogleAnalyticsTracker from './components/common/GoogleAnalyticsTracker';
 
 // Company Pages
 import Home from './pages/Home';
@@ -28,6 +29,7 @@ const App = () => {
   return (
     <Router>
       <ScrollToTop />
+      <GoogleAnalyticsTracker />
       <Routes>
         <Route path="/" element={<MainLayout />}>
           {/* ── Core Pages ── */}
