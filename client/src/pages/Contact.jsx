@@ -12,11 +12,112 @@ import JsonLd from '../components/seo/JsonLd';
 import { PAGE_SEO, getContactPageSchema } from '../config/seo';
 import { COMPANY_INFO } from '../data/companyInfo';
 import { sendContactEmail } from '../services/emailService';
+import { INDIAN_STATES, getCitiesForState } from '../data/indianLocations';
+import {
+  CONTACT_CATEGORIES,
+  CONTACT_SERVICES_BY_CATEGORY,
+  ALL_CONTACT_SERVICES
+} from '../data/services';
 
 // Import reusable Contact components
 import ContactHero from '../components/contact/ContactHero';
 import ContactInfoCards from '../components/contact/ContactInfoCards';
 import OfficeLocations from '../components/contact/OfficeLocations';
+
+export const normalizeIndianMobile = (input) => {
+  if (!input) return '';
+  let cleaned = input.trim().replace(/[\s\-()]/g, '');
+  if (cleaned.startsWith('+91')) {
+    cleaned = cleaned.slice(3);
+  } else if (cleaned.startsWith('0') && cleaned.length === 11) {
+    cleaned = cleaned.slice(1);
+  } else if (cleaned.startsWith('91') && cleaned.length === 12) {
+    cleaned = cleaned.slice(2);
+  }
+  return cleaned.replace(/\D/g, '');
+};
+
+export const validateIndianMobile = (input) => {
+  if (!input || !input.trim()) {
+    return 'Mobile number is required.';
+  }
+
+  const normalized = normalizeIndianMobile(input);
+
+  if (normalized.length !== 10) {
+    return 'Please enter a valid 10-digit Indian mobile number.';
+  }
+
+  if (!/^[6-9]/.test(normalized)) {
+    return 'Mobile number must begin with 6, 7, 8, or 9.';
+  }
+
+  if (/^([0-9])\1{9}$/.test(normalized)) {
+    return 'Please enter a valid active mobile number (repeated digits are not accepted).';
+  }
+
+  return null;
+};
+
+const GENERIC_FILLER_WORDS = new Set([
+  'hi', 'hello', 'hey', 'dear', 'sir', 'madam',
+  'call', 'contact', 'phone', 'ring', 'reach',
+  'me', 'us', 'my', 'we', 'i', 'am',
+  'please', 'pls', 'plz', 'kindly',
+  'urgently', 'urgent', 'asap', 'soon', 'today', 'now',
+  'need', 'needed', 'want', 'wanted', 'require', 'required', 'requiring',
+  'help', 'assist', 'assistance', 'support',
+  'send', 'share', 'give', 'provide',
+  'details', 'detail', 'info', 'information', 'more', 'data', 'pdf',
+  'thanks', 'thank', 'you',
+  'inquire', 'inquiry', 'enquire', 'enquiry',
+  'test', 'testing', 'check',
+  'interested', 'regarding', 'about', 'for', 'the', 'a', 'an', 'to', 'in', 'of', 'with'
+]);
+
+export const validateMessage = (input) => {
+  if (!input || !input.trim()) {
+    return 'Message is required.';
+  }
+  const trimmed = input.trim();
+  if (trimmed.length > 1000) {
+    return 'Message cannot exceed 1,000 characters.';
+  }
+  if (trimmed.length < 20) {
+    return 'Please provide a more detailed message (minimum 20 characters).';
+  }
+
+  const words = trimmed.split(/\s+/).filter(w => /[a-zA-Z0-9]/.test(w));
+  if (words.length < 4) {
+    return 'Please provide at least 4 meaningful words describing your requirement.';
+  }
+
+  // Reject messages with no letters
+  if (!/[a-zA-Z]/.test(trimmed)) {
+    return 'Message must contain words describing your requirement.';
+  }
+
+  // Reject repeated single character (e.g. "aaaaaaaaaaaaaaaaaaaaa", "....................")
+  const nonSpace = trimmed.replace(/\s+/g, '');
+  if (/^(.)\1+$/.test(nonSpace)) {
+    return 'Please enter a meaningful message (repeated characters are not accepted).';
+  }
+
+  // Reject low character diversity (e.g. "abababababababababab")
+  const uniqueChars = new Set(nonSpace.toLowerCase());
+  if (uniqueChars.size < 5) {
+    return 'Please enter a meaningful message describing your business requirement.';
+  }
+
+  // Check for generic-only message composed solely of generic filler words without business substance
+  const wordTokens = trimmed.toLowerCase().replace(/[^\w\s]/g, ' ').split(/\s+/).filter(Boolean);
+  const substantiveWords = wordTokens.filter(w => !GENERIC_FILLER_WORDS.has(w) && !/^\d+$/.test(w));
+  if (substantiveWords.length < 2) {
+    return 'Please describe your specific business requirement (e.g., service needed, company type, or timeline).';
+  }
+
+  return null;
+};
 
 const CONTACT_FAQS = [
   { q: 'How quickly will I receive a response to my inquiry?', a: 'We respond to WhatsApp inquiries within 30 minutes during business hours. Email and other inquiries are answered within 2–4 business hours (office hours: 9 AM – 9 PM, 7 days). Phone and landline calls are answered immediately during working hours.' },
@@ -28,19 +129,85 @@ const CONTACT_FAQS = [
 
 // Custom Hook to manage contact form logic and API integration
 const useContactForm = (onSuccess) => {
-  const [formData, setFormData] = useState({ name: '', phone: '', email: '', city: '', service: '', message: '' });
+  const [formData, setFormData] = useState({
+    name: '',
+    phone: '',
+    email: '',
+    state: '',
+    city: '',
+    category: '',
+    service: '',
+    subService: '',
+    customRequirement: '',
+    message: ''
+  });
   const [submitting, setSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const [submitError, setSubmitError] = useState(null);
+  const [phoneError, setPhoneError] = useState(null);
+  const [messageError, setMessageError] = useState(null);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData(prev => ({ ...prev, [name]: value }));
+    if (name === 'state') {
+      setFormData(prev => ({ ...prev, state: value, city: '' }));
+    } else if (name === 'category') {
+      setFormData(prev => ({
+        ...prev,
+        category: value,
+        service: '',
+        subService: '',
+        customRequirement: ''
+      }));
+    } else if (name === 'service') {
+      setFormData(prev => ({
+        ...prev,
+        service: value,
+        subService: '',
+        customRequirement: ''
+      }));
+    } else if (name === 'phone') {
+      setFormData(prev => ({ ...prev, phone: value }));
+      if (phoneError) {
+        const err = validateIndianMobile(value);
+        if (!err) setPhoneError(null);
+      }
+    } else if (name === 'message') {
+      setFormData(prev => ({ ...prev, message: value }));
+      if (messageError) {
+        const err = validateMessage(value);
+        if (!err) setMessageError(null);
+      }
+    } else {
+      setFormData(prev => ({ ...prev, [name]: value }));
+    }
+    if (submitError) {
+      setSubmitError(null);
+    }
+  };
+
+  const handlePhoneBlur = () => {
+    if (formData.phone.trim()) {
+      const err = validateIndianMobile(formData.phone);
+      setPhoneError(err);
+    }
+  };
+
+  const handleMessageBlur = () => {
+    if (formData.message.trim()) {
+      const err = validateMessage(formData.message);
+      setMessageError(err);
+    }
   };
 
   const validate = () => {
     if (!formData.name.trim()) {
       return 'Name is required.';
+    }
+    const phoneMsg = validateIndianMobile(formData.phone);
+    if (phoneMsg) {
+      setPhoneError(phoneMsg);
+      return phoneMsg;
     }
     if (!formData.email.trim()) {
       return 'Email is required.';
@@ -49,15 +216,10 @@ const useContactForm = (onSuccess) => {
     if (!emailRegex.test(formData.email.trim())) {
       return 'Please enter a valid email address.';
     }
-    if (!formData.phone.trim()) {
-      return 'Phone number is required.';
-    }
-    const phoneDigits = formData.phone.replace(/[^0-9]/g, '');
-    if (phoneDigits.length < 10) {
-      return 'Please enter a valid phone number with at least 10 digits.';
-    }
-    if (!formData.message.trim()) {
-      return 'Message is required.';
+    const msgError = validateMessage(formData.message);
+    if (msgError) {
+      setMessageError(msgError);
+      return msgError;
     }
     return null;
   };
@@ -74,20 +236,56 @@ const useContactForm = (onSuccess) => {
     setSubmitError(null);
 
     try {
-      // Map 'city' from the form to 'company' as required by EmailJS templates mapping
+      const normalizedDigits = normalizeIndianMobile(formData.phone);
+      const normalizedPhone = `+91 ${normalizedDigits}`;
+      const location = formData.city && formData.state
+        ? `${formData.city}, ${formData.state}`
+        : (formData.city || formData.state || 'Direct Website Inquiry');
+
+      const selectedService = ALL_CONTACT_SERVICES.find(s => s.slug === formData.service);
+      const serviceTitle = selectedService
+        ? selectedService.title
+        : (formData.service === 'other' || formData.service === 'Other'
+            ? (formData.category === 'other' ? 'Other Inquiry' : `Other (${formData.category || 'Service'})`)
+            : (formData.category ? `General (${formData.category})` : 'General Inquiry'));
+      const serviceSlug = selectedService ? selectedService.slug : (formData.service === 'other' || formData.service === 'Other' ? 'other' : '');
+      const serviceCategory = formData.category === 'other'
+        ? 'Other'
+        : (formData.category || (selectedService ? selectedService.category : 'General Inquiry'));
+
       const emailPayload = {
-        name: formData.name,
-        email: formData.email,
-        phone: formData.phone,
-        company: formData.city,
-        service: formData.service,
-        message: formData.message,
+        name: formData.name.trim(),
+        email: formData.email.trim(),
+        phone: normalizedPhone,
+        company: location,
+        state: formData.state,
+        city: formData.city,
+        serviceCategory: serviceCategory,
+        service: serviceTitle,
+        serviceTitle: serviceTitle,
+        serviceSlug: serviceSlug,
+        subService: formData.subService ? formData.subService.trim() : '',
+        customRequirement: formData.customRequirement ? formData.customRequirement.trim() : '',
+        message: formData.message.trim(),
       };
 
       const result = await sendContactEmail(emailPayload);
       if (result.success) {
         setSubmitted(true);
-        setFormData({ name: '', phone: '', email: '', city: '', service: '', message: '' });
+        setFormData({
+          name: '',
+          phone: '',
+          email: '',
+          state: '',
+          city: '',
+          category: '',
+          service: '',
+          subService: '',
+          customRequirement: '',
+          message: ''
+        });
+        setPhoneError(null);
+        setMessageError(null);
         if (onSuccess) onSuccess();
         setTimeout(() => setSubmitted(false), 5000);
       }
@@ -103,7 +301,11 @@ const useContactForm = (onSuccess) => {
     submitting,
     submitted,
     submitError,
+    phoneError,
+    messageError,
     handleChange,
+    handlePhoneBlur,
+    handleMessageBlur,
     handleSubmit,
     setSubmitError
   };
@@ -115,17 +317,28 @@ const Contact = () => {
     submitting,
     submitted,
     submitError,
+    phoneError,
+    messageError,
     handleChange,
+    handlePhoneBlur,
+    handleMessageBlur,
     handleSubmit,
   } = useContactForm();
 
   const [openFaq, setOpenFaq] = useState(null);
+  const availableCities = formData.state ? getCitiesForState(formData.state) : [];
+  const availableServices = formData.category && CONTACT_SERVICES_BY_CATEGORY[formData.category]
+    ? CONTACT_SERVICES_BY_CATEGORY[formData.category]
+    : [];
 
   const onSubmit = (e) => {
     handleSubmit(e);
   };
 
-  const inputClass = 'w-full bg-slate-50 border border-slate-200 focus:border-brand-primary focus:ring-4 focus:ring-brand-primary/10 rounded-xl px-4 py-3 text-sm text-slate-800 outline-none transition-all placeholder-slate-400 font-sans';
+  const inputBase = 'w-full h-[52px] bg-slate-50 border border-slate-200 focus:border-brand-primary focus:ring-4 focus:ring-brand-primary/10 rounded-xl px-4 text-sm text-slate-800 outline-none transition-all placeholder-slate-400 font-sans';
+  const inputClass = inputBase;
+  const selectClass = `${inputBase} cursor-pointer disabled:cursor-not-allowed disabled:bg-slate-100 disabled:text-slate-500`;
+  const textareaClass = 'w-full h-[120px] bg-slate-50 border border-slate-200 focus:border-brand-primary focus:ring-4 focus:ring-brand-primary/10 rounded-xl px-4 py-3 text-sm text-slate-800 outline-none transition-all placeholder-slate-400 font-sans resize-none';
   const labelClass = 'text-xs font-bold text-slate-500 uppercase tracking-wide block mb-1.5';
 
   return (
@@ -245,14 +458,21 @@ const Contact = () => {
                       type="tel"
                       name="phone"
                       required
-                      aria-invalid={submitError && (!formData.phone.trim() || formData.phone.replace(/[^0-9]/g, '').length < 10) ? 'true' : undefined}
-                      aria-describedby={submitError && (!formData.phone.trim() || formData.phone.replace(/[^0-9]/g, '').length < 10) ? 'contact-form-error' : undefined}
+                      aria-invalid={phoneError || (submitError && !formData.phone.trim()) ? 'true' : undefined}
+                      aria-describedby={phoneError ? 'contact-phone-error' : (submitError && !formData.phone.trim() ? 'contact-form-error' : undefined)}
                       value={formData.phone}
                       onChange={handleChange}
-                      placeholder="+91 XXXXX XXXXX"
-                      className={inputClass}
+                      onBlur={handlePhoneBlur}
+                      placeholder="+91 98765 43210"
+                      className={`${inputClass} ${phoneError ? 'border-red-300 focus:border-red-500 focus:ring-red-500/10' : ''}`}
                       disabled={submitting}
                     />
+                    {phoneError && (
+                      <p id="contact-phone-error" className="text-xs text-red-500 font-sans mt-1.5 flex items-center gap-1" role="alert">
+                        <AlertCircle className="w-3.5 h-3.5 flex-shrink-0" />
+                        <span>{phoneError}</span>
+                      </p>
+                    )}
                   </div>
                 </div>
 
@@ -274,28 +494,102 @@ const Contact = () => {
                     />
                   </div>
                   <div>
-                    <label htmlFor="contact-city" className={labelClass}>City / State</label>
-                    <input id="contact-city" type="text" name="city" value={formData.city} onChange={handleChange} placeholder="e.g. Delhi, Mumbai" className={inputClass} disabled={submitting} />
+                    <label htmlFor="contact-category" className={labelClass}>Service Category</label>
+                    <select
+                      id="contact-category"
+                      name="category"
+                      value={formData.category}
+                      onChange={handleChange}
+                      className={selectClass}
+                      disabled={submitting}
+                    >
+                      <option value="">Select Category...</option>
+                      {CONTACT_CATEGORIES.map((cat) => (
+                        <option key={cat} value={cat}>
+                          {cat}
+                        </option>
+                      ))}
+                      <option value="other">Other</option>
+                    </select>
                   </div>
                 </div>
 
-                <div>
-                  <label htmlFor="contact-service" className={labelClass}>Service Required</label>
-                  <select id="contact-service" name="service" value={formData.service} onChange={handleChange} className={inputClass} disabled={submitting}>
-                    <option value="">Select a service...</option>
-                    <option>Private Limited Company Registration</option>
-                    <option>LLP Registration</option>
-                    <option>GST Registration</option>
-                    <option>Trademark Registration</option>
-                    <option>Income Tax Filing</option>
-                    <option>Annual Compliance</option>
-                    <option>MSME Registration</option>
-                    <option>Website Development</option>
-                    <option>E-Commerce Website Development</option>
-                    <option>Custom Web Applications</option>
-                    <option>Digital Signature (DSC)</option>
-                    <option>Other</option>
-                  </select>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div>
+                    <label htmlFor="contact-service" className={labelClass}>Service Required</label>
+                    <select
+                      id="contact-service"
+                      name="service"
+                      value={formData.service}
+                      onChange={handleChange}
+                      className={selectClass}
+                      disabled={submitting || !formData.category}
+                    >
+                      <option value="">
+                        {!formData.category ? 'Select Category first...' : 'Select a service...'}
+                      </option>
+                      {availableServices.map((srv) => (
+                        <option key={srv.slug} value={srv.slug}>
+                          {srv.title}
+                        </option>
+                      ))}
+                      {formData.category ? <option value="other">Other</option> : null}
+                    </select>
+                  </div>
+                  <div>
+                    <label htmlFor="contact-requirement" className={labelClass}>Specific Requirement (Optional)</label>
+                    <input
+                      id="contact-requirement"
+                      type="text"
+                      name="customRequirement"
+                      value={formData.customRequirement}
+                      onChange={handleChange}
+                      placeholder="Add any specific requirements (optional)..."
+                      className={`${inputClass} disabled:cursor-not-allowed disabled:bg-slate-100 disabled:text-slate-500`}
+                      disabled={submitting || !formData.service}
+                    />
+                  </div>
+                </div>
+
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div>
+                    <label htmlFor="contact-state" className={labelClass}>State</label>
+                    <select
+                      id="contact-state"
+                      name="state"
+                      value={formData.state}
+                      onChange={handleChange}
+                      className={selectClass}
+                      disabled={submitting}
+                    >
+                      <option value="">Select State / UT...</option>
+                      {INDIAN_STATES.map((st) => (
+                        <option key={st} value={st}>
+                          {st}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+                  <div>
+                    <label htmlFor="contact-city" className={labelClass}>City</label>
+                    <select
+                      id="contact-city"
+                      name="city"
+                      value={formData.city}
+                      onChange={handleChange}
+                      className={selectClass}
+                      disabled={submitting || !formData.state}
+                    >
+                      <option value="">
+                        {!formData.state ? 'Select State first...' : 'Select City...'}
+                      </option>
+                      {availableCities.map((ct) => (
+                        <option key={ct} value={ct}>
+                          {ct}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
                 </div>
 
                 <div>
@@ -304,18 +598,26 @@ const Contact = () => {
                     id="contact-message"
                     name="message"
                     rows="4"
+                    maxLength={1000}
                     required
-                    aria-invalid={submitError && !formData.message.trim() ? 'true' : undefined}
-                    aria-describedby={submitError && !formData.message.trim() ? 'contact-form-error' : undefined}
+                    aria-invalid={messageError || (submitError && !formData.message.trim()) ? 'true' : undefined}
+                    aria-describedby={messageError ? 'contact-message-error' : (submitError && !formData.message.trim() ? 'contact-form-error' : undefined)}
                     value={formData.message}
                     onChange={handleChange}
-                    placeholder="Briefly describe your business and compliance requirements..."
-                    className={`${inputClass} resize-none`}
+                    onBlur={handleMessageBlur}
+                    placeholder="Briefly describe your business and compliance requirements (minimum 20 characters)..."
+                    className={`${textareaClass} ${messageError ? 'border-red-300 focus:border-red-500 focus:ring-red-500/10' : ''}`}
                     disabled={submitting}
                   />
+                  {messageError && (
+                    <p id="contact-message-error" className="text-xs text-red-500 font-sans mt-1.5 flex items-center gap-1" role="alert">
+                      <AlertCircle className="w-3.5 h-3.5 flex-shrink-0" />
+                      <span>{messageError}</span>
+                    </p>
+                  )}
                 </div>
 
-                <Button type="submit" variant="primary" className="w-full py-3.5 font-bold rounded-xl flex items-center justify-center gap-2 text-sm" disabled={submitting}>
+                <Button type="submit" variant="primary" className="w-full h-[52px] font-bold rounded-xl flex items-center justify-center gap-2 text-sm" disabled={submitting}>
                   <Send className="w-4 h-4" />
                   <span>{submitting ? 'Submitting...' : 'Submit Inquiry'}</span>
                 </Button>
