@@ -2292,4 +2292,87 @@ export const ICON_MAP = {
   Code
 };
 
-export default { SERVICES, CATEGORIES, CONSULTANTS, ICON_MAP, CATEGORY_SERVICES_MAP };
+export const CORPORATE_SERVICES = [
+  { slug: 'private-limited-company', title: 'Private Limited Company', category: 'Corporate Services' },
+  { slug: 'gst-registration', title: 'GST Registration', category: 'Corporate Services' },
+  { slug: 'trademark-registration', title: 'Trademark Registration', category: 'Corporate Services' }
+];
+
+export const LOAN_SERVICES = [
+  { slug: 'personal-loan', title: 'Personal Loan', category: 'Loan Services' },
+  { slug: 'home-loan', title: 'Home Loan', category: 'Loan Services' },
+  { slug: 'business-loan', title: 'Business Loan', category: 'Loan Services' },
+  { slug: 'msme-loan', title: 'MSME Loan', category: 'Loan Services' },
+  { slug: 'startup-loan', title: 'Startup Loan', category: 'Loan Services' },
+  { slug: 'working-capital-loan', title: 'Working Capital Loan', category: 'Loan Services' },
+  { slug: 'education-loan', title: 'Education Loan', category: 'Loan Services' },
+  { slug: 'vehicle-loan', title: 'Vehicle Loan', category: 'Loan Services' },
+  { slug: 'car-loan', title: 'Car Loan', category: 'Loan Services' },
+  { slug: 'bike-loan', title: 'Bike Loan', category: 'Loan Services' },
+  { slug: 'gold-loan', title: 'Gold Loan', category: 'Loan Services' },
+  { slug: 'loan-against-property', title: 'Loan Against Property', category: 'Loan Services' },
+  { slug: 'machinery-loan', title: 'Machinery Loan', category: 'Loan Services' },
+  { slug: 'equipment-finance', title: 'Equipment Finance', category: 'Loan Services' },
+  { slug: 'project-loan', title: 'Project Loan', category: 'Loan Services' },
+  { slug: 'cash-credit', title: 'Cash Credit', category: 'Loan Services' },
+  { slug: 'overdraft-facility', title: 'Overdraft Facility', category: 'Loan Services' },
+  { slug: 'professional-loan', title: 'Professional Loan', category: 'Loan Services' },
+  { slug: 'commercial-vehicle-loan', title: 'Commercial Vehicle Loan', category: 'Loan Services' },
+  { slug: 'construction-loan', title: 'Construction Loan', category: 'Loan Services' }
+];
+
+export const DIGITAL_SOLUTIONS_SERVICES = [
+  { slug: 'digital-signature', title: 'Digital Signature (DSC)', category: 'Digital Solutions' },
+  { slug: 'website-development', title: 'Website Development', category: 'Digital Solutions' },
+  { slug: 'ecommerce-website-development', title: 'E-Commerce Website Development', category: 'Digital Solutions' },
+  { slug: 'custom-web-applications', title: 'Custom Web Applications', category: 'Digital Solutions' }
+];
+
+export const CONTACT_CATEGORIES = [
+  'Corporate Services',
+  'Loan Services',
+  'Digital Solutions'
+];
+
+export const CONTACT_SERVICES_BY_CATEGORY = {
+  'Corporate Services': CORPORATE_SERVICES,
+  'Loan Services': LOAN_SERVICES,
+  'Digital Solutions': DIGITAL_SOLUTIONS_SERVICES
+};
+
+export const ALL_CONTACT_SERVICES = [
+  ...CORPORATE_SERVICES,
+  ...LOAN_SERVICES,
+  ...DIGITAL_SOLUTIONS_SERVICES
+];
+
+export const ACTIVE_SERVICE_SLUGS = [
+  ...CORPORATE_SERVICES.map(s => s.slug),
+  ...LOAN_SERVICES.map(s => s.slug)
+];
+
+export const ACTIVE_SERVICES = ACTIVE_SERVICE_SLUGS
+  .map(slug => SERVICES.find(s => s.slug === slug))
+  .filter(Boolean);
+
+export const ACTIVE_CATEGORIES = CONTACT_CATEGORIES;
+
+export const PREDEFINED_SUB_SERVICES = {
+  // Predefined sub-services by service slug (if explicitly defined in catalogue)
+  // Currently empty as the existing ClearFiling catalogue does not define sub-services
+};
+
+export default {
+  SERVICES,
+  CATEGORIES,
+  CONSULTANTS,
+  ICON_MAP,
+  CATEGORY_SERVICES_MAP,
+  ACTIVE_SERVICE_SLUGS,
+  ACTIVE_SERVICES,
+  ACTIVE_CATEGORIES,
+  CONTACT_CATEGORIES,
+  CONTACT_SERVICES_BY_CATEGORY,
+  ALL_CONTACT_SERVICES,
+  PREDEFINED_SUB_SERVICES
+};

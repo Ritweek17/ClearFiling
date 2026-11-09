@@ -35,13 +35,19 @@ export const sendInquiry = async (data) => {
   const serviceIdentifier = data.serviceTitle || data.service || 'General Compliance';
   const companyOrLocation =
     data.company ||
+    (data.city && data.state ? `${data.city}, ${data.state}` : '') ||
     (data.serviceTitle ? `Inquiry for ${data.serviceTitle}` : 'Direct Website Inquiry');
 
   // Format contextual message with metadata for admin notification
   let formattedMessage = (data.message || '').trim();
   const metaLines = [];
+  if (data.serviceCategory) metaLines.push(`Category: ${data.serviceCategory}`);
   if (data.serviceTitle) metaLines.push(`Service: ${data.serviceTitle}`);
   if (data.serviceSlug) metaLines.push(`Slug: ${data.serviceSlug}`);
+  if (data.subService) metaLines.push(`Sub-Service: ${data.subService}`);
+  if (data.customRequirement) metaLines.push(`Requirement: ${data.customRequirement}`);
+  if (data.state) metaLines.push(`State: ${data.state}`);
+  if (data.city) metaLines.push(`City: ${data.city}`);
   if (data.source) metaLines.push(`Source: ${data.source}`);
   if (data.pageUrl) metaLines.push(`Page URL: ${data.pageUrl}`);
 
@@ -57,6 +63,15 @@ export const sendInquiry = async (data) => {
     phone: data.phone ? data.phone.trim() : '',
     company: companyOrLocation,
     service: serviceIdentifier,
+    serviceCategory: data.serviceCategory || '',
+    serviceTitle: data.serviceTitle || serviceIdentifier,
+    serviceSlug: data.serviceSlug || '',
+    subService: data.subService || '',
+    customRequirement: data.customRequirement || '',
+    state: data.state || '',
+    city: data.city || '',
+    source: data.source || '',
+    pageUrl: data.pageUrl || '',
     message: formattedMessage,
   };
 
@@ -113,13 +128,22 @@ export const sendInquiry = async (data) => {
  * @returns {Promise<{success: boolean}>}
  */
 export const sendContactEmail = async (data) => {
+  const location = data.company ||
+    (data.city && data.state ? `${data.city}, ${data.state}` : (data.city || data.state || 'Direct Website Inquiry'));
+
   const result = await sendInquiry({
     name: data.name,
     email: data.email,
     phone: data.phone,
-    company: data.company,
-    service: data.service,
-    serviceTitle: data.service,
+    company: location,
+    state: data.state,
+    city: data.city,
+    serviceCategory: data.serviceCategory,
+    service: data.serviceTitle || data.service,
+    serviceTitle: data.serviceTitle || data.service,
+    serviceSlug: data.serviceSlug,
+    subService: data.subService,
+    customRequirement: data.customRequirement,
     message: data.message,
     source: 'contact-page',
     pageUrl: typeof window !== 'undefined' ? window.location.href : '',
