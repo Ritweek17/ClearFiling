@@ -1,5 +1,5 @@
 import React from 'react';
-import { motion } from 'framer-motion';
+import { motion, useReducedMotion } from 'framer-motion';
 import {
   Users, Shield, FileCheck, TrendingUp, Clock, HeartHandshake,
   BadgeCheck, Lightbulb, Phone, Landmark, Award, Star
@@ -30,9 +30,9 @@ const WHY_CHOOSE_ITEMS = [
   },
   {
     icon: BadgeCheck,
-    title: '10,000+ Businesses Served',
+    title: '10,000+ Clients Served',
     description:
-      'From early-stage founders to established MSMEs, we have guided over ten thousand Indian businesses through successful compliance journeys since 2020.',
+      'From early-stage founders to established MSMEs, we have guided over ten thousand Indian clients through successful compliance journeys since 2020.',
   },
   {
     icon: Shield,
@@ -62,12 +62,13 @@ const WHY_CHOOSE_ITEMS = [
 
 const WhyChooseCard = ({ item, index }) => {
   const IconComponent = item.icon;
+  const shouldReduceMotion = useReducedMotion();
   return (
     <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
+      initial={shouldReduceMotion ? { opacity: 1 } : { opacity: 0, y: 20 }}
+      whileInView={shouldReduceMotion ? { opacity: 1 } : { opacity: 1, y: 0 }}
       viewport={{ once: true, margin: '-60px' }}
-      transition={{ duration: 0.45, delay: index * 0.07, ease: [0.16, 1, 0.3, 1] }}
+      transition={shouldReduceMotion ? { duration: 0 } : { duration: 0.45, delay: index * 0.07, ease: [0.16, 1, 0.3, 1] }}
     >
       <Card
         isHoverable

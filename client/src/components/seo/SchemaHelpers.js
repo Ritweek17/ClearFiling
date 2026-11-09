@@ -38,13 +38,13 @@ export const generateServiceSchema = (service) => {
     'provider': {
       '@type': 'LocalBusiness',
       'name': 'Clear Filing & Compliance LLP',
-      'image': 'https://clearfiling.in/assets/logo.png',
+      'image': 'https://www.clearfiling.co.in/favicon.svg',
       'address': {
         '@type': 'PostalAddress',
-        'streetAddress': 'Connaught Place',
+        'streetAddress': 'E-20, Lajpat Nagar III',
         'addressLocality': 'New Delhi',
         'addressRegion': 'Delhi',
-        'postalCode': '110001',
+        'postalCode': '110024',
         'addressCountry': 'IN'
       }
     },
@@ -71,10 +71,10 @@ export const generateLocalBusinessSchema = (companyInfo) => {
     '@type': 'LegalService',
     'name': companyInfo.name,
     'alternateName': companyInfo.brandName,
-    'logo': 'https://clearfiling.in/assets/logo.png',
-    'telephone': `+91-${companyInfo.contact.phone}`,
-    'email': companyInfo.contact.email,
-    'url': 'https://clearfiling.in',
+    'logo': 'https://www.clearfiling.co.in/favicon.svg',
+    'telephone': companyInfo.contact.mobile?.display || '+91 9250201718',
+    'email': companyInfo.contact.email?.display || 'clearfiling@zohomail.in',
+    'url': 'https://www.clearfiling.co.in',
     'address': companyInfo.offices.map(office => ({
       '@type': 'PostalAddress',
       'addressLocality': office.city,

@@ -1,6 +1,7 @@
 import React from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
+import { smoothScrollTo } from '../../utils/scroll';
 
 const NavLink = ({
   label,
@@ -21,23 +22,24 @@ const NavLink = ({
 
     const isHomePage = location.pathname === '/';
     
-    if (targetId === 'home' && isHomePage) {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+    if (targetId === 'home') {
+      if (isHomePage) {
+        smoothScrollTo(0);
+      } else {
+        navigate('/');
+      }
       return;
     }
 
     if (isHomePage) {
       const element = document.getElementById(targetId);
       if (element) {
-        // Offset for sticky header (64px / 16rem)
-        const headerOffset = 70;
+        // Offset for sticky header (60px header + 12px breathing margin)
+        const headerOffset = 72;
         const elementPosition = element.getBoundingClientRect().top;
         const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
 
-        window.scrollTo({
-          top: offsetPosition,
-          behavior: 'smooth',
-        });
+        smoothScrollTo(offsetPosition);
       }
     } else {
       // Navigate to homepage first with anchor parameter
@@ -51,7 +53,7 @@ const NavLink = ({
       onClick={handleNavigation}
       aria-label={`Go to section ${label}`}
       className={`
-        relative py-2 text-sm font-medium transition-colors duration-200 outline-none select-none cursor-pointer
+        relative py-2 text-sm font-medium transition-colors duration-200 outline-none select-none cursor-pointer focus-visible:ring-2 focus-visible:ring-brand-primary focus-visible:ring-offset-2 focus-visible:rounded-md focus-visible:outline-none
         ${isActive ? 'text-brand-primary' : 'text-slate-600 hover:text-brand-dark'}
         ${className}
       `}

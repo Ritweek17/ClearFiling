@@ -19,6 +19,13 @@ const CONTACT = {
     raw: '05568450351',
   },
 
+  // Gorakhpur Office
+  gorakhpur: {
+    display: '+91 9336379826',
+    href: 'tel:+919336379826',
+    raw: '9336379826',
+  },
+
   // WhatsApp
   whatsapp: {
     number: '919250201718',
@@ -47,7 +54,9 @@ const CONTACT = {
   },
 
   // Response SLA
-  responseSLA: 'Within 2–4 business hours',
+  responseSLA: '2–4 business hours',
+  whatsappSLA: 'Within 30 minutes',
+  otherSLA: '2–4 business hours',
 };
 
 export default CONTACT;

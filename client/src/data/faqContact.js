@@ -8,7 +8,7 @@ const FAQ_CONTACT = [
     id: 'response-time',
     question: 'How quickly will I receive a response to my inquiry?',
     answer:
-      'We respond to all WhatsApp and email inquiries within 2–4 business hours during office hours (9 AM – 9 PM, 7 days a week). Phone and landline calls are answered immediately during working hours.',
+      'We respond to WhatsApp inquiries within 30 minutes during business hours. Email and other inquiries are answered within 2–4 business hours during office hours (9 AM – 9 PM, 7 days a week). Phone and landline calls are answered immediately during working hours.',
   },
   {
     id: 'visit-office',
@@ -26,7 +26,7 @@ const FAQ_CONTACT = [
     id: 'areas-served',
     question: 'What areas and states do you serve?',
     answer:
-      'Clear Filing serves clients across all states and union territories of India. Our primary offices are in New Delhi and Deoria (Uttar Pradesh), but we operate digitally nationwide. Clients from Mumbai, Bangalore, Chennai, Hyderabad, and other cities regularly engage our services.',
+      'Clear Filing serves clients across all states and union territories of India. Our primary offices are in New Delhi, Deoria, and Gorakhpur (Uttar Pradesh), but we operate digitally nationwide. Clients from Mumbai, Bangalore, Chennai, Hyderabad, and other cities regularly engage our services.',
   },
   {
     id: 'urgent',

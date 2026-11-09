@@ -1,12 +1,19 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { Phone, MessageSquare, ArrowRight, Sparkles } from 'lucide-react';
+import { Phone, MessageSquare, ArrowRight, Sparkles, Calendar } from 'lucide-react';
 import SectionContainer from '../ui/SectionContainer';
 import MaxWidthContainer from '../ui/MaxWidthContainer';
 import Badge from '../ui/Badge';
 import Button from '../ui/Button';
 
 const CTASection = () => {
+  const navigate = useNavigate();
+
+  const handleConsultation = () => {
+    navigate('/contact');
+  };
+
   const handlePhoneCall = () => {
     window.location.href = 'tel:+919250201718';
   };

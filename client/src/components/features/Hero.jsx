@@ -18,9 +18,9 @@ const TRUST_POINTS = [
 ];
 
 const STATS = [
-  { value: '5,000+', label: 'Filings Complete' },
+  { value: '10,000+', label: 'Filings Completed' },
   { value: '99.4%', label: 'Client Satisfaction' },
-  { value: '15+', label: 'CA & CS Experts' },
+  { value: '5', label: 'Qualified Professionals' },
 ];
 
 const Hero = () => {

@@ -21,6 +21,12 @@
     scroll-behavior: smooth;
     -webkit-tap-highlight-color: transparent;
   }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+  }
   
   body {
     @apply bg-brand-bg text-brand-dark antialiased font-sans;
@@ -89,5 +95,26 @@
 
   .rounded-banner {
     border-radius: 24px;
+  }
+
+  /* Hero illustration floating keyframe animation */
+  .animate-hero-float {
+    animation: hero-float 5s ease-in-out infinite;
+    will-change: transform;
+  }
+}
+
+@keyframes hero-float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-hero-float {
+    animation: none !important;
   }
 }

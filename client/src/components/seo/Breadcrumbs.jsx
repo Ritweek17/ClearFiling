@@ -25,13 +25,13 @@ const Breadcrumbs = ({ items = [] }) => {
           className="inline-flex items-center"
         >
           <Link 
-            itemProp="item" 
             to="/" 
             className="inline-flex items-center text-slate-400 hover:text-brand-primary transition-colors"
           >
             <Home className="w-3.5 h-3.5 mr-1.5" />
             <span itemProp="name" className="sr-only">Home</span>
           </Link>
+          <meta itemProp="item" content="https://www.clearfiling.co.in/" />
           <meta itemProp="position" content="1" />
         </li>
 
@@ -39,6 +39,10 @@ const Breadcrumbs = ({ items = [] }) => {
         {items.map((item, index) => {
           const position = index + 2;
           const isLast = index === items.length - 1;
+          const cleanPath = typeof window !== 'undefined' ? window.location.pathname : '';
+          const itemUrl = isLast 
+            ? `https://www.clearfiling.co.in${cleanPath}` 
+            : `https://www.clearfiling.co.in${item.to || ''}`;
 
           return (
             <li 
@@ -53,18 +57,19 @@ const Breadcrumbs = ({ items = [] }) => {
               {isLast ? (
                 <span 
                   itemProp="name" 
+                  aria-current="page"
                   className="text-slate-800 font-semibold"
                 >
                   {item.label}
-                  <meta itemProp="item" content={window.location.href} />
+                  <meta itemProp="item" content={itemUrl} />
                 </span>
               ) : (
                 <Link 
-                  itemProp="item" 
                   to={item.to || '#'} 
                   className="hover:text-brand-primary transition-colors"
                 >
                   <span itemProp="name">{item.label}</span>
+                  <meta itemProp="item" content={itemUrl} />
                 </Link>
               )}
               

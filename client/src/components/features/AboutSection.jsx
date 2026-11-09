@@ -42,7 +42,7 @@ const AboutSection = () => {
               <div className="p-2 bg-brand-primary/5 rounded-lg border border-brand-primary/10 w-fit text-brand-primary">
                 <Target className="w-5 h-5" />
               </div>
-              <h4 className="text-base font-bold font-heading text-brand-secondary">Our Mission</h4>
+              <h3 className="text-base font-bold font-heading text-brand-secondary">Our Mission</h3>
               <p className="text-xs text-slate-500 font-sans leading-relaxed">
                 To simplify legal setups, tax compliance, and finance filings for Indian enterprises through high-speed, expert-backed solutions.
               </p>
@@ -52,7 +52,7 @@ const AboutSection = () => {
               <div className="p-2 bg-brand-primary/5 rounded-lg border border-brand-primary/10 w-fit text-brand-primary">
                 <Eye className="w-5 h-5" />
               </div>
-              <h4 className="text-base font-bold font-heading text-brand-secondary">Our Vision</h4>
+              <h3 className="text-base font-bold font-heading text-brand-secondary">Our Vision</h3>
               <p className="text-xs text-slate-500 font-sans leading-relaxed">
                 To be the primary growth-partner for Indian business founders, delivering absolute pricing clarity and sincere consulting.
               </p>
@@ -93,7 +93,7 @@ const AboutSection = () => {
               </div>
               <div className="p-4 bg-slate-50 rounded-xl border border-slate-100">
                 <div className="text-2xl font-black font-heading text-brand-primary">5</div>
-                <div className="text-[10px] text-slate-400 font-bold uppercase tracking-wider mt-1">Professionals</div>
+                <div className="text-[10px] text-slate-400 font-bold uppercase tracking-wider mt-1">Qualified Professionals</div>
               </div>
               <div className="p-4 bg-slate-50 rounded-xl border border-slate-100 col-span-2 sm:col-span-1">
                 <div className="text-sm font-black font-heading text-brand-primary leading-none mt-1.5">Delhi, Deoria & Gorakhpur</div>
@@ -111,7 +111,7 @@ const AboutSection = () => {
               <span className="text-[10px] font-bold text-brand-primary uppercase tracking-widest">ClearFiling Dashboard</span>
             </div>
             
-            <svg viewBox="0 0 240 180" className="w-full h-full text-brand-primary">
+            <svg viewBox="0 0 240 180" aria-hidden="true" className="w-full h-full text-brand-primary">
               {/* Background grids */}
               <line x1="20" y1="150" x2="220" y2="150" stroke="#E2E8F0" strokeWidth="2" strokeDasharray="3 3" />
               <line x1="20" y1="100" x2="220" y2="100" stroke="#E2E8F0" strokeWidth="1.5" strokeDasharray="3 3" />

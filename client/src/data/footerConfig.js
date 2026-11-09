@@ -19,6 +19,7 @@ export const FOOTER_COMPANY = {
 export const FOOTER_CONTACT = {
   mobile: { display: '+91 9250201718', href: 'tel:+919250201718' },
   landline: { display: '05568-450351', href: 'tel:05568450351' },
+  gorakhpur: { display: '+91 9336379826', href: 'tel:+919336379826' },
   email: { display: 'clearfiling@zohomail.in', href: 'mailto:clearfiling@zohomail.in' },
   emails: [
     { display: 'clearfiling@zohomail.in', href: 'mailto:clearfiling@zohomail.in' },
@@ -53,6 +54,7 @@ export const FOOTER_OFFICES = [
   {
     id: 'gorakhpur',
     label: 'Gorakhpur Office',
+    phone: '+91 9336379826',
     lines: [
       '100D, Surajkund Colony,',
       'Gorakhpur, Uttar Pradesh – 273015',
@@ -95,16 +97,16 @@ export const FOOTER_QUICK_LINKS = [
 ];
 
 export const FOOTER_LOANS = [
-  { label: 'Personal Loan',             slug: null },
-  { label: 'Home Loan',                 slug: null },
+  { label: 'Personal Loan',             slug: 'personal-loan' },
+  { label: 'Home Loan',                 slug: 'home-loan' },
   { label: 'Business Loan',             slug: 'business-loan' },
-  { label: 'MSME Loan',                 slug: null },
-  { label: 'Working Capital Loan',      slug: null },
-  { label: 'Startup Loan',              slug: null },
-  { label: 'Education Loan',            slug: null },
-  { label: 'Vehicle Loan',              slug: null },
-  { label: 'Loan Against Property',     slug: null },
-  { label: 'View All Loan Services',    slug: null },
+  { label: 'MSME Loan',                 slug: 'msme-loan' },
+  { label: 'Working Capital Loan',      slug: 'working-capital-loan' },
+  { label: 'Startup Loan',              slug: 'startup-loan' },
+  { label: 'Education Loan',            slug: 'education-loan' },
+  { label: 'Vehicle Loan',              slug: 'vehicle-loan' },
+  { label: 'Loan Against Property',     slug: 'loan-against-property' },
+  { label: 'View All Loan Services',    to: '/services?category=Loan%20Services' },
 ];
 
 // ─── POPULAR SERVICES ─────────────────────────────────────────────────────────

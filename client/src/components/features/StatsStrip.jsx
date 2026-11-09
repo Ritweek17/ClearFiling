@@ -8,8 +8,8 @@ import Flex from '../ui/Flex';
 const STATS_DATA = [
   {
     icon: Users,
-    value: '5,000+',
-    label: 'Businesses Served',
+    value: '10,000+',
+    label: 'Clients Served',
     desc: 'Empowering startups & MSMEs across India',
   },
   {
@@ -20,14 +20,14 @@ const STATS_DATA = [
   },
   {
     icon: ShieldAlert,
-    value: '15+',
-    label: 'CAs & CSs Experts',
+    value: '5',
+    label: 'Qualified Professionals',
     desc: 'Dedicated professional compliance team',
   },
   {
     icon: Award,
-    value: '10+',
-    label: 'Years Combined Exper.',
+    value: '6+',
+    label: 'Years Experience',
     desc: 'Delivering top-tier corporate advisory',
   },
 ];

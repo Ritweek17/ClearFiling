@@ -7,6 +7,9 @@ import Badge from '../components/ui/Badge';
 import Card from '../components/ui/Card';
 import Button from '../components/ui/Button';
 import Breadcrumbs from '../components/seo/Breadcrumbs';
+import SEOHead from '../components/seo/SEOHead';
+import JsonLd from '../components/seo/JsonLd';
+import { PAGE_SEO, getContactPageSchema } from '../config/seo';
 import { COMPANY_INFO } from '../data/companyInfo';
 import { sendContactEmail } from '../services/emailService';
 
@@ -16,10 +19,10 @@ import ContactInfoCards from '../components/contact/ContactInfoCards';
 import OfficeLocations from '../components/contact/OfficeLocations';
 
 const CONTACT_FAQS = [
-  { q: 'How quickly will I receive a response to my inquiry?', a: 'We respond to all WhatsApp and email inquiries within 2–4 business hours during office hours (9 AM – 9 PM, 7 days). Phone and landline calls are answered immediately during working hours.' },
+  { q: 'How quickly will I receive a response to my inquiry?', a: 'We respond to WhatsApp inquiries within 30 minutes during business hours. Email and other inquiries are answered within 2–4 business hours (office hours: 9 AM – 9 PM, 7 days). Phone and landline calls are answered immediately during working hours.' },
   { q: 'Do I need to visit your office to get started?', a: 'No. All our services are delivered digitally. Documents are collected via email or WhatsApp, and registrations are filed online. You do not need to visit our office in person.' },
   { q: 'Is the first consultation free?', a: 'Yes, the initial consultation is completely free. We discuss your requirements, recommend the appropriate service, and provide a transparent pricing quote — with no obligation.' },
-  { q: 'What areas do you serve across India?', a: 'ClearFiling serves clients across all states and union territories of India. Our primary offices are in Delhi and Deoria (UP), but we operate digitally nationwide.' },
+  { q: 'What areas do you serve across India?', a: 'ClearFiling serves clients across all states and union territories of India. Our primary offices are in Delhi, Deoria, and Gorakhpur (UP), but we operate digitally nationwide.' },
   { q: 'Can you handle urgent or time-sensitive registrations?', a: 'Yes. We prioritise urgent requirements such as expiring GST registrations, trademark filing deadlines, and compliance due dates. Please mention your timeline during your initial consultation.' },
 ];
 
@@ -127,6 +130,15 @@ const Contact = () => {
 
   return (
     <PageContainer animate>
+      {/* Route-level SEO Metadata & Structured Data */}
+      <SEOHead
+        title={PAGE_SEO.contact.title}
+        description={PAGE_SEO.contact.description}
+        canonical={PAGE_SEO.contact.canonical}
+        keywords={PAGE_SEO.contact.keywords}
+      />
+      <JsonLd schema={getContactPageSchema()} />
+
       {/* Reusable Premium Hero */}
       <ContactHero />
 
@@ -203,7 +215,7 @@ const Contact = () => {
               <form onSubmit={onSubmit} className="space-y-4" noValidate>
 
                 {submitError && (
-                  <div className="p-3.5 bg-red-50 border border-red-200 text-red-600 text-xs font-semibold rounded-xl flex items-center gap-2" role="alert">
+                  <div id="contact-form-error" className="p-3.5 bg-red-50 border border-red-200 text-red-600 text-xs font-semibold rounded-xl flex items-center gap-2" role="alert">
                     <AlertCircle className="w-4 h-4 flex-shrink-0" />
                     <span>{submitError}</span>
                   </div>
@@ -212,18 +224,54 @@ const Contact = () => {
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
                     <label htmlFor="contact-name" className={labelClass}>Full Name *</label>
-                    <input id="contact-name" type="text" name="name" required value={formData.name} onChange={handleChange} placeholder="Your full name" className={inputClass} disabled={submitting} />
+                    <input
+                      id="contact-name"
+                      type="text"
+                      name="name"
+                      required
+                      aria-invalid={submitError && !formData.name.trim() ? 'true' : undefined}
+                      aria-describedby={submitError && !formData.name.trim() ? 'contact-form-error' : undefined}
+                      value={formData.name}
+                      onChange={handleChange}
+                      placeholder="Your full name"
+                      className={inputClass}
+                      disabled={submitting}
+                    />
                   </div>
                   <div>
                     <label htmlFor="contact-phone" className={labelClass}>Mobile Number *</label>
-                    <input id="contact-phone" type="tel" name="phone" required value={formData.phone} onChange={handleChange} placeholder="+91 XXXXX XXXXX" className={inputClass} disabled={submitting} />
+                    <input
+                      id="contact-phone"
+                      type="tel"
+                      name="phone"
+                      required
+                      aria-invalid={submitError && (!formData.phone.trim() || formData.phone.replace(/[^0-9]/g, '').length < 10) ? 'true' : undefined}
+                      aria-describedby={submitError && (!formData.phone.trim() || formData.phone.replace(/[^0-9]/g, '').length < 10) ? 'contact-form-error' : undefined}
+                      value={formData.phone}
+                      onChange={handleChange}
+                      placeholder="+91 XXXXX XXXXX"
+                      className={inputClass}
+                      disabled={submitting}
+                    />
                   </div>
                 </div>
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
                     <label htmlFor="contact-email" className={labelClass}>Email Address *</label>
-                    <input id="contact-email" type="email" name="email" required value={formData.email} onChange={handleChange} placeholder="name@company.com" className={inputClass} disabled={submitting} />
+                    <input
+                      id="contact-email"
+                      type="email"
+                      name="email"
+                      required
+                      aria-invalid={submitError && (!formData.email.trim() || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email.trim())) ? 'true' : undefined}
+                      aria-describedby={submitError && (!formData.email.trim() || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email.trim())) ? 'contact-form-error' : undefined}
+                      value={formData.email}
+                      onChange={handleChange}
+                      placeholder="name@company.com"
+                      className={inputClass}
+                      disabled={submitting}
+                    />
                   </div>
                   <div>
                     <label htmlFor="contact-city" className={labelClass}>City / State</label>
@@ -252,7 +300,19 @@ const Contact = () => {
 
                 <div>
                   <label htmlFor="contact-message" className={labelClass}>Your Message *</label>
-                  <textarea id="contact-message" name="message" rows="4" value={formData.message} onChange={handleChange} placeholder="Briefly describe your business and compliance requirements..." className={`${inputClass} resize-none`} disabled={submitting} />
+                  <textarea
+                    id="contact-message"
+                    name="message"
+                    rows="4"
+                    required
+                    aria-invalid={submitError && !formData.message.trim() ? 'true' : undefined}
+                    aria-describedby={submitError && !formData.message.trim() ? 'contact-form-error' : undefined}
+                    value={formData.message}
+                    onChange={handleChange}
+                    placeholder="Briefly describe your business and compliance requirements..."
+                    className={`${inputClass} resize-none`}
+                    disabled={submitting}
+                  />
                 </div>
 
                 <Button type="submit" variant="primary" className="w-full py-3.5 font-bold rounded-xl flex items-center justify-center gap-2 text-sm" disabled={submitting}>
@@ -268,8 +328,14 @@ const Contact = () => {
               {/* Success Toast */}
               <AnimatePresence>
                 {submitted && (
-                  <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: 10 }}
-                    className="absolute inset-0 bg-white/95 rounded-2xl flex flex-col items-center justify-center p-8 text-center z-20">
+                  <motion.div
+                    role="status"
+                    aria-live="polite"
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: 10 }}
+                    className="absolute inset-0 bg-white/95 rounded-2xl flex flex-col items-center justify-center p-8 text-center z-20"
+                  >
                     <div className="p-4 bg-brand-primary/10 text-brand-primary rounded-full mb-4">
                       <Check className="w-10 h-10" />
                     </div>
@@ -298,15 +364,28 @@ const Contact = () => {
           <div className="max-w-2xl mx-auto space-y-3">
             {CONTACT_FAQS.map((faq, i) => (
               <div key={i} className="bg-slate-50 border border-slate-200/60 rounded-xl overflow-hidden">
-                <button onClick={() => setOpenFaq(openFaq === i ? null : i)}
-                  className="w-full text-left flex justify-between items-center gap-4 p-4 text-sm font-semibold text-brand-secondary outline-none">
+                <button
+                  id={`faq-contact-btn-${i}`}
+                  onClick={() => setOpenFaq(openFaq === i ? null : i)}
+                  aria-expanded={openFaq === i}
+                  aria-controls={`faq-contact-content-${i}`}
+                  className="w-full text-left flex justify-between items-center gap-4 p-4 text-sm font-semibold text-brand-secondary outline-none focus-visible:ring-2 focus-visible:ring-brand-primary/50 focus-visible:ring-inset"
+                >
                   <span>{faq.q}</span>
                   <ChevronDown className={`w-4 h-4 text-slate-400 flex-shrink-0 transition-transform ${openFaq === i ? 'rotate-180 text-brand-primary' : ''}`} />
                 </button>
                 <AnimatePresence>
                   {openFaq === i && (
-                    <motion.div initial={{ height: 0 }} animate={{ height: 'auto' }} exit={{ height: 0 }}
-                      transition={{ duration: 0.2 }} className="overflow-hidden border-t border-slate-100">
+                    <motion.div
+                      id={`faq-contact-content-${i}`}
+                      role="region"
+                      aria-labelledby={`faq-contact-btn-${i}`}
+                      initial={{ height: 0 }}
+                      animate={{ height: 'auto' }}
+                      exit={{ height: 0 }}
+                      transition={{ duration: 0.2 }}
+                      className="overflow-hidden border-t border-slate-100"
+                    >
                       <div className="p-4 text-xs text-slate-500 font-sans leading-relaxed">{faq.a}</div>
                     </motion.div>
                   )}
@@ -333,7 +412,7 @@ const Contact = () => {
         <MaxWidthContainer size="md" className="text-center space-y-6 relative z-10">
           <h2 className="text-2xl sm:text-3xl font-extrabold font-heading text-white">Prefer to Connect Directly?</h2>
           <p className="text-slate-300 text-sm max-w-md mx-auto font-sans leading-relaxed">
-            Call us or send a WhatsApp message — our senior advisors respond within 30 minutes during business hours.
+            Call us or send a WhatsApp message — our senior advisors respond to WhatsApp enquiries within 30 minutes during business hours (other enquiries: 2–4 business hours).
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-3 pt-2">
             <a href={COMPANY_INFO.contact.mobile.href}

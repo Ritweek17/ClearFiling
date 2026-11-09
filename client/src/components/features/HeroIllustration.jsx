@@ -5,23 +5,15 @@ const HeroIllustration = ({ className = '' }) => {
   return (
     <motion.div
       initial={{ opacity: 0, scale: 0.95 }}
-      animate={{ 
-        opacity: 1, 
-        scale: 1,
-        y: [0, -10, 0]
-      }}
+      animate={{ opacity: 1, scale: 1 }}
       transition={{
-        opacity: { duration: 0.6, ease: 'easeOut' },
-        scale: { duration: 0.6, ease: 'easeOut' },
-        y: {
-          duration: 5,
-          repeat: Infinity,
-          ease: 'easeInOut'
-        }
+        duration: 0.6,
+        ease: 'easeOut'
       }}
       className={`relative w-full max-w-[480px] lg:max-w-none aspect-[4/3] flex items-center justify-center ${className}`}
     >
-      {/* Decorative ambient background glows */}
+      <div className="relative w-full h-full flex items-center justify-center animate-hero-float">
+        {/* Decorative ambient background glows */}
       <div className="absolute inset-0 bg-radial-gradient from-brand-accent/10 via-transparent to-transparent blur-3xl rounded-full scale-110 -z-10" />
       <div className="absolute w-40 h-40 bg-brand-primary/5 blur-2xl rounded-full top-10 right-10 -z-10 animate-pulse duration-4000" />
 
@@ -30,6 +22,7 @@ const HeroIllustration = ({ className = '' }) => {
         viewBox="0 0 500 400"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
+        aria-hidden="true"
         className="w-full h-full drop-shadow-[0_8px_24px_rgba(15,23,42,0.03)]"
       >
         {/* Background Grid Lines (Subtle Linear details) */}
@@ -120,6 +113,7 @@ const HeroIllustration = ({ className = '' }) => {
           </linearGradient>
         </defs>
       </svg>
+      </div>
     </motion.div>
   );
 };

@@ -95,7 +95,8 @@ const FAQItem = ({ faq, index, isOpen, onToggle }) => (
       id={`faq-button-${index}`}
       onClick={onToggle}
       aria-expanded={isOpen}
-      className="w-full text-left flex items-start justify-between gap-4 px-5 py-4 md:py-5 outline-none group"
+      aria-controls={`faq-content-${index}`}
+      className="w-full text-left flex items-start justify-between gap-4 px-5 py-4 md:py-5 outline-none group focus-visible:ring-2 focus-visible:ring-brand-primary/50 focus-visible:ring-inset"
     >
       <div className="flex items-start gap-3 flex-1">
         <span className={`mt-0.5 flex-shrink-0 text-[10px] font-bold px-2 py-0.5 rounded-full uppercase tracking-wide
@@ -114,6 +115,9 @@ const FAQItem = ({ faq, index, isOpen, onToggle }) => (
     <AnimatePresence initial={false}>
       {isOpen && (
         <motion.div
+          id={`faq-content-${index}`}
+          role="region"
+          aria-labelledby={`faq-button-${index}`}
           key="content"
           initial={{ height: 0 }}
           animate={{ height: 'auto' }}

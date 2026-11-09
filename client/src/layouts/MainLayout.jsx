@@ -1,8 +1,10 @@
-import React from 'react';
+import React, { Suspense } from 'react';
 import { Outlet } from 'react-router-dom';
 import Navbar from '../components/common/Navbar';
 import Footer from '../components/common/Footer';
 import FloatingCTAs from '../components/common/FloatingCTAs';
+import RouteLoadingFallback from '../components/common/RouteLoadingFallback';
+import ErrorBoundary from '../components/common/ErrorBoundary';
 
 /**
  * MainLayout Component
@@ -16,7 +18,11 @@ const MainLayout = () => {
 
       {/* 2. Main Page Viewport Container */}
       <main className="flex-grow flex flex-col">
-        <Outlet />
+        <ErrorBoundary>
+          <Suspense fallback={<RouteLoadingFallback />}>
+            <Outlet />
+          </Suspense>
+        </ErrorBoundary>
       </main>
 
       {/* 3. Floating Contact CTAs (all viewports) */}

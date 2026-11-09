@@ -20,7 +20,7 @@ const Button = ({
     primary: 'bg-brand-primary text-white hover:bg-brand-primary/95 focus:ring-2 focus:ring-brand-accent/50 focus:ring-offset-2',
     secondary: 'bg-white text-slate-800 border border-slate-200 hover:bg-slate-50 focus:ring-2 focus:ring-slate-200',
     accent: 'bg-brand-accent text-white hover:bg-brand-accent/90 focus:ring-2 focus:ring-brand-accent/30',
-    text: 'text-brand-primary hover:text-brand-primary/80 px-0 py-0 bg-transparent hover:bg-transparent shadow-none inline-flex items-center gap-1.5 font-semibold group',
+    text: 'text-brand-primary hover:text-brand-primary/80 px-0 py-0 bg-transparent hover:bg-transparent shadow-none inline-flex items-center gap-1.5 font-semibold group focus-visible:ring-2 focus-visible:ring-brand-primary/50 focus-visible:ring-offset-2 focus-visible:rounded-md focus-visible:outline-none',
     outline: 'bg-transparent text-slate-800 border border-slate-200 hover:bg-slate-50 focus:ring-2 focus:ring-slate-200',
     outlineDark: 'bg-transparent text-white border border-white/20 hover:bg-white/10 focus:ring-2 focus:ring-white/20',
   };

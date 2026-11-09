@@ -28,11 +28,11 @@ export const PAGE_SEO = {
   },
   about: {
     title: `About Clear Filing | Trusted CA, CS & Legal Advisory Firm Since 2020`,
-    description: 'Clear Filing & Compliance LLP is a premium corporate advisory firm with offices in Delhi and Deoria. Expert CAs, CSs, and legal advisors serving 10,000+ clients.',
+    description: 'Clear Filing & Compliance LLP is a premium corporate advisory firm with offices in Delhi, Deoria, and Gorakhpur. Expert CAs, CSs, and legal advisors serving 10,000+ clients.',
     canonical: `${BUSINESS.url}/about`,
   },
   contact: {
-    title: `Contact Clear Filing | CA, CS & Compliance Advisory — Delhi & Deoria`,
+    title: `Contact Clear Filing | CA, CS & Compliance Advisory — Delhi, Deoria & Gorakhpur`,
     description: 'Get in touch with Clear Filing\'s compliance experts. Call +91 9250201718, WhatsApp, or email clearfiling@zohomail.in / support.clearfiling@gmail.com. Free consultation, 9 AM – 9 PM, 7 days.',
     canonical: `${BUSINESS.url}/contact`,
     keywords: 'contact CA firm Delhi, compliance advisor contact, company registration help, GST expert contact',
@@ -87,6 +87,14 @@ export const getOrganizationSchema = () => ({
       postalCode: '274001',
       addressCountry: 'IN',
     },
+    {
+      '@type': 'PostalAddress',
+      streetAddress: '100D, Surajkund Colony',
+      addressLocality: 'Gorakhpur',
+      addressRegion: 'Uttar Pradesh',
+      postalCode: '273015',
+      addressCountry: 'IN',
+    },
   ],
   sameAs: [
     'https://www.facebook.com/share/1BZxGC9K7z/?mibextid=wwXIfr',
@@ -97,7 +105,7 @@ export const getOrganizationSchema = () => ({
 });
 
 /**
- * LocalBusiness schema — for both offices
+ * LocalBusiness schema — for all three offices
  */
 export const getLocalBusinessSchema = () => [
   {
@@ -130,6 +138,22 @@ export const getLocalBusinessSchema = () => [
       addressLocality: 'Deoria',
       addressRegion: 'Uttar Pradesh',
       postalCode: '274001',
+      addressCountry: 'IN',
+    },
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'AccountingService',
+    name: `${BUSINESS.legalName} — Gorakhpur`,
+    url: BUSINESS.url,
+    telephone: CONTACT.gorakhpur.display,
+    openingHours: 'Mo-Su 09:00-21:00',
+    address: {
+      '@type': 'PostalAddress',
+      streetAddress: '100D, Surajkund Colony',
+      addressLocality: 'Gorakhpur',
+      addressRegion: 'Uttar Pradesh',
+      postalCode: '273015',
       addressCountry: 'IN',
     },
   },

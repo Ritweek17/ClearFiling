@@ -1,5 +1,5 @@
 import React from 'react';
-import { motion } from 'framer-motion';
+import { motion, useReducedMotion } from 'framer-motion';
 
 /**
  * PageContainer Component
@@ -13,9 +13,10 @@ const PageContainer = ({
   animate = true,
   ...props
 }) => {
+  const shouldReduceMotion = useReducedMotion();
   const baseClasses = 'flex-grow w-full flex flex-col pb-16 md:pb-0'; // space for sticky mobile bar
 
-  if (animate) {
+  if (animate && !shouldReduceMotion) {
     return (
       <motion.div
         initial={{ opacity: 0 }}

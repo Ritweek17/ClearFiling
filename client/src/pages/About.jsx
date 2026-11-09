@@ -10,6 +10,8 @@ import PageContainer from '../components/ui/PageContainer';
 import Badge from '../components/ui/Badge';
 import Card from '../components/ui/Card';
 import Breadcrumbs from '../components/seo/Breadcrumbs';
+import SEOHead from '../components/seo/SEOHead';
+import { PAGE_SEO } from '../config/seo';
 import { COMPANY_INFO } from '../data/companyInfo';
 
 // ─── Data ──────────────────────────────────────────────────────────────────
@@ -51,6 +53,13 @@ const About = () => {
 
   return (
     <PageContainer animate>
+      {/* Route-level SEO Metadata */}
+      <SEOHead
+        title={PAGE_SEO.about.title}
+        description={PAGE_SEO.about.description}
+        canonical={PAGE_SEO.about.canonical}
+      />
+
       {/* ── 1. Hero ─────────────────────────────────────────────────────────── */}
       <div className="relative bg-brand-secondary text-white py-24 md:py-32 border-b border-slate-800 overflow-hidden">
         <div className="absolute inset-0 bg-radial-gradient from-brand-primary/20 via-transparent to-transparent opacity-70 pointer-events-none" />
@@ -63,7 +72,7 @@ const About = () => {
             Integrity. Sanctity. Dedication.
           </h1>
           <p className="text-slate-300 max-w-2xl mx-auto text-base md:text-lg font-sans leading-relaxed">
-            Since 2020, ClearFiling & Compliance LLP has helped over 10,000 businesses across India with company registration, taxation, trademark, and compliance advisory — with full transparency and expert precision.
+            Since 2020, ClearFiling & Compliance LLP has helped over 10,000 clients across India with company registration, taxation, trademark, and compliance advisory — with full transparency and expert precision.
           </p>
           <div className="flex items-center justify-center gap-3 flex-wrap pt-2">
             <Link to="/contact"
@@ -97,10 +106,10 @@ const About = () => {
               ClearFiling & Compliance LLP was founded in 2020 with a clear purpose: to make corporate advisory, business registration, and regulatory compliance accessible, transparent, and professional for every Indian entrepreneur.
             </p>
             <p className="text-slate-600 font-sans text-base leading-relaxed">
-              What began as a boutique firm serving early-stage startups and MSMEs in Delhi has grown into a full-service compliance practice with offices in both New Delhi and Deoria, Uttar Pradesh. Our panel now includes Chartered Accountants, Company Secretaries, legal advisors, merchant bankers, and cost accountants — each bringing deep domain expertise.
+              What began as a boutique firm serving early-stage startups and MSMEs in Delhi has grown into a full-service compliance practice with offices in New Delhi, Deoria, and Gorakhpur, Uttar Pradesh. Our panel now includes Chartered Accountants, Company Secretaries, legal advisors, merchant bankers, and cost accountants — each bringing deep domain expertise.
             </p>
             <p className="text-slate-600 font-sans text-base leading-relaxed">
-              Over the past six years, we have guided more than 10,000 businesses through company registrations, GST filings, trademark applications, and annual ROC compliance — with no hidden fees, no delays, and no confusion. Every client receives dedicated advisor support and regular status updates.
+              Over the past six years, we have guided more than 10,000 clients through company registrations, GST filings, trademark applications, and annual ROC compliance — with no hidden fees, no delays, and no confusion. Every client receives dedicated advisor support and regular status updates.
             </p>
 
             {/* Mission & Vision */}

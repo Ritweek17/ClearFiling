@@ -6,11 +6,18 @@ import PageContainer from '../components/ui/PageContainer';
 import MaxWidthContainer from '../components/ui/MaxWidthContainer';
 import Badge from '../components/ui/Badge';
 import Card from '../components/ui/Card';
+import SEOHead from '../components/seo/SEOHead';
+import { PAGE_SEO } from '../config/seo';
 import { ArrowRight, BookOpen } from 'lucide-react';
 
 // Resources listing page (shown at /resources)
 const ResourcesListing = () => (
   <PageContainer animate>
+    <SEOHead
+      title={PAGE_SEO.resources.title}
+      description={PAGE_SEO.resources.description}
+      canonical={PAGE_SEO.resources.canonical}
+    />
     <div className="relative bg-brand-secondary text-white py-20 md:py-28 border-b border-slate-800 overflow-hidden">
       <div className="absolute inset-0 bg-radial-gradient from-brand-primary/15 via-transparent to-transparent pointer-events-none" />
       <MaxWidthContainer size="lg" className="relative z-10 text-center space-y-5">

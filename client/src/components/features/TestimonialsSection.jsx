@@ -139,7 +139,7 @@ const TestimonialsSection = () => {
           {[
             { value: '10,000+', label: 'Clients Served' },
             { value: '4.9 / 5', label: 'Average Rating' },
-            { value: '98%', label: 'Client Satisfaction' },
+            { value: '99.4%', label: 'Client Satisfaction' },
             { value: '6+ Years', label: 'Industry Experience' },
           ].map((stat) => (
             <div key={stat.label} className="text-center py-4">

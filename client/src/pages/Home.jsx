@@ -1,5 +1,8 @@
 import React from 'react';
 import PageContainer from '../components/ui/PageContainer';
+import SEOHead from '../components/seo/SEOHead';
+import JsonLd from '../components/seo/JsonLd';
+import { PAGE_SEO, getOrganizationSchema, getLocalBusinessSchema } from '../config/seo';
 
 // Existing approved sections
 import Hero from '../components/features/Hero';
@@ -19,6 +22,16 @@ import CTASection from '../components/features/CTASection';
 const Home = () => {
   return (
     <PageContainer animate>
+      {/* Route-level SEO & Structured Data */}
+      <SEOHead
+        title={PAGE_SEO.home.title}
+        description={PAGE_SEO.home.description}
+        canonical={PAGE_SEO.home.canonical}
+        keywords={PAGE_SEO.home.keywords}
+      />
+      <JsonLd schema={getOrganizationSchema()} />
+      <JsonLd schema={getLocalBusinessSchema()} />
+
       {/* 1. Premium Hero Section */}
       <Hero />
 

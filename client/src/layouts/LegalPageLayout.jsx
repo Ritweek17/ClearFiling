@@ -4,16 +4,26 @@
  * All legal pages import this layout and pass their content sections.
  */
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { FileText, ArrowLeft, Clock } from 'lucide-react';
 import MaxWidthContainer from '../components/ui/MaxWidthContainer';
 import PageContainer from '../components/ui/PageContainer';
 import Badge from '../components/ui/Badge';
 import Breadcrumbs from '../components/seo/Breadcrumbs';
+import SEOHead from '../components/seo/SEOHead';
 
 const LegalPageLayout = ({ title, badge, lastUpdated, effectiveDate, intro, sections, children }) => {
+  const location = useLocation();
+
   return (
     <PageContainer animate>
+      {/* Route-level SEO Metadata */}
+      <SEOHead
+        title={`${title} | ClearFiling & Compliance LLP`}
+        description={intro || `Review the official ${title} for ClearFiling & Compliance LLP.`}
+        canonical={`https://www.clearfiling.co.in${location.pathname}`}
+      />
+
       {/* Hero Banner */}
       <div className="relative bg-brand-secondary text-white py-20 md:py-28 border-b border-slate-800 overflow-hidden">
         <div className="absolute inset-0 bg-radial-gradient from-brand-primary/15 via-transparent to-transparent pointer-events-none" />

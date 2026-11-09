@@ -16,6 +16,7 @@ import { Link, useNavigate, useLocation } from 'react-router-dom';
 import {
   Phone, MessageSquare, Mail, MapPin, Clock, Facebook, Instagram, ArrowRight,
 } from 'lucide-react';
+import { smoothScrollTo } from '../../utils/scroll';
 
 import {
   FOOTER_COMPANY,
@@ -79,21 +80,20 @@ const FooterNavLink = ({ label, to, section, slug, title }) => {
     );
   }
 
-  // Section scroll — if already on home page, scroll; otherwise navigate + scroll
+  // Section scroll — if already on home page, scroll; otherwise navigate with hash
   if (section) {
     const handleSectionClick = (e) => {
       e.preventDefault();
-      const scrollToSection = () => {
+      if (location.pathname === '/') {
         const el = document.getElementById(section);
         if (el) {
-          el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          const headerOffset = 72;
+          const elementPosition = el.getBoundingClientRect().top;
+          const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+          smoothScrollTo(offsetPosition);
         }
-      };
-      if (location.pathname === '/') {
-        scrollToSection();
       } else {
-        navigate(to || '/');
-        setTimeout(scrollToSection, 400);
+        navigate(`${to || '/'}#${section}`);
       }
     };
 
@@ -349,7 +349,7 @@ const Footer = () => {
           <div className="lg:col-span-2">
             <FooterColumn title="Loan Services">
               {FOOTER_LOANS.map((l) => (
-                <FooterNavLink key={l.label} label={l.label} to="/services" slug={l.slug} />
+                <FooterNavLink key={l.label} label={l.label} to={l.to || '/services'} slug={l.slug} />
               ))}
             </FooterColumn>
           </div>

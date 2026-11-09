@@ -12,7 +12,7 @@ export const PRIVACY_POLICY = {
   effectiveDate: '1 July 2026',
   metaTitle: 'Privacy Policy | ClearFiling & Compliance LLP',
   metaDescription: 'Read the ClearFiling privacy policy to understand how we collect, use, and protect your personal information.',
-  intro: 'ClearFiling & Compliance LLP ("ClearFiling", "we", "our", or "us") is committed to protecting your privacy. This Privacy Policy explains how we collect, use, disclose, and safeguard your personal information when you visit our website clearfiling.in or engage with our services. Please read this policy carefully. By using this website, you agree to the terms described herein.',
+  intro: 'ClearFiling & Compliance LLP ("ClearFiling", "we", "our", or "us") is committed to protecting your privacy. This Privacy Policy explains how we collect, use, disclose, and safeguard your personal information when you visit our website clearfiling.co.in or engage with our services. Please read this policy carefully. By using this website, you agree to the terms described herein.',
   sections: [
     {
       heading: 'Information We Collect',
@@ -84,7 +84,7 @@ export const PRIVACY_POLICY = {
       heading: 'Contact Us',
       content: [
         'If you have any questions, concerns, or requests regarding this Privacy Policy, please contact us:',
-        ['Email: clearfiling@zohomail.in / support.clearfiling@gmail.com', 'Phone: +91 9250201718 | Landline: 05568-450351', 'Delhi Office: E-20, Lajpat Nagar III, New Delhi – 110024', 'Deoria Office: Asha Complex, 30 Feet Road, Near Nahar, Bhikhampur Road, Deoria, Uttar Pradesh – 274001'],
+        ['Email: clearfiling@zohomail.in / support.clearfiling@gmail.com', 'Phone: +91 9250201718 | Landline: 05568-450351 | Gorakhpur: +91 9336379826', 'Delhi Office: E-20, Lajpat Nagar III, New Delhi – 110024', 'Deoria Office: Asha Complex, 30 Feet Road, Near Nahar, Bhikhampur Road, Deoria, Uttar Pradesh – 274001', 'Gorakhpur Office: 100D, Surajkund Colony, Gorakhpur, Uttar Pradesh – 273015'],
       ],
     },
   ],
@@ -98,7 +98,7 @@ export const TERMS_CONDITIONS = {
   effectiveDate: '1 July 2026',
   metaTitle: 'Terms & Conditions | ClearFiling & Compliance LLP',
   metaDescription: 'Review the terms and conditions governing the use of ClearFiling services and this website.',
-  intro: 'These Terms & Conditions ("Terms") govern your access to and use of the website clearfiling.in and the professional advisory and compliance services provided by ClearFiling & Compliance LLP. By accessing this website or engaging our services, you agree to be bound by these Terms. If you do not agree, please do not use this website.',
+  intro: 'These Terms & Conditions ("Terms") govern your access to and use of the website clearfiling.co.in and the professional advisory and compliance services provided by ClearFiling & Compliance LLP. By accessing this website or engaging our services, you agree to be bound by these Terms. If you do not agree, please do not use this website.',
   sections: [
     {
       heading: 'Services Offered',
@@ -169,7 +169,7 @@ export const TERMS_CONDITIONS = {
     {
       heading: 'Contact for Legal Queries',
       content: [
-        ['Email: clearfiling@zohomail.in / support.clearfiling@gmail.com', 'Phone: +91 9250201718', 'Delhi Office: E-20, Lajpat Nagar III, New Delhi – 110024'],
+        ['Email: clearfiling@zohomail.in / support.clearfiling@gmail.com', 'Phone: +91 9250201718 | Landline: 05568-450351 | Gorakhpur: +91 9336379826', 'Delhi Office: E-20, Lajpat Nagar III, New Delhi – 110024', 'Deoria Office: Asha Complex, 30 Feet Road, Near Nahar, Bhikhampur Road, Deoria, Uttar Pradesh – 274001', 'Gorakhpur Office: 100D, Surajkund Colony, Gorakhpur, Uttar Pradesh – 273015'],
       ],
     },
   ],
@@ -183,7 +183,7 @@ export const DISCLAIMER = {
   effectiveDate: '1 July 2026',
   metaTitle: 'Disclaimer | ClearFiling & Compliance LLP',
   metaDescription: 'Read the ClearFiling legal disclaimer covering professional advisory limitations and website content usage.',
-  intro: 'The information provided on this website (clearfiling.in) and by ClearFiling & Compliance LLP is for general informational and educational purposes only. It does not constitute formal legal, tax, or financial advice. Please read this disclaimer carefully before relying on any content from this website.',
+  intro: 'The information provided on this website (clearfiling.co.in) and by ClearFiling & Compliance LLP is for general informational and educational purposes only. It does not constitute formal legal, tax, or financial advice. Please read this disclaimer carefully before relying on any content from this website.',
   sections: [
     {
       heading: 'Not a Substitute for Professional Advice',

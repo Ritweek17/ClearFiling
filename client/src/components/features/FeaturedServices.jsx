@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { 
   ArrowRight, 
@@ -31,6 +31,18 @@ import Spacer from '../ui/Spacer';
 // SEO Helpers
 import JsonLd from '../seo/JsonLd';
 import { generateServiceSchema, generateFAQSchema } from '../seo/SchemaHelpers';
+
+// Precompute lowercase search text for all services once at module initialization
+const SERVICES_SEARCH_CACHE = SERVICES.map(s => ({
+  service: s,
+  searchText: [
+    s.title.toLowerCase(),
+    s.category.toLowerCase(),
+    (s.subtitle || '').toLowerCase(),
+    s.description.toLowerCase(),
+    ...(s.keywords || []).map(k => (typeof k === 'string' ? k.toLowerCase() : ''))
+  ].join(' ')
+}));
 
 const FeaturedServices = () => {
   const [activeCategory, setActiveCategory] = useState('All');
@@ -75,67 +87,56 @@ const FeaturedServices = () => {
     }, 80);
   };
 
-  // 1. Intelligent Fuzzy Search Matcher
-  const getFuzzyFilteredServices = () => {
-    let result = SERVICES;
+  // 1. Intelligent Fuzzy Search Matcher (Memoized to prevent string allocation churn)
+  const filteredServices = useMemo(() => {
+    let candidates = SERVICES_SEARCH_CACHE;
     
     // Filter by Category Chip
     if (activeCategory !== 'All') {
-      result = result.filter(s => s.category === activeCategory);
+      candidates = candidates.filter(item => item.service.category === activeCategory);
     } else if (searchQuery.trim() === '') {
       // Default view when 'All' is selected and no search query: show only featured services
-      result = result.filter(s => s.featured);
+      return SERVICES.filter(s => s.featured);
     }
     
     // Fuzzy Query match
-    if (searchQuery.trim() !== '') {
-      const q = searchQuery.toLowerCase().trim();
-      
-      // Synonym mappings to match variations (e.g. return -> filings, itr -> tax, company -> pvt ltd/llp)
-      const queryTokens = [q];
-      if (q.includes('gst')) queryTokens.push('tax', 'gstin', 'indirect tax', 'returns', 'filing');
-      if (q.includes('itr') || q.includes('tax') || q.includes('income')) {
-        queryTokens.push('income tax', 'tds', 'returns', 'filing');
-      }
-      if (q.includes('company') || q.includes('setup') || q.includes('firm')) {
-        queryTokens.push('private limited', 'llp', 'incorporation', 'partnership', 'opc', 'formation');
-      }
-      if (q.includes('trademark') || q.includes('logo') || q.includes('brand') || q.includes('patent') || q.includes('copyright')) {
-        queryTokens.push('brand name', 'ipr', 'copyright', 'stamp', 'patent');
-      }
-      if (q.includes('audit') || q.includes('book') || q.includes('account') || q.includes('cost')) {
-        queryTokens.push('bookkeeping', 'accounting', 'ledger', 'compliance', 'audit');
-      }
-      if (q.includes('annual') || q.includes('roc') || q.includes('mca') || q.includes('filing') || q.includes('compliance')) {
-        queryTokens.push('compliance', 'returns', 'kyc', 'director');
-      }
-
-      result = result.filter(s => {
-        const textToSearch = [
-          s.title.toLowerCase(),
-          s.category.toLowerCase(),
-          (s.subtitle || '').toLowerCase(),
-          s.description.toLowerCase(),
-          ...(s.keywords || [])
-        ].join(' ');
-
-        return queryTokens.some(token => textToSearch.includes(token));
-      });
+    const trimmedQuery = searchQuery.trim();
+    if (trimmedQuery === '') {
+      return candidates.map(item => item.service);
     }
+
+    const q = trimmedQuery.toLowerCase();
     
-    return result;
-  };
+    // Synonym mappings to match variations (e.g. return -> filings, itr -> tax, company -> pvt ltd/llp)
+    const queryTokens = [q];
+    if (q.includes('gst')) queryTokens.push('tax', 'gstin', 'indirect tax', 'returns', 'filing');
+    if (q.includes('itr') || q.includes('tax') || q.includes('income')) {
+      queryTokens.push('income tax', 'tds', 'returns', 'filing');
+    }
+    if (q.includes('company') || q.includes('setup') || q.includes('firm')) {
+      queryTokens.push('private limited', 'llp', 'incorporation', 'partnership', 'opc', 'formation');
+    }
+    if (q.includes('trademark') || q.includes('logo') || q.includes('brand') || q.includes('patent') || q.includes('copyright')) {
+      queryTokens.push('brand name', 'ipr', 'copyright', 'stamp', 'patent');
+    }
+    if (q.includes('audit') || q.includes('book') || q.includes('account') || q.includes('cost')) {
+      queryTokens.push('bookkeeping', 'accounting', 'ledger', 'compliance', 'audit');
+    }
+    if (q.includes('annual') || q.includes('roc') || q.includes('mca') || q.includes('filing') || q.includes('compliance')) {
+      queryTokens.push('compliance', 'returns', 'kyc', 'director');
+    }
 
-  const filteredServices = getFuzzyFilteredServices();
+    return candidates
+      .filter(item => queryTokens.some(token => item.searchText.includes(token)))
+      .map(item => item.service);
+  }, [activeCategory, searchQuery]);
 
-  // Check if search matches Consultant profiles (CA, CS, Legal, Banker, Cost)
-  const isConsultantSearchActive = () => {
+  // Check if search matches Consultant profiles (CA, CS, Legal, Banker, Cost) - Memoized
+  const showConsultantsGrid = useMemo(() => {
     if (!searchQuery.trim()) return false;
     const q = searchQuery.toLowerCase();
     return /(ca|cs|consultant|advisor|lawyer|attorney|banker|accountant|auditor|secretary|merchant)/i.test(q);
-  };
-
-  const showConsultantsGrid = isConsultantSearchActive();
+  }, [searchQuery]);
 
   // Dynamic selector logic: Automatically update active featured service if current is filtered out
   useEffect(() => {
@@ -146,12 +147,14 @@ const FeaturedServices = () => {
         setActiveFeaturedId(filteredServices[0].id);
       }
     }
-  }, [searchQuery, activeCategory]);
+  }, [filteredServices, activeFeaturedId]);
 
-  const activeFeaturedService = SERVICES.find(s => s.id === activeFeaturedId) || SERVICES[0];
+  const activeFeaturedService = useMemo(() => {
+    return SERVICES.find(s => s.id === activeFeaturedId) || SERVICES[0];
+  }, [activeFeaturedId]);
 
-  // Suggestions Autocomplete dropdown
-  const getSuggestions = () => {
+  // Suggestions Autocomplete dropdown - Memoized
+  const suggestions = useMemo(() => {
     if (!searchQuery.trim()) return [];
     const q = searchQuery.toLowerCase().trim();
     const suggestionsList = [];
@@ -180,9 +183,7 @@ const FeaturedServices = () => {
     });
 
     return suggestionsList.slice(0, 5);
-  };
-
-  const suggestions = getSuggestions();
+  }, [searchQuery]);
 
   // Click handler for service card selection in grid
   const handleServiceCardClick = (serviceId) => {
@@ -290,6 +291,7 @@ const FeaturedServices = () => {
             <Search className="w-5 h-5 text-slate-400 ml-5 flex-shrink-0" />
             <input
               type="text"
+              aria-label="Search services or consultants"
               placeholder="Search services or consultants (e.g. GST, CA)..."
               value={searchQuery}
               onChange={(e) => {

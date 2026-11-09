@@ -2,132 +2,234 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <!-- Home Page -->
   <url>
-    <loc>https://clearfiling.co.in/</loc>
+    <loc>https://www.clearfiling.co.in/</loc>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
 
   <!-- Core Pages -->
   <url>
-    <loc>https://clearfiling.co.in/about</loc>
+    <loc>https://www.clearfiling.co.in/about</loc>
     <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://clearfiling.co.in/services</loc>
+    <loc>https://www.clearfiling.co.in/services</loc>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://clearfiling.co.in/contact</loc>
+    <loc>https://www.clearfiling.co.in/contact</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://clearfiling.co.in/resources</loc>
+    <loc>https://www.clearfiling.co.in/resources</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://clearfiling.co.in/blog</loc>
+    <loc>https://www.clearfiling.co.in/blog</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
 
-  <!-- Active Service Pages -->
+  <!-- Active Corporate Service Pages -->
   <url>
-    <loc>https://clearfiling.co.in/services/private-limited-company</loc>
+    <loc>https://www.clearfiling.co.in/services/private-limited-company</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://clearfiling.co.in/services/gst-registration</loc>
+    <loc>https://www.clearfiling.co.in/services/gst-registration</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://clearfiling.co.in/services/trademark-registration</loc>
+    <loc>https://www.clearfiling.co.in/services/trademark-registration</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Active Loan Services -->
+  <url>
+    <loc>https://www.clearfiling.co.in/services/personal-loan</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.clearfiling.co.in/services/home-loan</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.clearfiling.co.in/services/business-loan</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.clearfiling.co.in/services/msme-loan</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.clearfiling.co.in/services/startup-loan</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.clearfiling.co.in/services/working-capital-loan</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.clearfiling.co.in/services/education-loan</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.clearfiling.co.in/services/vehicle-loan</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.clearfiling.co.in/services/car-loan</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.clearfiling.co.in/services/bike-loan</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.clearfiling.co.in/services/gold-loan</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.clearfiling.co.in/services/loan-against-property</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.clearfiling.co.in/services/machinery-loan</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.clearfiling.co.in/services/equipment-finance</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.clearfiling.co.in/services/project-loan</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.clearfiling.co.in/services/cash-credit</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.clearfiling.co.in/services/overdraft-facility</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.clearfiling.co.in/services/professional-loan</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.clearfiling.co.in/services/commercial-vehicle-loan</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.clearfiling.co.in/services/construction-loan</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
 
   <!-- Resource Guides -->
   <url>
-    <loc>https://clearfiling.co.in/resources/company-registration</loc>
+    <loc>https://www.clearfiling.co.in/resources/company-registration</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://clearfiling.co.in/resources/gst-guide</loc>
+    <loc>https://www.clearfiling.co.in/resources/gst-guide</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://clearfiling.co.in/resources/trademark-guide</loc>
+    <loc>https://www.clearfiling.co.in/resources/trademark-guide</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://clearfiling.co.in/resources/compliance-guide</loc>
+    <loc>https://www.clearfiling.co.in/resources/compliance-guide</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://clearfiling.co.in/resources/startup-guide</loc>
+    <loc>https://www.clearfiling.co.in/resources/startup-guide</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://clearfiling.co.in/resources/business-resources</loc>
+    <loc>https://www.clearfiling.co.in/resources/business-resources</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
 
   <!-- Blog Articles -->
   <url>
-    <loc>https://clearfiling.co.in/blog/how-to-register-private-limited-company-india</loc>
+    <loc>https://www.clearfiling.co.in/blog/how-to-register-private-limited-company-india</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://clearfiling.co.in/blog/gst-registration-guide</loc>
+    <loc>https://www.clearfiling.co.in/blog/gst-registration-guide</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://clearfiling.co.in/blog/trademark-registration-brand-protection</loc>
+    <loc>https://www.clearfiling.co.in/blog/trademark-registration-brand-protection</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://clearfiling.co.in/blog/income-tax-filing-business</loc>
+    <loc>https://www.clearfiling.co.in/blog/income-tax-filing-business</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://clearfiling.co.in/blog/msme-udyam-registration-benefits</loc>
+    <loc>https://www.clearfiling.co.in/blog/msme-udyam-registration-benefits</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://clearfiling.co.in/blog/annual-compliance-pvt-ltd</loc>
+    <loc>https://www.clearfiling.co.in/blog/annual-compliance-pvt-ltd</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
 
   <!-- Legal Pages -->
   <url>
-    <loc>https://clearfiling.co.in/privacy-policy</loc>
+    <loc>https://www.clearfiling.co.in/privacy-policy</loc>
     <changefreq>yearly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>https://clearfiling.co.in/terms</loc>
+    <loc>https://www.clearfiling.co.in/terms</loc>
     <changefreq>yearly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>https://clearfiling.co.in/disclaimer</loc>
+    <loc>https://www.clearfiling.co.in/disclaimer</loc>
     <changefreq>yearly</changefreq>
     <priority>0.5</priority>
   </url>

@@ -17,10 +17,13 @@ import {
   MapPin,
   Sparkles,
   Send,
-  ArrowLeft
+  ArrowLeft,
+  AlertCircle,
+  Loader2
 } from 'lucide-react';
 
 import { SERVICES, ICON_MAP } from '../data/services';
+import { sendInquiry } from '../services/emailService';
 import MaxWidthContainer from '../components/ui/MaxWidthContainer';
 import SectionContainer from '../components/ui/SectionContainer';
 import Button from '../components/ui/Button';
@@ -30,6 +33,7 @@ import Spacer from '../components/ui/Spacer';
 
 // SEO Components
 import Breadcrumbs from '../components/seo/Breadcrumbs';
+import SEOHead from '../components/seo/SEOHead';
 import JsonLd from '../components/seo/JsonLd';
 import { generateServiceSchema, generateFAQSchema } from '../components/seo/SchemaHelpers';
 
@@ -40,26 +44,65 @@ const ServiceDetail = () => {
   
   // Lead Consultation Form State
   const [formData, setFormData] = useState({ name: '', email: '', phone: '', message: '' });
+  const [submitting, setSubmitting] = useState(false);
   const [formSubmitted, setFormSubmitted] = useState(false);
+  const [submitError, setSubmitError] = useState(null);
+  const [honeypot, setHoneypot] = useState('');
 
-  // Scroll to top on page navigation
+  // Scroll to top on page navigation and reset form state
   useEffect(() => {
-    window.scrollTo(0, 0);
+    window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
     setFormSubmitted(false);
+    setSubmitting(false);
+    setSubmitError(null);
+    setHoneypot('');
     setFormData({ name: '', email: '', phone: '', message: '' });
     setActiveFaq(null);
   }, [slug]);
 
   // Find target service
   const service = SERVICES.find(s => s.slug === slug);
-  const activeSlugs = ['private-limited-company', 'gst-registration', 'trademark-registration'];
+  const LOAN_SLUGS = [
+    'personal-loan',
+    'home-loan',
+    'business-loan',
+    'msme-loan',
+    'startup-loan',
+    'working-capital-loan',
+    'education-loan',
+    'vehicle-loan',
+    'car-loan',
+    'bike-loan',
+    'gold-loan',
+    'loan-against-property',
+    'machinery-loan',
+    'equipment-finance',
+    'project-loan',
+    'cash-credit',
+    'overdraft-facility',
+    'professional-loan',
+    'commercial-vehicle-loan',
+    'construction-loan'
+  ];
 
-  // Check if service is within active batch-1 services, otherwise render NotFound / fallback
+  const activeSlugs = [
+    'private-limited-company',
+    'gst-registration',
+    'trademark-registration',
+    ...LOAN_SLUGS
+  ];
+
+  // Check if service is within active services, otherwise render NotFound / fallback
   if (!service || !activeSlugs.includes(slug)) {
     return (
       <SectionContainer className="py-32 bg-white text-center min-h-[60vh] flex flex-col items-center justify-center">
+        <SEOHead
+          title="Service Coming Soon | ClearFiling"
+          description="The page for this service is currently being drafted by our corporate advisory team."
+          canonical={`https://www.clearfiling.co.in/services/${slug}`}
+        />
         <ShieldCheck className="w-16 h-16 text-slate-300 mb-6" />
-        <h2 className="text-3xl font-extrabold text-brand-secondary font-heading mb-4">Service Page Coming Soon</h2>
+        <h1 className="text-3xl font-extrabold text-brand-secondary font-heading mb-4">Service Page Coming Soon</h1>
         <p className="text-slate-500 max-w-md mx-auto mb-8 font-sans">
           The page for this service is currently being drafted by our corporate advisory team. Please check back later.
         </p>
@@ -76,16 +119,104 @@ const ServiceDetail = () => {
   const handleFormChange = (e) => {
     const { name, value } = e.target;
     setFormData(prev => ({ ...prev, [name]: value }));
+    if (submitError) {
+      setSubmitError(null);
+    }
   };
 
-  const handleFormSubmit = (e) => {
-    e.preventDefault();
-    if (!formData.name || !formData.phone) return;
-    setFormSubmitted(true);
-    setTimeout(() => {
-      setFormSubmitted(false);
-      setFormData({ name: '', email: '', phone: '', message: '' });
-    }, 5000);
+  const validateLeadForm = () => {
+    const trimmedName = formData.name.trim();
+    if (!trimmedName) {
+      return 'Full Name is required.';
+    }
+    if (trimmedName.length < 2) {
+      return 'Please enter a valid full name.';
+    }
+    if (trimmedName.length > 80) {
+      return 'Name cannot exceed 80 characters.';
+    }
+
+    const trimmedPhone = formData.phone.trim();
+    if (!trimmedPhone) {
+      return 'Phone number is required.';
+    }
+    const phoneDigits = trimmedPhone.replace(/[^0-9]/g, '');
+    if (phoneDigits.length < 10) {
+      return 'Please enter a valid 10-digit mobile number.';
+    }
+
+    const trimmedEmail = formData.email.trim();
+    if (trimmedEmail) {
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailRegex.test(trimmedEmail)) {
+        return 'Please enter a valid email address.';
+      }
+      if (trimmedEmail.length > 100) {
+        return 'Email address is too long.';
+      }
+    }
+
+    if (formData.message && formData.message.length > 1000) {
+      return 'Message cannot exceed 1000 characters.';
+    }
+
+    return null;
+  };
+
+  const handleFormSubmit = async (e) => {
+    if (e) e.preventDefault();
+
+    // Guard against concurrent/duplicate submissions
+    if (submitting) return;
+
+    // Accessible hidden honeypot check for bots
+    if (honeypot) {
+      // Silently discard bot submission while displaying visual acknowledgment
+      setFormSubmitted(true);
+      setTimeout(() => setFormSubmitted(false), 5000);
+      return;
+    }
+
+    const validationError = validateLeadForm();
+    if (validationError) {
+      setSubmitError(validationError);
+      return;
+    }
+
+    setSubmitting(true);
+    setSubmitError(null);
+
+    try {
+      const canonicalUrl = `https://www.clearfiling.co.in/services/${service.slug}`;
+      const payload = {
+        name: formData.name.trim(),
+        phone: formData.phone.trim(),
+        email: formData.email.trim(),
+        message: formData.message.trim(),
+        serviceTitle: service.title,
+        serviceSlug: service.slug,
+        source: 'service-detail',
+        pageUrl: canonicalUrl,
+      };
+
+      const result = await sendInquiry(payload);
+
+      if (result.success) {
+        setFormSubmitted(true);
+        // Reset form inputs only after successful transmission
+        setFormData({ name: '', email: '', phone: '', message: '' });
+        setSubmitError(null);
+        setTimeout(() => {
+          setFormSubmitted(false);
+        }, 5000);
+      }
+    } catch (err) {
+      setSubmitError(
+        err.message || 'Unable to submit your inquiry right now. Please try again or call us directly.'
+      );
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   const handlePhoneCall = () => {
@@ -112,12 +243,21 @@ const ServiceDetail = () => {
 
   // SEO schemas
   const serviceSchema = generateServiceSchema(service);
-  const faqSchema = generateFAQSchema(service.faqs);
+  const faqs = service.faqs || service.faqReference;
+  const faqSchema = generateFAQSchema(faqs);
 
   const ServiceIcon = ICON_MAP[service.iconName] || FileText;
 
   return (
     <div className="bg-brand-bg relative min-h-screen pt-24 font-sans text-left">
+      {/* Route-level SEO Metadata */}
+      <SEOHead
+        title={service.metaTitle || `${service.title} | ClearFiling`}
+        description={service.metaDescription || service.description || service.shortDescription}
+        canonical={service.canonicalSlug || `https://www.clearfiling.co.in/services/${service.slug}`}
+        keywords={Array.isArray(service.keywords) ? service.keywords.join(', ') : service.keywords}
+      />
+
       {/* Dynamic JSON-LD Schemas */}
       <JsonLd schema={serviceSchema} />
       <JsonLd schema={faqSchema} />
@@ -206,69 +346,115 @@ const ServiceDetail = () => {
                 <p className="text-xs text-slate-400 font-sans">No signup. No upfront fees. Free consultation call.</p>
               </div>
 
-              <form onSubmit={handleFormSubmit} className="space-y-4 text-left">
+              <form onSubmit={handleFormSubmit} className="space-y-4 text-left" noValidate>
+                {/* Honeypot field for bot suppression (hidden from visual and screen readers) */}
+                <div className="hidden" aria-hidden="true">
+                  <label htmlFor="service-hp-field">Leave this empty</label>
+                  <input
+                    type="text"
+                    id="service-hp-field"
+                    name="service-hp-field"
+                    tabIndex={-1}
+                    autoComplete="off"
+                    value={honeypot}
+                    onChange={(e) => setHoneypot(e.target.value)}
+                  />
+                </div>
+
+                {submitError && (
+                  <div
+                    className="p-3.5 bg-red-50 border border-red-200 text-red-600 text-xs font-semibold rounded-xl flex items-center gap-2"
+                    role="alert"
+                  >
+                    <AlertCircle className="w-4 h-4 flex-shrink-0" />
+                    <span>{submitError}</span>
+                  </div>
+                )}
+
                 <div className="space-y-1">
-                  <label htmlFor="name" className="text-xs font-bold text-slate-500 uppercase tracking-wide">Full Name *</label>
+                  <label htmlFor="name" className="text-xs font-bold text-slate-500 uppercase tracking-wide">
+                    Full Name *
+                  </label>
                   <input
                     type="text"
                     id="name"
                     name="name"
                     required
+                    disabled={submitting}
                     value={formData.name}
                     onChange={handleFormChange}
                     placeholder="Enter your name"
-                    className="w-full bg-slate-50 border border-slate-200 focus:border-brand-primary focus:ring-4 focus:ring-brand-primary/10 rounded-xl px-4 py-3 text-sm text-slate-800 outline-none transition-all placeholder-slate-400"
+                    className="w-full bg-slate-50 border border-slate-200 focus:border-brand-primary focus:ring-4 focus:ring-brand-primary/10 rounded-xl px-4 py-3 text-sm text-slate-800 outline-none transition-all placeholder-slate-400 disabled:opacity-60 disabled:cursor-not-allowed"
                   />
                 </div>
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div className="space-y-1">
-                    <label htmlFor="phone" className="text-xs font-bold text-slate-500 uppercase tracking-wide">Phone Number *</label>
+                    <label htmlFor="phone" className="text-xs font-bold text-slate-500 uppercase tracking-wide">
+                      Phone Number *
+                    </label>
                     <input
                       type="tel"
                       id="phone"
                       name="phone"
                       required
+                      disabled={submitting}
                       value={formData.phone}
                       onChange={handleFormChange}
                       placeholder="10-digit mobile number"
-                      className="w-full bg-slate-50 border border-slate-200 focus:border-brand-primary focus:ring-4 focus:ring-brand-primary/10 rounded-xl px-4 py-3 text-sm text-slate-800 outline-none transition-all placeholder-slate-400"
+                      className="w-full bg-slate-50 border border-slate-200 focus:border-brand-primary focus:ring-4 focus:ring-brand-primary/10 rounded-xl px-4 py-3 text-sm text-slate-800 outline-none transition-all placeholder-slate-400 disabled:opacity-60 disabled:cursor-not-allowed"
                     />
                   </div>
                   <div className="space-y-1">
-                    <label htmlFor="email" className="text-xs font-bold text-slate-500 uppercase tracking-wide">Email Address</label>
+                    <label htmlFor="email" className="text-xs font-bold text-slate-500 uppercase tracking-wide">
+                      Email Address
+                    </label>
                     <input
                       type="email"
                       id="email"
                       name="email"
+                      disabled={submitting}
                       value={formData.email}
                       onChange={handleFormChange}
                       placeholder="name@company.com"
-                      className="w-full bg-slate-50 border border-slate-200 focus:border-brand-primary focus:ring-4 focus:ring-brand-primary/10 rounded-xl px-4 py-3 text-sm text-slate-800 outline-none transition-all placeholder-slate-400"
+                      className="w-full bg-slate-50 border border-slate-200 focus:border-brand-primary focus:ring-4 focus:ring-brand-primary/10 rounded-xl px-4 py-3 text-sm text-slate-800 outline-none transition-all placeholder-slate-400 disabled:opacity-60 disabled:cursor-not-allowed"
                     />
                   </div>
                 </div>
 
                 <div className="space-y-1">
-                  <label htmlFor="message" className="text-xs font-bold text-slate-500 uppercase tracking-wide">Describe your business requirement</label>
+                  <label htmlFor="message" className="text-xs font-bold text-slate-500 uppercase tracking-wide">
+                    Describe your business requirement
+                  </label>
                   <textarea
                     id="message"
                     name="message"
                     rows="3"
+                    disabled={submitting}
                     value={formData.message}
                     onChange={handleFormChange}
                     placeholder={`e.g. Need assistance with registering a ${service.title}`}
-                    className="w-full bg-slate-50 border border-slate-200 focus:border-brand-primary focus:ring-4 focus:ring-brand-primary/10 rounded-xl px-4 py-3 text-sm text-slate-800 outline-none transition-all placeholder-slate-400 resize-none"
+                    className="w-full bg-slate-50 border border-slate-200 focus:border-brand-primary focus:ring-4 focus:ring-brand-primary/10 rounded-xl px-4 py-3 text-sm text-slate-800 outline-none transition-all placeholder-slate-400 resize-none disabled:opacity-60 disabled:cursor-not-allowed"
                   />
                 </div>
 
                 <Button 
                   type="submit" 
                   variant="primary" 
+                  isDisabled={submitting}
                   className="w-full flex items-center justify-center gap-2 py-3.5 font-bold rounded-xl shadow-md"
                 >
-                  <Send className="w-4 h-4" />
-                  <span>Submit Inquiry</span>
+                  {submitting ? (
+                    <>
+                      <Loader2 className="w-4 h-4 animate-spin text-white" />
+                      <span>Submitting...</span>
+                    </>
+                  ) : (
+                    <>
+                      <Send className="w-4 h-4" />
+                      <span>Submit Inquiry</span>
+                    </>
+                  )}
                 </Button>
               </form>
 
@@ -279,14 +465,16 @@ const ServiceDetail = () => {
                     initial={{ opacity: 0, y: 10 }}
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: 10 }}
+                    role="status"
+                    aria-live="polite"
                     className="absolute inset-0 bg-white/95 rounded-2xl flex flex-col items-center justify-center p-6 text-center z-10"
                   >
                     <div className="p-3 bg-brand-success/15 text-brand-success rounded-full mb-4">
                       <Check className="w-8 h-8" />
                     </div>
-                    <h4 className="text-base font-extrabold text-brand-secondary font-heading">Inquiry Submitted Successfully</h4>
+                    <h3 className="text-base font-extrabold text-brand-secondary font-heading">Inquiry Submitted Successfully</h3>
                     <p className="text-xs text-slate-500 font-sans mt-2 max-w-xs">
-                      Thank you, **{formData.name}**! Our senior compliance advisors will call you shortly.
+                      Thank you! Our senior compliance advisors will call you shortly regarding {service.title}.
                     </p>
                   </motion.div>
                 )}
@@ -319,10 +507,14 @@ const ServiceDetail = () => {
                 </div>
               </div>
               <div>
-                <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest block mb-2">CA/CS Audit Certificate</span>
+                <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest block mb-2">
+                  {service.category === 'Loan Services' ? 'Advisory Support' : 'CA/CS Audit Certificate'}
+                </span>
                 <div className="flex items-center gap-2.5">
                   <ShieldCheck className="w-5 h-5 text-brand-primary flex-shrink-0" />
-                  <span className="text-sm font-semibold text-slate-600">Included in standard rates</span>
+                  <span className="text-sm font-semibold text-slate-600">
+                    {service.category === 'Loan Services' ? 'End-to-End Application Assistance' : 'Included in standard rates'}
+                  </span>
                 </div>
               </div>
             </div>
@@ -339,7 +531,7 @@ const ServiceDetail = () => {
                 Key Advantages
               </Badge>
               <h2 className="text-2xl sm:text-3xl font-extrabold font-heading text-brand-secondary tracking-tight">
-                Key Benefits of Registering
+                {service.category === 'Loan Services' ? 'Key Loan Benefits' : 'Key Benefits of Registering'}
               </h2>
             </div>
 
@@ -354,12 +546,18 @@ const ServiceDetail = () => {
                     <Check className="w-5 h-5" />
                   </div>
                   <div>
-                    <h4 className="text-base font-bold font-heading text-brand-secondary mb-2 group-hover:text-brand-primary transition-colors">
+                    <h3 className="text-base font-bold font-heading text-brand-secondary mb-2 group-hover:text-brand-primary transition-colors">
                       {benefit.split(':')[0] || benefit}
-                    </h4>
-                    <p className="text-xs text-slate-500 leading-relaxed">
-                      {benefit.split(':')[1] || 'Ensures standard regulatory protections, limited liabilities, and builds operational trust in market ecosystems.'}
-                    </p>
+                    </h3>
+                    {benefit.includes(':') ? (
+                      <p className="text-xs text-slate-500 leading-relaxed">
+                        {benefit.split(':')[1]}
+                      </p>
+                    ) : service.category !== 'Loan Services' ? (
+                      <p className="text-xs text-slate-500 leading-relaxed">
+                        Ensures standard regulatory protections, limited liabilities, and builds operational trust in market ecosystems.
+                      </p>
+                    ) : null}
                   </div>
                 </Card>
               ))}
@@ -388,7 +586,7 @@ const ServiceDetail = () => {
                     <div className="p-2 bg-brand-primary/5 text-brand-primary rounded-lg border border-brand-primary/10 w-fit">
                       <UserCheck className="w-4.5 h-4.5" />
                     </div>
-                    <h4 className="text-sm font-bold font-heading text-brand-secondary">{item}</h4>
+                    <h3 className="text-sm font-bold font-heading text-brand-secondary">{item}</h3>
                   </div>
                   <span className="text-[10px] text-slate-400 font-sans tracking-wide">Fully Eligible</span>
                 </div>
@@ -407,7 +605,7 @@ const ServiceDetail = () => {
                 Checklist Requirements
               </Badge>
               <h2 className="text-2xl sm:text-3xl font-extrabold font-heading text-brand-secondary tracking-tight">
-                Documents Required for Registration
+                {service.category === 'Loan Services' ? 'Documents Required for Application' : 'Documents Required for Registration'}
               </h2>
             </div>
 
@@ -454,7 +652,7 @@ const ServiceDetail = () => {
                   
                   <div className="space-y-1">
                     <span className="text-[10px] font-bold text-brand-accent tracking-wider uppercase">{step.step}</span>
-                    <h4 className="text-base font-bold font-heading text-brand-secondary">{step.title}</h4>
+                    <h3 className="text-base font-bold font-heading text-brand-secondary">{step.title}</h3>
                     <p className="text-xs text-slate-500 font-sans leading-relaxed max-w-xl">{step.desc}</p>
                   </div>
                 </div>
@@ -467,7 +665,7 @@ const ServiceDetail = () => {
                 </div>
                 <div className="space-y-1">
                   <span className="text-[10px] font-bold text-brand-success tracking-wider uppercase">Done</span>
-                  <h4 className="text-base font-bold font-heading text-brand-secondary">Approval & Certificate Shared</h4>
+                  <h3 className="text-base font-bold font-heading text-brand-secondary">Approval & Certificate Shared</h3>
                   <p className="text-xs text-slate-500 font-sans leading-relaxed">
                     The registration certificate is delivered directly to your email, ready for operations.
                   </p>
@@ -479,7 +677,7 @@ const ServiceDetail = () => {
       )}
 
       {/* 9. Frequently Asked Questions (Accordion) */}
-      {service.faqs && (
+      {faqs && (
         <SectionContainer bgType="default" animate={false} className="py-20 bg-slate-50/50 border-t border-slate-100">
           <MaxWidthContainer size="lg" className="px-4 md:px-8 space-y-12">
             <div className="space-y-3 text-center">
@@ -492,13 +690,16 @@ const ServiceDetail = () => {
             </div>
 
             <div className="space-y-3 w-full text-left">
-              {service.faqs.map((faq, idx) => {
+              {faqs.map((faq, idx) => {
                 const isOpen = activeFaq === idx;
                 return (
                   <div key={idx} className="bg-white border border-slate-200/80 rounded-xl overflow-hidden shadow-sm">
                     <button
+                      id={`faq-btn-${idx}`}
                       onClick={() => setActiveFaq(isOpen ? null : idx)}
-                      className="w-full p-5 text-left text-sm font-bold text-brand-secondary flex justify-between items-center outline-none"
+                      aria-expanded={isOpen}
+                      aria-controls={`faq-panel-${idx}`}
+                      className="w-full p-5 text-left text-sm font-bold text-brand-secondary flex justify-between items-center outline-none focus-visible:ring-2 focus-visible:ring-brand-primary/50 focus-visible:ring-inset"
                     >
                       <span>{faq.q || faq.question}</span>
                       <ChevronDown className={`w-4.5 h-4.5 text-slate-400 transition-transform duration-255 ${isOpen ? 'rotate-180 text-brand-primary' : ''}`} />
@@ -507,6 +708,9 @@ const ServiceDetail = () => {
                     <AnimatePresence>
                       {isOpen && (
                         <motion.div
+                          id={`faq-panel-${idx}`}
+                          role="region"
+                          aria-labelledby={`faq-btn-${idx}`}
                           initial={{ height: 0 }}
                           animate={{ height: 'auto' }}
                           exit={{ height: 0 }}
@@ -560,9 +764,9 @@ const ServiceDetail = () => {
                         <div className="p-2.5 bg-brand-primary/5 text-brand-primary rounded-xl w-fit">
                           <FileText className="w-5 h-5" />
                         </div>
-                        <h4 className="text-sm font-bold font-heading text-brand-secondary group-hover:text-brand-primary transition-colors">
+                        <h3 className="text-sm font-bold font-heading text-brand-secondary group-hover:text-brand-primary transition-colors">
                           {detail.title}
-                        </h4>
+                        </h3>
                         <p className="text-xs text-slate-500 font-sans leading-relaxed line-clamp-3">
                           {detail.shortDescription || 'Access professional registration, documentation compliance and support for growth.'}
                         </p>
@@ -591,11 +795,11 @@ const ServiceDetail = () => {
           </Badge>
 
           <h2 className="text-3xl sm:text-4xl font-extrabold font-heading text-white tracking-tight max-w-xl mx-auto">
-            {service.ctaTitle || 'Ready to Complete Your Registration?'}
+            {service.ctaTitle || (service.category === 'Loan Services' ? 'Ready to Apply for Financing?' : 'Ready to Complete Your Registration?')}
           </h2>
           
           <p className="text-slate-200 max-w-md mx-auto text-sm md:text-base leading-relaxed font-sans">
-            {service.ctaDescription || 'Discuss your business setup and licensing requirements with our verified Chartered Accountants (CAs).'}
+            {service.ctaDescription || (service.category === 'Loan Services' ? 'Discuss your financing requirements with our experienced loan advisors and financial experts.' : 'Discuss your business setup and licensing requirements with our verified Chartered Accountants (CAs).')}
           </p>
 
           <div className="flex flex-col sm:flex-row gap-3 pt-2 w-full sm:w-auto">

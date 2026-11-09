@@ -7,6 +7,8 @@ import MaxWidthContainer from '../components/ui/MaxWidthContainer';
 import Badge from '../components/ui/Badge';
 import Card from '../components/ui/Card';
 import Breadcrumbs from '../components/seo/Breadcrumbs';
+import SEOHead from '../components/seo/SEOHead';
+import { PAGE_SEO } from '../config/seo';
 import { BLOG_POSTS, getBlogPostBySlug } from '../data/blogContent';
 
 // ─── Category color map ───────────────────────────────────────────────────────
@@ -22,6 +24,11 @@ const CATEGORY_COLORS = {
 // ─── Blog Listing Page (/blog) ────────────────────────────────────────────────
 export const BlogListing = () => (
   <PageContainer animate>
+    <SEOHead
+      title={PAGE_SEO.blog.title}
+      description={PAGE_SEO.blog.description}
+      canonical={PAGE_SEO.blog.canonical}
+    />
     <div className="relative bg-brand-secondary text-white py-20 md:py-28 border-b border-slate-800 overflow-hidden">
       <div className="absolute inset-0 bg-radial-gradient from-brand-primary/15 via-transparent to-transparent pointer-events-none" />
       <MaxWidthContainer size="lg" className="relative z-10 text-center space-y-5">
@@ -90,6 +97,11 @@ const BlogPost = () => {
   if (!post) {
     return (
       <PageContainer animate>
+        <SEOHead
+          title="Article Not Found | ClearFiling"
+          description="The requested blog article could not be found."
+          canonical="https://www.clearfiling.co.in/blog"
+        />
         <div className="min-h-[60vh] flex flex-col items-center justify-center py-24 text-center">
           <h1 className="text-3xl font-extrabold font-heading text-brand-secondary mb-4">Article Not Found</h1>
           <p className="text-slate-500 mb-8 font-sans">This article may have been moved or is not yet published.</p>
@@ -110,6 +122,14 @@ const BlogPost = () => {
 
   return (
     <PageContainer animate>
+      {/* Route-level SEO Metadata */}
+      <SEOHead
+        title={`${post.title} | ClearFiling Blog`}
+        description={post.excerpt || 'Read the full business compliance article on ClearFiling Blog.'}
+        canonical={`https://www.clearfiling.co.in/blog/${post.slug}`}
+        ogType="article"
+      />
+
       {/* Hero */}
       <div
         className="relative text-white py-20 md:py-28 border-b border-slate-800 overflow-hidden"

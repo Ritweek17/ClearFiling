@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState, useEffect, useMemo } from 'react';
+import { Link, useSearchParams } from 'react-router-dom';
 import { ArrowRight, Search, Filter } from 'lucide-react';
 import { motion } from 'framer-motion';
 import PageContainer from '../components/ui/PageContainer';
@@ -7,24 +7,89 @@ import MaxWidthContainer from '../components/ui/MaxWidthContainer';
 import Badge from '../components/ui/Badge';
 import Card from '../components/ui/Card';
 import Breadcrumbs from '../components/seo/Breadcrumbs';
+import SEOHead from '../components/seo/SEOHead';
+import { PAGE_SEO } from '../config/seo';
 import { SERVICES, ICON_MAP } from '../data/services';
 
 // Get unique categories
 const ALL_CATEGORIES = ['All', ...Array.from(new Set(SERVICES.map(s => s.category)))];
-const ACTIVE_SLUGS = ['private-limited-company', 'gst-registration', 'trademark-registration'];
+
+const LOAN_SLUGS = [
+  'personal-loan',
+  'home-loan',
+  'business-loan',
+  'msme-loan',
+  'startup-loan',
+  'working-capital-loan',
+  'education-loan',
+  'vehicle-loan',
+  'car-loan',
+  'bike-loan',
+  'gold-loan',
+  'loan-against-property',
+  'machinery-loan',
+  'equipment-finance',
+  'project-loan',
+  'cash-credit',
+  'overdraft-facility',
+  'professional-loan',
+  'commercial-vehicle-loan',
+  'construction-loan'
+];
+
+const ACTIVE_SLUGS = [
+  'private-limited-company',
+  'gst-registration',
+  'trademark-registration',
+  ...LOAN_SLUGS
+];
+
+// Hoisted static animation configs for services grid cards
+const CARD_INITIAL = { opacity: 0, y: 16 };
+const CARD_WHILE_IN_VIEW = { opacity: 1, y: 0 };
+const CARD_VIEWPORT = { once: true };
+const CARD_TRANSITIONS = Array.from({ length: 6 }, (_, i) => ({
+  duration: 0.35,
+  delay: i * 0.05,
+}));
 
 const Services = () => {
+  const [searchParams] = useSearchParams();
+  const categoryParam = searchParams.get('category');
   const [search, setSearch] = useState('');
-  const [activeCategory, setActiveCategory] = useState('All');
+  const [activeCategory, setActiveCategory] = useState(
+    categoryParam && ALL_CATEGORIES.includes(categoryParam) ? categoryParam : 'All'
+  );
 
-  const filtered = SERVICES.filter(s => {
-    const matchCat = activeCategory === 'All' || s.category === activeCategory;
-    const matchSearch = !search || s.title.toLowerCase().includes(search.toLowerCase()) || s.shortDescription.toLowerCase().includes(search.toLowerCase());
-    return matchCat && matchSearch;
-  });
+  useEffect(() => {
+    const cat = searchParams.get('category');
+    if (cat && ALL_CATEGORIES.includes(cat)) {
+      setActiveCategory(cat);
+    }
+  }, [searchParams]);
+
+  const filtered = useMemo(() => {
+    const normalizedSearch = search.trim().toLowerCase();
+    return SERVICES.filter((s) => {
+      const matchCat = activeCategory === 'All' || s.category === activeCategory;
+      if (!matchCat) return false;
+      if (!normalizedSearch) return true;
+      return (
+        s.title.toLowerCase().includes(normalizedSearch) ||
+        s.shortDescription.toLowerCase().includes(normalizedSearch)
+      );
+    });
+  }, [activeCategory, search]);
 
   return (
     <PageContainer animate>
+      {/* Route-level SEO Metadata */}
+      <SEOHead
+        title={PAGE_SEO.services.title}
+        description={PAGE_SEO.services.description}
+        canonical={PAGE_SEO.services.canonical}
+      />
+
       {/* Hero */}
       <div className="relative bg-brand-secondary text-white py-20 md:py-24 border-b border-slate-800 overflow-hidden">
         <div className="absolute inset-0 bg-radial-gradient from-brand-primary/15 via-transparent to-transparent pointer-events-none" />
@@ -42,8 +107,11 @@ const Services = () => {
           <div className="max-w-md mx-auto relative">
             <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
             <input
-              type="text" placeholder="Search services..."
-              value={search} onChange={e => setSearch(e.target.value)}
+              type="text"
+              aria-label="Search all services"
+              placeholder="Search services..."
+              value={search}
+              onChange={e => setSearch(e.target.value)}
               className="w-full pl-11 pr-4 py-3 bg-white/10 border border-white/20 text-white placeholder-slate-400 rounded-xl outline-none focus:border-brand-primary focus:bg-white/15 transition-all text-sm font-sans"
             />
           </div>
@@ -92,8 +160,13 @@ const Services = () => {
                   const IconComponent = ICON_MAP[service.iconName];
                   const isActive = ACTIVE_SLUGS.includes(service.slug);
                   return (
-                    <motion.div key={service.id} initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }}
-                      viewport={{ once: true }} transition={{ duration: 0.35, delay: (idx % 6) * 0.05 }}>
+                    <motion.div
+                      key={service.id}
+                      initial={CARD_INITIAL}
+                      whileInView={CARD_WHILE_IN_VIEW}
+                      viewport={CARD_VIEWPORT}
+                      transition={CARD_TRANSITIONS[idx % 6]}
+                    >
                       {isActive ? (
                         <Link to={`/services/${service.slug}`} className="group block h-full">
                           <Card isHoverable className="h-full flex flex-col p-5 gap-3 relative">

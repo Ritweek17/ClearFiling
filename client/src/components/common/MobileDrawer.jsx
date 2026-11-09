@@ -1,5 +1,5 @@
-import React, { useEffect } from 'react';
-import { AnimatePresence, motion } from 'framer-motion';
+import React, { useEffect, useRef } from 'react';
+import { AnimatePresence, motion, useReducedMotion } from 'framer-motion';
 import { X, Phone, Mail, MapPin } from 'lucide-react';
 import Logo from './Logo';
 import NavLink from './NavLink';
@@ -12,40 +12,99 @@ const MobileDrawer = ({
   navLinks = [],
   activeSection = '',
 }) => {
-  // Body scroll lock effect
+  const drawerRef = useRef(null);
+  const previouslyFocusedElementRef = useRef(null);
+  const shouldReduceMotion = useReducedMotion();
+
+  // Focus trap, Escape key handling, and body scroll lock
   useEffect(() => {
     if (isOpen) {
+      previouslyFocusedElementRef.current = document.activeElement;
       document.body.style.overflow = 'hidden';
-    } else {
-      document.body.style.overflow = '';
+
+      const focusTimer = setTimeout(() => {
+        if (!drawerRef.current) return;
+        const focusableElements = drawerRef.current.querySelectorAll(
+          'button:not([disabled]), [href]:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])'
+        );
+        if (focusableElements.length > 0) {
+          focusableElements[0].focus();
+        }
+      }, 50);
+
+      const handleKeyDown = (e) => {
+        if (e.key === 'Escape') {
+          e.preventDefault();
+          onClose();
+          return;
+        }
+
+        if (e.key === 'Tab' && drawerRef.current) {
+          const focusableElements = drawerRef.current.querySelectorAll(
+            'button:not([disabled]), [href]:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])'
+          );
+          if (focusableElements.length === 0) return;
+
+          const firstElement = focusableElements[0];
+          const lastElement = focusableElements[focusableElements.length - 1];
+
+          if (e.shiftKey) {
+            if (document.activeElement === firstElement) {
+              e.preventDefault();
+              lastElement.focus();
+            }
+          } else {
+            if (document.activeElement === lastElement) {
+              e.preventDefault();
+              firstElement.focus();
+            }
+          }
+        }
+      };
+
+      document.addEventListener('keydown', handleKeyDown);
+
+      return () => {
+        clearTimeout(focusTimer);
+        document.removeEventListener('keydown', handleKeyDown);
+        document.body.style.overflow = '';
+        if (previouslyFocusedElementRef.current && typeof previouslyFocusedElementRef.current.focus === 'function') {
+          previouslyFocusedElementRef.current.focus();
+        }
+      };
     }
-    return () => {
-      document.body.style.overflow = '';
-    };
-  }, [isOpen]);
+  }, [isOpen, onClose]);
 
   const drawerVariants = {
     closed: {
-      x: '100%',
+      x: shouldReduceMotion ? 0 : '100%',
+      opacity: shouldReduceMotion ? 0 : 1,
       transition: {
         type: 'tween',
-        duration: 0.3,
+        duration: shouldReduceMotion ? 0 : 0.3,
         ease: 'easeIn',
       },
     },
     opened: {
       x: 0,
+      opacity: 1,
       transition: {
         type: 'tween',
-        duration: 0.35,
+        duration: shouldReduceMotion ? 0 : 0.35,
         ease: 'easeOut',
       },
     },
   };
 
   const backdropVariants = {
-    closed: { opacity: 0 },
-    opened: { opacity: 0.4 },
+    closed: {
+      opacity: 0,
+      transition: { duration: shouldReduceMotion ? 0 : 0.2 },
+    },
+    opened: {
+      opacity: 0.4,
+      transition: { duration: shouldReduceMotion ? 0 : 0.2 },
+    },
   };
 
   // Stagger nav links animation
@@ -53,16 +112,22 @@ const MobileDrawer = ({
     closed: { opacity: 0 },
     opened: {
       opacity: 1,
-      transition: {
-        staggerChildren: 0.05,
-        delayChildren: 0.1,
-      },
+      transition: shouldReduceMotion
+        ? { duration: 0 }
+        : {
+            staggerChildren: 0.05,
+            delayChildren: 0.1,
+          },
     },
   };
 
   const linkItemVariants = {
-    closed: { opacity: 0, x: 20 },
-    opened: { opacity: 1, x: 0 },
+    closed: { opacity: 0, x: shouldReduceMotion ? 0 : 20 },
+    opened: {
+      opacity: 1,
+      x: 0,
+      transition: { duration: shouldReduceMotion ? 0 : 0.2 },
+    },
   };
 
   return (
@@ -81,7 +146,11 @@ const MobileDrawer = ({
 
           {/* Drawer Panel */}
           <motion.div
+            ref={drawerRef}
             id="mobile-nav-drawer"
+            role="dialog"
+            aria-modal="true"
+            aria-label="Navigation Menu"
             variants={drawerVariants}
             initial="closed"
             animate="opened"
@@ -96,7 +165,7 @@ const MobileDrawer = ({
                 onClick={onClose}
                 type="button"
                 aria-label="Close menu"
-                className="p-2 -mr-2 rounded-lg text-slate-500 hover:text-brand-dark hover:bg-slate-50 focus:outline-none focus:ring-2 focus:ring-brand-primary/20"
+                className="p-2 -mr-2 rounded-lg text-slate-500 hover:text-brand-dark hover:bg-slate-50 focus:outline-none focus:ring-2 focus:ring-brand-primary/20 focus-visible:ring-2 focus-visible:ring-brand-primary"
               >
                 <X className="w-5 h-5" />
               </button>

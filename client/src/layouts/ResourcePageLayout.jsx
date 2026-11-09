@@ -12,6 +12,7 @@ import PageContainer from '../components/ui/PageContainer';
 import Badge from '../components/ui/Badge';
 import Card from '../components/ui/Card';
 import Breadcrumbs from '../components/seo/Breadcrumbs';
+import SEOHead from '../components/seo/SEOHead';
 
 const ResourcePageLayout = ({ resource }) => {
   const [openFaq, setOpenFaq] = React.useState(0);
@@ -25,6 +26,14 @@ const ResourcePageLayout = ({ resource }) => {
 
   return (
     <PageContainer animate>
+      {/* Route-level SEO Metadata */}
+      <SEOHead
+        title={`${resource.title} | Business Guide | ClearFiling`}
+        description={resource.intro}
+        canonical={`https://www.clearfiling.co.in/resources/${resource.slug}`}
+        keywords={resource.tags ? resource.tags.join(', ') : undefined}
+      />
+
       {/* Hero */}
       <div className="relative bg-brand-secondary text-white py-20 md:py-28 border-b border-slate-800 overflow-hidden">
         <div className="absolute inset-0 bg-radial-gradient from-brand-primary/15 via-transparent to-transparent pointer-events-none" />

@@ -47,7 +47,7 @@ export const SERVICES = [
     description: 'The Private Limited Company is the most popular corporate structure for high-growth startups and SMEs in India. It offers limited liability protection, separates personal and business assets, and makes raising venture capital seamless.',
     longDescription: 'Registering a Private Limited Company is the primary choice for businesses aiming to raise venture capital or offer ESOPs to employees. It is recognized as a separate legal entity, guaranteeing that the founders personal liabilities are strictly limited to their shares. With ClearFiling, we guide you through name approvals on the MCA portal, DSC creation, drafting the memorandum & articles of association, and receiving the final Certificate of Incorporation together with PAN & TAN cards.',
     metaTitle: 'Private Limited Company Registration Online India | ClearFiling',
-    metaDescription: 'Register a Private Limited Company online in India with ClearFiling. Handled by verified CAs & CSs. Fast name approvals and company incorporation.',
+    metaDescription: 'Register a Private Limited Company online in India with ClearFiling. Professional support for company incorporation and compliance. Assistance with company name reservation and incorporation filings.',
     keywords: ['pvt ltd', 'company registration', 'incorporation', 'formation', 'startup registration', 'register company', 'pvt ltd setup'],
     iconName: 'Building2',
     featured: true,
@@ -95,7 +95,7 @@ export const SERVICES = [
       { id: 'opc-registration', title: 'OPC Registration' },
       { id: 'gst-registration', title: 'GST Registration' }
     ],
-    canonicalSlug: 'https://clearfiling.in/services/private-limited-company',
+    canonicalSlug: 'https://www.clearfiling.co.in/services/private-limited-company',
     futurePage: '/services/private-limited-company'
   },
   {
@@ -126,7 +126,7 @@ export const SERVICES = [
     faqReference: [
       { q: 'What is the minimum capital for an LLP?', a: 'There is no statutory minimum capital requirement for establishing an LLP.' }
     ],
-    canonicalSlug: 'https://clearfiling.in/services/llp-registration',
+    canonicalSlug: 'https://www.clearfiling.co.in/services/llp-registration',
     futurePage: '/services/llp-registration'
   },
   {
@@ -145,7 +145,7 @@ export const SERVICES = [
     requiredDocuments: ['PAN & Aadhaar of the Promoter', 'Nominee Consent Form & KYC details', 'Address Proof of Registered Premises'],
     benefits: ['Single owner control', 'Separate legal entity protection', 'Limited personal liability'],
     faqReference: [{ q: 'Is a Nominee mandatory for OPC?', a: 'Yes, a nominee must be appointed in case of death or disability of the sole promoter.' }],
-    canonicalSlug: 'https://clearfiling.in/services/opc-registration',
+    canonicalSlug: 'https://www.clearfiling.co.in/services/opc-registration',
     futurePage: '/services/opc-registration'
   },
   {
@@ -164,7 +164,7 @@ export const SERVICES = [
     requiredDocuments: ['Identity Proof of all Partners', 'Address Proof of Partners', 'Drafted Partnership Deed', 'Rent Agreement of Office'],
     benefits: ['Easy to establish', 'Shared pooling of resources', 'Fewer annual filing requirements'],
     faqReference: [{ q: 'Is registration of a partnership deed compulsory?', a: 'Registration is not legally compulsory but highly recommended to enforce legal partnership rights.' }],
-    canonicalSlug: 'https://clearfiling.in/services/partnership-firm',
+    canonicalSlug: 'https://www.clearfiling.co.in/services/partnership-firm',
     futurePage: '/services/partnership-firm'
   },
   {
@@ -183,7 +183,7 @@ export const SERVICES = [
     requiredDocuments: ['KYC of 3 Directors & 7 Shareholders', 'Digital Signature Certificates', 'Registered Address Proof'],
     benefits: ['Ability to raise public equity capital', 'High market reputation and trust', 'Transferability of shares on stock market'],
     faqReference: [{ q: 'How many directors are needed for a Public Company?', a: 'A minimum of three directors are required.' }],
-    canonicalSlug: 'https://clearfiling.in/services/public-limited-company',
+    canonicalSlug: 'https://www.clearfiling.co.in/services/public-limited-company',
     futurePage: '/services/public-limited-company'
   },
   {
@@ -202,7 +202,7 @@ export const SERVICES = [
     requiredDocuments: ['KYC of 10 or more primary producers', 'Producer certificate or land records', 'Registered office address proof'],
     benefits: ['Corporate structure for rural producers', 'Tax exemptions on agricultural income', 'Access to government agro-subsidies'],
     faqReference: [{ q: 'What is the minimum member count for a Producer Company?', a: 'A minimum of 10 primary producers (individuals) or 2 producer institutions are required.' }],
-    canonicalSlug: 'https://clearfiling.in/services/producer-company',
+    canonicalSlug: 'https://www.clearfiling.co.in/services/producer-company',
     futurePage: '/services/producer-company'
   },
   {
@@ -221,7 +221,7 @@ export const SERVICES = [
     requiredDocuments: ['KYC of 2 Directors', 'Charitable objective statement', 'Registered office documents', 'Digital signature certificates'],
     benefits: ['Access to corporate social responsibility (CSR) funds', 'No minimum capital requirement', 'Tax exemptions on donations'],
     faqReference: [{ q: 'Can a Section 8 company pay dividends?', a: 'No, payment of dividends or distribution of profit to members is strictly prohibited.' }],
-    canonicalSlug: 'https://clearfiling.in/services/section-8-organization',
+    canonicalSlug: 'https://www.clearfiling.co.in/services/section-8-organization',
     futurePage: '/services/section-8-organization'
   },
   {
@@ -240,7 +240,7 @@ export const SERVICES = [
     requiredDocuments: ['Deed details and objectives', 'KYC of Author and Trustees', 'Registered Office address proof', 'Two Witnesses KYC'],
     benefits: ['Simple structure for religious/charitable setups', 'Perpetual legal existence', 'Exemptions on income tax via 12A registration'],
     faqReference: [{ q: 'What is the minimum member count for a trust?', a: 'A minimum of two trustees are required to register a trust.' }],
-    canonicalSlug: 'https://clearfiling.in/services/trust-registration',
+    canonicalSlug: 'https://www.clearfiling.co.in/services/trust-registration',
     futurePage: '/services/trust-registration'
   },
 
@@ -268,7 +268,7 @@ export const SERVICES = [
       'Rebates on electricity bills and municipal approvals'
     ],
     faqReference: [{ q: 'Is GST mandatory for MSME registration?', a: 'GST is mandatory only for businesses where GST registration is legally required under GST law.' }],
-    canonicalSlug: 'https://clearfiling.in/services/msme-registration',
+    canonicalSlug: 'https://www.clearfiling.co.in/services/msme-registration',
     futurePage: '/services/msme-registration'
   },
   {
@@ -287,7 +287,7 @@ export const SERVICES = [
     requiredDocuments: ['Certificate of Incorporation', 'Detailed pitch deck or business write-up', 'Product videos or app links', 'Director details'],
     benefits: ['Income tax exemption under Section 80IAC', 'Easy winding up and self-certification', 'Patent filing cost discounts up to 80%'],
     faqReference: [{ q: 'Can a Partnership Firm get DPIIT recognition?', a: 'Yes, registered partnership firms, LLPs, and Private Limited companies are eligible.' }],
-    canonicalSlug: 'https://clearfiling.in/services/startup-india-registration',
+    canonicalSlug: 'https://www.clearfiling.co.in/services/startup-india-registration',
     futurePage: '/services/startup-india-registration'
   },
   {
@@ -306,7 +306,7 @@ export const SERVICES = [
     requiredDocuments: ['PAN & Aadhaar of Promoter', 'Cancelled Cheque of current account', 'Address proof of office (electricity bill)'],
     benefits: ['Legal permission to trade globally', 'No annual renewal required (Lifetime validity)', 'Access to export promotional incentives'],
     faqReference: [{ q: 'Does IEC code require yearly renewal?', a: 'No, IEC has lifetime validity, but the profile details must be updated yearly on the DGFT portal.' }],
-    canonicalSlug: 'https://clearfiling.in/services/iec-registration',
+    canonicalSlug: 'https://www.clearfiling.co.in/services/iec-registration',
     futurePage: '/services/iec-registration'
   },
   {
@@ -325,7 +325,7 @@ export const SERVICES = [
     requiredDocuments: ['Business Incorporation Certificate', 'Rent agreement & tax paid receipt of office', 'Layout diagram of commercial space', 'NOC from fire department (if applicable)'],
     benefits: ['Guarantees legal commercial operation', 'Protects against heavy municipal penal notices', 'Increases customer confidence'],
     faqReference: [{ q: 'Is a trade license required for online services?', a: 'No, it is typically required only for physical commercial activities, stores, eateries, and factories.' }],
-    canonicalSlug: 'https://clearfiling.in/services/trade-license',
+    canonicalSlug: 'https://www.clearfiling.co.in/services/trade-license',
     futurePage: '/services/trade-license'
   },
   {
@@ -344,7 +344,7 @@ export const SERVICES = [
     requiredDocuments: ['Identity proof of the employer', 'Address proof of the store/office', 'Photo of the shop front showing name board', 'List of employees'],
     benefits: ['Serves as proof of commercial existence', 'Mandatory for opening corporate current bank accounts', 'Legal compliance under state labor department laws'],
     faqReference: [{ q: 'Is a Shop license mandatory for home-based offices?', a: 'Depending on the state laws, home-based businesses are often exempt, but having it helps open current bank accounts.' }],
-    canonicalSlug: 'https://clearfiling.in/services/shop-establishment',
+    canonicalSlug: 'https://www.clearfiling.co.in/services/shop-establishment',
     futurePage: '/services/shop-establishment'
   },
   {
@@ -363,7 +363,7 @@ export const SERVICES = [
     requiredDocuments: ['PAN & Aadhaar of applicant', 'Active Mobile Number and Email', 'Video/Mobile verification matching Aadhaar details'],
     benefits: ['Lawful signature verification on online portals', 'Secure encrypted signatures preventing tamper tampering', 'Required for filing government e-tenders'],
     faqReference: [{ q: 'What is the validity of a DSC?', a: 'DSC tokens are usually issued with a validity of 2 years or 3 years.' }],
-    canonicalSlug: 'https://clearfiling.in/services/digital-signature',
+    canonicalSlug: 'https://www.clearfiling.co.in/services/digital-signature',
     futurePage: '/services/digital-signature'
   },
   {
@@ -382,7 +382,7 @@ export const SERVICES = [
     requiredDocuments: ['Business profile & product catalog', 'Company registration proof', 'Scope of work details'],
     benefits: ['Global validation of process quality', 'Mandatory eligibility for international corporate tenders', 'Improves team execution standards'],
     faqReference: [{ q: 'Which is the most common ISO standard?', a: 'ISO 9001:2015 (Quality Management System) is the most widely adopted standard.' }],
-    canonicalSlug: 'https://clearfiling.in/services/iso-certification',
+    canonicalSlug: 'https://www.clearfiling.co.in/services/iso-certification',
     futurePage: '/services/iso-certification'
   },
   {
@@ -401,7 +401,7 @@ export const SERVICES = [
     requiredDocuments: ['Incorporate certificate of company', 'PAN of the directors/entity', 'Employee list & salary details', 'Bank statement'],
     benefits: ['Mandatory compliance for hiring workforce', 'Avoid heavy penalties under state PT rules', 'Enables neat salary deductions'],
     faqReference: [{ q: 'Is professional tax applicable in all Indian states?', a: 'No, Professional Tax is active only in specific states like Maharashtra, Karnataka, Tamil Nadu, and West Bengal.' }],
-    canonicalSlug: 'https://clearfiling.in/services/professional-tax-registration',
+    canonicalSlug: 'https://www.clearfiling.co.in/services/professional-tax-registration',
     futurePage: '/services/professional-tax-registration'
   },
   {
@@ -420,7 +420,7 @@ export const SERVICES = [
     requiredDocuments: ['Identity and address proof of the promoter', 'Details of food categories to sell', 'Premises address proof (Rent deed & NOC)', 'Water testing report (for state/central licenses)'],
     benefits: ['Legally sell food items in commercial markets', 'Necessary for onboarding on Zomato and Swiggy', 'Guarantees food safety and hygiene to buyers'],
     faqReference: [{ q: 'What is the limit for basic FSSAI registration?', a: 'Basic registration is for food business operators with an annual turnover below ₹12 Lakhs.' }],
-    canonicalSlug: 'https://clearfiling.in/services/fssai-registration',
+    canonicalSlug: 'https://www.clearfiling.co.in/services/fssai-registration',
     futurePage: '/services/fssai-registration'
   },
   {
@@ -439,7 +439,7 @@ export const SERVICES = [
     requiredDocuments: ['Aadhaar and PAN details of Director/Owner', 'Bank Details', 'Turnover figures'],
     benefits: ['Subsidized loan interest', 'Delayed payment protection', 'Priority procurement'],
     faqReference: [{ q: 'Can a trader get Udyam registration?', a: 'Yes, the government has extended MSME benefits to retail and wholesale traders.' }],
-    canonicalSlug: 'https://clearfiling.in/services/udyam-registration',
+    canonicalSlug: 'https://www.clearfiling.co.in/services/udyam-registration',
     futurePage: '/services/udyam-registration'
   },
   {
@@ -458,7 +458,7 @@ export const SERVICES = [
     requiredDocuments: ['PAN & Aadhaar of Promoter', 'Cancelled Cheque', 'Office address proof'],
     benefits: ['Lifetime validity', 'Global sales expansion', 'Customs clearance approval'],
     faqReference: [{ q: 'Is IEC required for service exports?', a: 'IEC is not mandatory for service exports, but holds immense utility.' }],
-    canonicalSlug: 'https://clearfiling.in/services/import-export-code',
+    canonicalSlug: 'https://www.clearfiling.co.in/services/import-export-code',
     futurePage: '/services/import-export-code'
   },
   {
@@ -477,7 +477,7 @@ export const SERVICES = [
     requiredDocuments: ['Registration proof of business', 'PAN Card of entity', 'Product details and packaging label'],
     benefits: ['Sell globally in supermarkets', 'Automates billing and ledger systems', 'Reduces labeling mistakes'],
     faqReference: [{ q: 'How many barcodes should I buy?', a: 'GS1 allocates barcodes in sets (e.g., 100, 1000, etc.) depending on the number of unique product variants.' }],
-    canonicalSlug: 'https://clearfiling.in/services/barcode-registration',
+    canonicalSlug: 'https://www.clearfiling.co.in/services/barcode-registration',
     futurePage: '/services/barcode-registration'
   },
   {
@@ -496,7 +496,7 @@ export const SERVICES = [
     requiredDocuments: ['Product lab test reports', 'Manufacturing setup layout details', 'Quality checklist documents', 'Authorized representative details'],
     benefits: [' ISI/CRS mark on packaging increases sales', 'Mandatory compliance to avoid seizure of goods', 'Attests safety and quality standards to users'],
     faqReference: [{ q: 'Is laboratory testing mandatory for BIS?', a: 'Yes, products must be tested in BIS-certified laboratory facilities.' }],
-    canonicalSlug: 'https://clearfiling.in/services/bis-certification',
+    canonicalSlug: 'https://www.clearfiling.co.in/services/bis-certification',
     futurePage: '/services/bis-certification'
   },
 
@@ -512,7 +512,7 @@ export const SERVICES = [
     description: 'Trademark registration grants you exclusive ownership rights over your brand name, logos, and slogans. It prevents competitors from riding on your hard-earned corporate reputation and protects business assets.',
     longDescription: 'Registering a Trademark is essential to safeguard your unique brand assets—like names, logos, or marketing slogans—from competitors. Trademark registration allows you to legally use the ™ symbol immediately upon filing and the ® symbol once registered. It establishes an intangible asset that boosts business valuations and prevents other firms from riding on your hard-earned market reputation.',
     metaTitle: 'Trademark Registration Online India | Register Logo & Brand Name | ClearFiling',
-    metaDescription: 'Secure your brand trademark registration. File applications instantly under correct trademark classes. Access 50% discount for MSMEs.',
+    metaDescription: 'Secure your brand trademark registration. Prepare and file trademark applications under appropriate classes.',
     keywords: ['trademark registration', 'register brand name', 'logo trademark', 'trademark filing online', 'tm application'],
     iconName: 'Stamp',
     featured: true,
@@ -559,7 +559,7 @@ export const SERVICES = [
       { id: 'trademark-objection', title: 'Trademark Objection' },
       { id: 'copyright-registration', title: 'Copyright Registration' }
     ],
-    canonicalSlug: 'https://clearfiling.in/services/trademark-registration',
+    canonicalSlug: 'https://www.clearfiling.co.in/services/trademark-registration',
     futurePage: '/services/trademark-registration'
   },
   {
@@ -578,7 +578,7 @@ export const SERVICES = [
     requiredDocuments: ['Copy of registered trademark certificate', 'Power of attorney documents', 'Applicant PAN / Aadhaar'],
     benefits: ['Continuous protection of brand rights', 'Avoid competitive trademark hijackers', 'Maintain asset value in ledger balance sheets'],
     faqReference: [{ q: 'When can I apply for trademark renewal?', a: 'You can apply within 6 months before the 10-year expiry window.' }],
-    canonicalSlug: 'https://clearfiling.in/services/trademark-renewal',
+    canonicalSlug: 'https://www.clearfiling.co.in/services/trademark-renewal',
     futurePage: '/services/trademark-renewal'
   },
   {
@@ -597,7 +597,7 @@ export const SERVICES = [
     requiredDocuments: ['Examination report copy', 'Notice from registry', 'User affidavit & brand proof of usage'],
     benefits: ['Prevents abandonment of your application', 'Defends brand distinctiveness legally', 'Increases chances of application publication'],
     faqReference: [{ q: 'What is the timeline to reply to an objection?', a: 'A written response must be filed within 30 days from the date of receipt of the examination report.' }],
-    canonicalSlug: 'https://clearfiling.in/services/trademark-objection',
+    canonicalSlug: 'https://www.clearfiling.co.in/services/trademark-objection',
     futurePage: '/services/trademark-objection'
   },
   {
@@ -616,7 +616,7 @@ export const SERVICES = [
     requiredDocuments: ['Opposition notice or counter statement details', 'Brand evidence certificates', 'Attested user affidavit'],
     benefits: ['Stop competitors from registering similar logos', 'Protect brand exclusivity in commercial markets', 'Attested legal protection'],
     faqReference: [{ q: 'What is the time limit for trademark opposition?', a: 'An opposition must be filed within 4 months of the trademark publication in the Trademark Journal.' }],
-    canonicalSlug: 'https://clearfiling.in/services/trademark-opposition',
+    canonicalSlug: 'https://www.clearfiling.co.in/services/trademark-opposition',
     futurePage: '/services/trademark-opposition'
   },
   {
@@ -635,7 +635,7 @@ export const SERVICES = [
     requiredDocuments: ['Hearing notice copy', 'Written arguments memo', 'Proof of brand usage history'],
     benefits: ['Professional verbal advocacy before the examiner', 'Direct answers to examiner objections', 'Secures final registration approval'],
     faqReference: [{ q: 'Is physical appearance required for hearings?', a: 'Most trademark hearings are now held virtually via video conference.' }],
-    canonicalSlug: 'https://clearfiling.in/services/trademark-hearing',
+    canonicalSlug: 'https://www.clearfiling.co.in/services/trademark-hearing',
     futurePage: '/services/trademark-hearing'
   },
   {
@@ -654,7 +654,7 @@ export const SERVICES = [
     requiredDocuments: ['Copy of trademark certificate', 'Application statement showing reasons', 'Supportive evidence documents'],
     benefits: ['Keeps records updated and error-free', 'Cancel unused similar marks to clear path', 'Legal record authenticity'],
     faqReference: [{ q: 'Can I rectify my own address in TM register?', a: 'Yes, you can file a correction request (Form TM-P) to update address details.' }],
-    canonicalSlug: 'https://clearfiling.in/services/trademark-rectification',
+    canonicalSlug: 'https://www.clearfiling.co.in/services/trademark-rectification',
     futurePage: '/services/trademark-rectification'
   },
   {
@@ -673,7 +673,7 @@ export const SERVICES = [
     requiredDocuments: ['Copy of the original creative work', 'Applicant identity card', 'NOC from author / publisher (if applicable)'],
     benefits: ['Prevents duplication of proprietary software codes', 'Grants exclusive publishing and distribution rights', 'Strong legal evidence in copyright infringement lawsuits'],
     faqReference: [{ q: 'Is software code copyrightable in India?', a: 'Yes, software source codes and object codes are copyrightable under literary works.' }],
-    canonicalSlug: 'https://clearfiling.in/services/copyright-registration',
+    canonicalSlug: 'https://www.clearfiling.co.in/services/copyright-registration',
     futurePage: '/services/copyright-registration'
   },
   {
@@ -692,7 +692,7 @@ export const SERVICES = [
     requiredDocuments: ['Invention write-up & schematics', 'Novelty assessment summary', 'Applicant identity details'],
     benefits: ['Excludes others from copying your technology for 20 years', 'High valuation asset for raising venture capital', 'License or lease technology for royalty streams'],
     faqReference: [{ q: 'What is the validity of a patent in India?', a: 'Patents have a legal validity of 20 years from the date of filing.' }],
-    canonicalSlug: 'https://clearfiling.in/services/patent-registration',
+    canonicalSlug: 'https://www.clearfiling.co.in/services/patent-registration',
     futurePage: '/services/patent-registration'
   },
   {
@@ -711,7 +711,7 @@ export const SERVICES = [
     requiredDocuments: ['High-resolution photos from 6 viewpoints (front, side, top, etc.)', 'Statement of novelty details', 'Applicant identity card'],
     benefits: ['Prevents visual design copies by competitors', 'Establishes visual brand assets', 'Filing discounts for startup entities'],
     faqReference: [{ q: 'How long is a design registration valid?', a: 'Valid for 10 years, extendable by another 5 years.' }],
-    canonicalSlug: 'https://clearfiling.in/services/industrial-design-registration',
+    canonicalSlug: 'https://www.clearfiling.co.in/services/industrial-design-registration',
     futurePage: '/services/industrial-design-registration'
   },
   {
@@ -730,7 +730,7 @@ export const SERVICES = [
     requiredDocuments: ['Registered trademark certificate', 'Drafted Assignment Deed', 'PAN & Aadhaar of Assignor and Assignee'],
     benefits: ['Legally monetise brand values', 'Clean transfer of ownership details in register', 'Enables easy franchising of businesses'],
     faqReference: [{ q: 'Can an unregistered trademark be assigned?', a: 'Yes, unregistered trademarks can also be assigned under the Trademarks Act.' }],
-    canonicalSlug: 'https://clearfiling.in/services/trademark-assignment',
+    canonicalSlug: 'https://www.clearfiling.co.in/services/trademark-assignment',
     futurePage: '/services/trademark-assignment'
   },
 
@@ -746,7 +746,7 @@ export const SERVICES = [
     description: 'Acquire your 15-digit Goods and Services Tax Identification Number (GSTIN). GST registration is mandatory for businesses with turnover exceeding threshold limits or involved in inter-state supply.',
     longDescription: 'GST Registration is legally mandatory for companies supplying goods or services across state lines, or exceeding the annual threshold turnover. Registering for GST gives businesses legal recognition, enables them to collect tax from customers, and allows them to pass on Input Tax Credit (ITC) savings. ClearFiling ensures a completely smooth registration process, verifying address documents beforehand to prevent GST department queries.',
     metaTitle: 'GST Registration Online India | Apply for GSTIN | ClearFiling',
-    metaDescription: 'Get your GST registration certificate online. Sincere review by tax experts to avoid government queries and ensure smooth approval.',
+    metaDescription: 'Get your GST registration certificate online. Assistance with GST registration documentation and filing.',
     keywords: ['gst registration', 'apply for gst', 'get gstin', 'gst certificate online', 'gst setup'],
     iconName: 'FileCheck2',
     featured: true,
@@ -793,7 +793,7 @@ export const SERVICES = [
       { id: 'gst-annual-return', title: 'GST Annual Return' },
       { id: 'virtual-office-gst', title: 'Virtual Office + GST' }
     ],
-    canonicalSlug: 'https://clearfiling.in/services/gst-registration',
+    canonicalSlug: 'https://www.clearfiling.co.in/services/gst-registration',
     futurePage: '/services/gst-registration'
   },
   {
@@ -812,7 +812,7 @@ export const SERVICES = [
     requiredDocuments: ['Sales invoice registers', 'Purchase bills & records', 'GST portal credentials'],
     benefits: ['Avoid monthly late fee penalties', 'Maximize Input Tax Credit offsets', 'Stay compliant for corporate audits'],
     faqReference: [{ q: 'What is the QRMP scheme in GST?', a: 'QRMP allows taxpayers with turnover below ₹5 Crores to file GSTR-1 and GSTR-3B quarterly while paying tax monthly.' }],
-    canonicalSlug: 'https://clearfiling.in/services/gst-return-filing',
+    canonicalSlug: 'https://www.clearfiling.co.in/services/gst-return-filing',
     futurePage: '/services/gst-return-filing'
   },
   {
@@ -831,7 +831,7 @@ export const SERVICES = [
     requiredDocuments: ['Annual sales ledger', 'Monthly GSTR-1 & 3B logs', 'Audited financial reports'],
     benefits: ['Consolidates all errors made in monthly files', 'Mandatory compliance to avoid tax audit notices', 'Clean ledger reports'],
     faqReference: [{ q: 'Who needs to file GSTR-9?', a: 'Registered taxpayers with an annual turnover exceeding ₹2 Crores must file GSTR-9.' }],
-    canonicalSlug: 'https://clearfiling.in/services/gst-annual-return',
+    canonicalSlug: 'https://www.clearfiling.co.in/services/gst-annual-return',
     futurePage: '/services/gst-annual-return'
   },
   {
@@ -850,7 +850,7 @@ export const SERVICES = [
     requiredDocuments: ['Copy of notice received', 'Sales/Purchase records of matching period', 'Reason for discrepancies statement'],
     benefits: ['Defends business against wrongful tax demands', 'Reduces penalties and interest liabilities', 'Prevents ledger freeze actions by officers'],
     faqReference: [{ q: 'What is ASMT-10?', a: 'ASMT-10 is a notice issued by a tax officer to point out tax returns discrepancies discovered during audit.' }],
-    canonicalSlug: 'https://clearfiling.in/services/gst-notice-reply',
+    canonicalSlug: 'https://www.clearfiling.co.in/services/gst-notice-reply',
     futurePage: '/services/gst-notice-reply'
   },
   {
@@ -869,7 +869,7 @@ export const SERVICES = [
     requiredDocuments: ['GST certificate copy', 'Proof of change (New rent agreement / Board resolution)', 'Promoter KYC (if changing promoter)'],
     benefits: ['Maintains legally updated GST registry profiles', 'Avoids address matching errors on invoicing', 'Ensures compliant returns filing'],
     faqReference: [{ q: 'What are core fields in GST amendment?', a: 'Core fields include business name, addition of stakeholders, and registered office address.' }],
-    canonicalSlug: 'https://clearfiling.in/services/gst-amendment',
+    canonicalSlug: 'https://www.clearfiling.co.in/services/gst-amendment',
     futurePage: '/services/gst-amendment'
   },
   {
@@ -888,7 +888,7 @@ export const SERVICES = [
     requiredDocuments: ['Cancellation order copy', 'Pending returns invoices database', 'Revocation application memo'],
     benefits: ['Restores your active trade invoicing status', 'Avoids starting a new registration process', 'Resolve past liabilities cleanly'],
     faqReference: [{ q: 'What is the limit to apply for GST revocation?', a: 'An application must be filed within 90 days from the cancellation order date.' }],
-    canonicalSlug: 'https://clearfiling.in/services/gst-revocation',
+    canonicalSlug: 'https://www.clearfiling.co.in/services/gst-revocation',
     futurePage: '/services/gst-revocation'
   },
   {
@@ -907,7 +907,7 @@ export const SERVICES = [
     requiredDocuments: ['GSTIN credentials', 'Final sales database', 'Reason statement for surrendering'],
     benefits: ['Stop mandatory zero-return filings requirements', 'Save compliance costs on unused registration', 'Avoid default notices'],
     faqReference: [{ q: 'Can I cancel GST if returns are pending?', a: 'All pending tax liabilities and returns must be cleared before requesting cancellation.' }],
-    canonicalSlug: 'https://clearfiling.in/services/gst-cancellation',
+    canonicalSlug: 'https://www.clearfiling.co.in/services/gst-cancellation',
     futurePage: '/services/gst-cancellation'
   },
   {
@@ -926,7 +926,7 @@ export const SERVICES = [
     requiredDocuments: ['GSTIN credentials', 'PAN & Aadhaar of applicant', 'Details of two witnesses'],
     benefits: ['Export services/goods at 0% tax rate legally', 'Protects business working capital reserves', 'Simple annual processing online'],
     faqReference: [{ q: 'How long is a GST LUT valid?', a: 'LUT is valid for one financial year and must be refiled every April.' }],
-    canonicalSlug: 'https://clearfiling.in/services/gst-lut',
+    canonicalSlug: 'https://www.clearfiling.co.in/services/gst-lut',
     futurePage: '/services/gst-lut'
   },
   {
@@ -945,7 +945,7 @@ export const SERVICES = [
     requiredDocuments: ['Foreign incorporate certificate (tax identification)', 'Board resolution authorizing Indian agent', 'Indian representative KYC'],
     benefits: ['Legally serve products in the Indian marketplace', 'Claim Input tax offsets on Indian imports', 'Transparent cross-border setup'],
     faqReference: [{ q: 'What is the validity of an NRTP GST registration?', a: 'It is typically issued for 90 days, extendable by another 90 days.' }],
-    canonicalSlug: 'https://clearfiling.in/services/gst-foreign-business',
+    canonicalSlug: 'https://www.clearfiling.co.in/services/gst-foreign-business',
     futurePage: '/services/gst-foreign-business'
   },
   {
@@ -964,7 +964,7 @@ export const SERVICES = [
     requiredDocuments: ['Promoter Identity proof', 'Incorporation details of business', 'GST profile requirement info'],
     benefits: ['Premium corporate business address at low cost', 'Complete legally compliant GST registration NOC documents', 'Mail collection and sorting services'],
     faqReference: [{ q: 'Is virtual office legal for GST registration?', a: 'Yes, provided a physical space partition and valid NOC agreements exist.' }],
-    canonicalSlug: 'https://clearfiling.in/services/virtual-office-gst',
+    canonicalSlug: 'https://www.clearfiling.co.in/services/virtual-office-gst',
     futurePage: '/services/virtual-office-gst'
   },
 
@@ -992,7 +992,7 @@ export const SERVICES = [
       'Clean credit history record'
     ],
     faqReference: [{ q: 'Which ITR should a salaried person file?', a: 'ITR-1 (Sahaj) is filed by individuals with salary income up to ₹50 Lakhs.' }],
-    canonicalSlug: 'https://clearfiling.in/services/income-tax-filing',
+    canonicalSlug: 'https://www.clearfiling.co.in/services/income-tax-filing',
     futurePage: '/services/income-tax-filing'
   },
   {
@@ -1011,7 +1011,7 @@ export const SERVICES = [
     requiredDocuments: ['Business sales database', 'Bank statement of business accounts', 'PAN of promoter', 'TDS credit logs'],
     benefits: ['Presumptive filing options save bookkeeping costs', 'Build credit profile for commercial loans', 'Stay fully compliant'],
     faqReference: [{ q: 'What is Section 44AD presumptive taxation?', a: 'It allows small businesses with turnover below ₹2 Crores to declare profit at 8% (6% for digital sales) without maintaining books.' }],
-    canonicalSlug: 'https://clearfiling.in/services/business-itr',
+    canonicalSlug: 'https://www.clearfiling.co.in/services/business-itr',
     futurePage: '/services/business-itr'
   },
   {
@@ -1030,7 +1030,7 @@ export const SERVICES = [
     requiredDocuments: ['Audited Profit & Loss Statement', 'Balance Sheet and ledger details', 'Director details and PAN', 'TDS deduction certificates'],
     benefits: ['Fulfill statutory MCA and tax portal compliances', 'Carry forward business losses to offset future profits', 'Avoid company status cancellation warnings'],
     faqReference: [{ q: 'Is ITR mandatory for a loss-making company?', a: 'Yes, filing ITR-6 is mandatory for all companies, even if there is zero business activity or loss.' }],
-    canonicalSlug: 'https://clearfiling.in/services/company-itr',
+    canonicalSlug: 'https://www.clearfiling.co.in/services/company-itr',
     futurePage: '/services/company-itr'
   },
   {
@@ -1049,7 +1049,7 @@ export const SERVICES = [
     requiredDocuments: ['Partnership deed copy', 'Financial statement of firm', 'KYC of partners', 'Partner ledger accounts'],
     benefits: ['Claim deductions on partner salary & interest', 'Fulfill statutory partnership legal requirements', 'Establish loan credentials'],
     faqReference: [{ q: 'What is the tax rate for LLPs?', a: 'LLPs are taxed at a flat rate of 30% plus applicable surcharge and cess.' }],
-    canonicalSlug: 'https://clearfiling.in/services/llp-itr',
+    canonicalSlug: 'https://www.clearfiling.co.in/services/llp-itr',
     futurePage: '/services/llp-itr'
   },
   {
@@ -1068,7 +1068,7 @@ export const SERVICES = [
     requiredDocuments: ['Books of accounts & donation registers', '12A & 80G registration certificates', 'Details of trustees', 'Income application proof'],
     benefits: ['Retains tax-free NGO income status', 'Clear record of donor funds for audits', 'Avoid tax revocation notices'],
     faqReference: [{ q: 'What is the income utilization limit for NGOs?', a: 'NGOs must apply at least 85% of their income to charitable purposes in India annually.' }],
-    canonicalSlug: 'https://clearfiling.in/services/ngo-tax-filing',
+    canonicalSlug: 'https://www.clearfiling.co.in/services/ngo-tax-filing',
     futurePage: '/services/ngo-tax-filing'
   },
   {
@@ -1087,7 +1087,7 @@ export const SERVICES = [
     requiredDocuments: ['TDS deduction challans', 'PAN list of deductees', 'Payment registers'],
     benefits: ['Ensures deductees get tax credit in Form 26AS', 'Avoid late filing fees of ₹200/day under tax laws', 'Accurate compliance'],
     faqReference: [{ q: 'What is the due date for quarterly TDS filing?', a: 'TDS returns must be filed within 31 days from the end of each quarter.' }],
-    canonicalSlug: 'https://clearfiling.in/services/tds-return',
+    canonicalSlug: 'https://www.clearfiling.co.in/services/tds-return',
     futurePage: '/services/tds-return'
   },
   {
@@ -1106,7 +1106,7 @@ export const SERVICES = [
     requiredDocuments: ['PAN of the business promoter/entity', 'Identity and address proof of deductor'],
     benefits: ['Mandatory code for collecting and filing TDS', 'Avoid heavy penalties for missing TAN references', 'Lifetime validity code'],
     faqReference: [{ q: 'Is PAN required for TAN registration?', a: 'Yes, PAN of the applicant or corporate entity is mandatory.' }],
-    canonicalSlug: 'https://clearfiling.in/services/tan-registration',
+    canonicalSlug: 'https://www.clearfiling.co.in/services/tan-registration',
     futurePage: '/services/tan-registration'
   },
   {
@@ -1125,7 +1125,7 @@ export const SERVICES = [
     requiredDocuments: ['Copy of notice from department', 'Original ITR filing transcript', 'Financial records matching period'],
     benefits: ['Saves applicant from hefty tax assessments', 'Corrects defect errors on filing portals', 'Resolves tax disputes safely'],
     faqReference: [{ q: 'What is a defective return under Section 139(9)?', a: 'It means the tax department found missing info or errors in your filed ITR.' }],
-    canonicalSlug: 'https://clearfiling.in/services/income-tax-notice',
+    canonicalSlug: 'https://www.clearfiling.co.in/services/income-tax-notice',
     futurePage: '/services/income-tax-notice'
   },
   {
@@ -1144,7 +1144,7 @@ export const SERVICES = [
     requiredDocuments: ['Original ITR acknowledgment copy', 'Correction details database', 'New bank or income details'],
     benefits: ['Corrects error statements before scrutiny triggers', 'Avoids notices for mismatching data', 'Legally allowed updates'],
     faqReference: [{ q: 'What is the time limit to file a revised return?', a: 'You can revise a return at any time before 3 months prior to the end of the assessment year.' }],
-    canonicalSlug: 'https://clearfiling.in/services/revised-return',
+    canonicalSlug: 'https://www.clearfiling.co.in/services/revised-return',
     futurePage: '/services/revised-return'
   },
 
@@ -1177,7 +1177,7 @@ export const SERVICES = [
       'Protects directors from disqualification actions'
     ],
     faqReference: [{ q: 'What is the penalty for late ROC filings?', a: 'The delay penalty is ₹100 per day per form (AOC-4 and MGT-7) with no upper cap.' }],
-    canonicalSlug: 'https://clearfiling.in/services/annual-compliance',
+    canonicalSlug: 'https://www.clearfiling.co.in/services/annual-compliance',
     futurePage: '/services/annual-compliance'
   },
   {
@@ -1196,7 +1196,7 @@ export const SERVICES = [
     requiredDocuments: ['Account statement of LLP', 'Partner details update records', 'Active DSC of partners'],
     benefits: ['Protects partners against heavy regulatory penalties', 'Keeps LLP active on register', 'Smooth banking operations'],
     faqReference: [{ q: 'What is the due date for LLP Form 11?', a: 'Form 11 must be filed by 30th May, and Form 8 by 30th October every year.' }],
-    canonicalSlug: 'https://clearfiling.in/services/llp-compliance',
+    canonicalSlug: 'https://www.clearfiling.co.in/services/llp-compliance',
     futurePage: '/services/llp-compliance'
   },
   {
@@ -1215,7 +1215,7 @@ export const SERVICES = [
     requiredDocuments: ['Financial statement of OPC', 'Promoter identity logs', 'Nominee details'],
     benefits: ['Maintains corporate legal validity', 'Clear credit status', 'Avoids default penalties'],
     faqReference: [{ q: 'Does OPC require physical board meetings?', a: 'No, OPC is exempt from holding annual general meetings and physical board meetings.' }],
-    canonicalSlug: 'https://clearfiling.in/services/opc-compliance',
+    canonicalSlug: 'https://www.clearfiling.co.in/services/opc-compliance',
     futurePage: '/services/opc-compliance'
   },
   {
@@ -1234,7 +1234,7 @@ export const SERVICES = [
     requiredDocuments: ['PAN & Aadhaar of Director', 'Personal Mobile & Email for OTP verification', 'DSC of the Director'],
     benefits: ['Prevents deactivation of director status', 'Avoids steep penalty fee of ₹5,000 for delay', 'Enables director to sign corporate forms'],
     faqReference: [{ q: 'What happens if DIN KYC is not filed?', a: 'The DIN is deactivated, and a late fee of ₹5,000 is charged to reactivate it.' }],
-    canonicalSlug: 'https://clearfiling.in/services/din-kyc',
+    canonicalSlug: 'https://www.clearfiling.co.in/services/din-kyc',
     futurePage: '/services/din-kyc'
   },
   {
@@ -1253,7 +1253,7 @@ export const SERVICES = [
     requiredDocuments: ['Board Resolution & Consent letter', 'DIN & KYC of the new director', 'Resignation letter (for removal)', 'DSC of director'],
     benefits: ['Legally valid corporate structural changes', 'Updates public registry logs instantly', 'Smooth corporate transitions'],
     faqReference: [{ q: 'What is DIR-12?', a: 'DIR-12 is the ROC form filed to notify changes in directors or key managerial personnel.' }],
-    canonicalSlug: 'https://clearfiling.in/services/director-change',
+    canonicalSlug: 'https://www.clearfiling.co.in/services/director-change',
     futurePage: '/services/director-change'
   },
   {
@@ -1272,7 +1272,7 @@ export const SERVICES = [
     requiredDocuments: ['New Rent Agreement & Electricity Bill', 'NOC from landlord', 'Board Resolution details'],
     benefits: ['Maintains legally valid corporate communication channel', 'Aligns GST and company registries', 'Avoids non-compliance notices'],
     faqReference: [{ q: 'Which form is filed for office address change?', a: 'Form INC-22 is submitted to the ROC for registered office updates.' }],
-    canonicalSlug: 'https://clearfiling.in/services/registered-office-change',
+    canonicalSlug: 'https://www.clearfiling.co.in/services/registered-office-change',
     futurePage: '/services/registered-office-change'
   },
   {
@@ -1291,7 +1291,7 @@ export const SERVICES = [
     requiredDocuments: ['Share Transfer Deed (SH-4)', 'Share certificates to be transferred', 'Identity proof of transferor and transferee', 'Board Resolution'],
     benefits: ['Legally valid transfer of business equity', 'Accurate updates in company register of members', 'Saves stamp duty penalty risks'],
     faqReference: [{ q: 'Is stamp duty payable on share transfers?', a: 'Yes, stamp duty of 0.015% is payable on the value of shares transferred.' }],
-    canonicalSlug: 'https://clearfiling.in/services/share-transfer',
+    canonicalSlug: 'https://www.clearfiling.co.in/services/share-transfer',
     futurePage: '/services/share-transfer'
   },
   {
@@ -1310,7 +1310,7 @@ export const SERVICES = [
     requiredDocuments: ['Copy of existing MOA & AOA', 'Proposed new object clause draft', 'Notice and minutes of board meeting'],
     benefits: ['Pivot business activities legally', 'Expands commercial operating limits', 'Compliant MCA records'],
     faqReference: [{ q: 'Which form is filed for changing business objects?', a: 'Form MGT-14 must be filed with the ROC within 30 days of passing the special resolution.' }],
-    canonicalSlug: 'https://clearfiling.in/services/moa-amendment',
+    canonicalSlug: 'https://www.clearfiling.co.in/services/moa-amendment',
     futurePage: '/services/moa-amendment'
   },
   {
@@ -1329,7 +1329,7 @@ export const SERVICES = [
     requiredDocuments: ['Existing AOA copy', 'Special resolution text details', 'Board meeting documentation'],
     benefits: ['Align articles with new investor agreements', 'Change voting structures legally', 'Ensures smooth management'],
     faqReference: [{ q: 'Is shareholder approval required to amend AOA?', a: 'Yes, a special resolution requiring 75% approval from shareholders is mandatory.' }],
-    canonicalSlug: 'https://clearfiling.in/services/aoa-amendment',
+    canonicalSlug: 'https://www.clearfiling.co.in/services/aoa-amendment',
     futurePage: '/services/aoa-amendment'
   },
   {
@@ -1348,7 +1348,7 @@ export const SERVICES = [
     requiredDocuments: ['Copy of MOA/AOA', 'Board Resolution details', 'Details of proposed capital increase amount'],
     benefits: ['Enable issuance of new equity shares to investors', 'Increases corporate transaction limits', 'Smooth legal process'],
     faqReference: [{ q: 'What is the government fee to increase capital?', a: 'Government fee and stamp duty depend on the capital amount and the state of registration.' }],
-    canonicalSlug: 'https://clearfiling.in/services/authorized-capital-increase',
+    canonicalSlug: 'https://www.clearfiling.co.in/services/authorized-capital-increase',
     futurePage: '/services/authorized-capital-increase'
   },
   {
@@ -1367,7 +1367,7 @@ export const SERVICES = [
     requiredDocuments: ['Audited financial ledgers', 'Board and shareholder consent resolution', 'Assets and liabilities certificate'],
     benefits: ['Drastically reduces yearly audit and compliance filing fees', 'Retains company name rights for future use', 'Avoid strike-off notices'],
     faqReference: [{ q: 'How long can a company remain dormant?', a: 'A company can hold dormant status for a maximum of 5 consecutive years.' }],
-    canonicalSlug: 'https://clearfiling.in/services/dormant-company-filing',
+    canonicalSlug: 'https://www.clearfiling.co.in/services/dormant-company-filing',
     futurePage: '/services/dormant-company-filing'
   },
   {
@@ -1386,7 +1386,7 @@ export const SERVICES = [
     requiredDocuments: ['Zero liability statement (audited)', 'Bank closure certificate', 'Promoter indemnity bond', 'DSC of all directors'],
     benefits: ['Stop all statutory monthly/yearly filing requirements', 'Save directors from future regulatory disqualifications', 'Legally sound wind up process'],
     faqReference: [{ q: 'When can a company apply for strike-off?', a: 'A company can apply if it has been inactive for a minimum of 2 consecutive years.' }],
-    canonicalSlug: 'https://clearfiling.in/services/company-closure',
+    canonicalSlug: 'https://www.clearfiling.co.in/services/company-closure',
     futurePage: '/services/company-closure'
   },
 
@@ -1419,7 +1419,7 @@ export const SERVICES = [
       'Strategic global trading hub connection'
     ],
     faqReference: [{ q: 'Is physical travel mandatory to setup a Dubai company?', a: 'Most Free Zone registrations can be fully completed remotely without traveling.' }],
-    canonicalSlug: 'https://clearfiling.in/services/uae-company-setup',
+    canonicalSlug: 'https://www.clearfiling.co.in/services/uae-company-setup',
     futurePage: '/services/uae-company-setup'
   },
   {
@@ -1438,7 +1438,7 @@ export const SERVICES = [
     requiredDocuments: ['Passport copy of promoter', 'Details of US registered agent', 'Business description details'],
     benefits: ['Acquire global SaaS payments access (Stripe, Paypal US)', 'High prestige and trust for selling in Western markets', 'Access US venture capital investors'],
     faqReference: [{ q: 'Which US state is best for IT startups?', a: 'Delaware is preferred for VC-backed C-Corps, while Wyoming is popular for bootstrap LLCs due to lower fees.' }],
-    canonicalSlug: 'https://clearfiling.in/services/usa-company-registration',
+    canonicalSlug: 'https://www.clearfiling.co.in/services/usa-company-registration',
     futurePage: '/services/usa-company-registration'
   },
   {
@@ -1457,7 +1457,7 @@ export const SERVICES = [
     requiredDocuments: ['Passport copy of Director', 'Registered address details', 'Share structure plan'],
     benefits: ['Extremely low setup cost and annual fees', 'Setup Wise/Payoneer corporate accounts instantly', 'Simple tax laws'],
     faqReference: [{ q: 'How long does UK registration take?', a: 'Companies House typically registers the LTD company within 24 to 48 hours.' }],
-    canonicalSlug: 'https://clearfiling.in/services/uk-company-registration',
+    canonicalSlug: 'https://www.clearfiling.co.in/services/uk-company-registration',
     futurePage: '/services/uk-company-registration'
   },
   {
@@ -1476,7 +1476,7 @@ export const SERVICES = [
     requiredDocuments: ['Passport and Address proof of promoters', 'Nominee director agreement details', 'Corporate bank account requirements info'],
     benefits: ['Voted the world\'s easiest place to do business', 'Extremely low tax rates and startup tax exemption credits', 'Access to top Asian investment hubs'],
     faqReference: [{ q: 'Is a resident director mandatory in Singapore?', a: 'Yes, Singapore law requires a minimum of one local resident nominee director.' }],
-    canonicalSlug: 'https://clearfiling.in/services/singapore-business-setup',
+    canonicalSlug: 'https://www.clearfiling.co.in/services/singapore-business-setup',
     futurePage: '/services/singapore-business-setup'
   },
   {
@@ -1495,7 +1495,7 @@ export const SERVICES = [
     requiredDocuments: ['Indian trademark application copy (for Madrid protocol)', 'Power of attorney documents', 'Logo designs representation'],
     benefits: ['Global brand asset protection against piracy', 'Legal monopoly rights in export markets', 'Safeguards international trading operations'],
     faqReference: [{ q: 'What is the Madrid Protocol?', a: 'It is an international treaty allowing trademark owners to protect brands in 120+ countries with one application.' }],
-    canonicalSlug: 'https://clearfiling.in/services/overseas-trademark',
+    canonicalSlug: 'https://www.clearfiling.co.in/services/overseas-trademark',
     futurePage: '/services/overseas-trademark'
   },
   {
@@ -1514,7 +1514,7 @@ export const SERVICES = [
     requiredDocuments: ['Corporate structure draft', 'FEMA requirements info', 'Cross-border transaction details'],
     benefits: ['Avoid double taxation payouts legally', 'Compliant FEMA/RBI structures for fund routing', 'Tax-efficient corporate planning'],
     faqReference: [{ q: 'What is DTAA?', a: 'DTAA is a tax treaty between countries to ensure taxpayers do not pay double tax on the same income.' }],
-    canonicalSlug: 'https://clearfiling.in/services/international-advisory',
+    canonicalSlug: 'https://www.clearfiling.co.in/services/international-advisory',
     futurePage: '/services/international-advisory'
   },
   {
@@ -1553,7 +1553,7 @@ export const SERVICES = [
       { id: 'gst-registration', title: 'GST Registration' },
       { id: 'trademark-registration', title: 'Trademark Registration' }
     ],
-    canonicalSlug: 'https://clearfiling.in/services/digital-signature',
+    canonicalSlug: 'https://www.clearfiling.co.in/services/digital-signature',
     futurePage: '/services/digital-signature'
   },
   {
@@ -1586,7 +1586,7 @@ export const SERVICES = [
       { q: 'Will the website be mobile-friendly?', a: 'Yes, all our websites are fully responsive and optimized for mobile, tablet, and desktop screens.' },
       { q: 'Do you provide website hosting?', a: 'We assist in setting up hosting and domains on your preferred platform (e.g., Hostinger, AWS, GoDaddy) so you retain full ownership.' }
     ],
-    canonicalSlug: 'https://clearfiling.in/services/website-development',
+    canonicalSlug: 'https://www.clearfiling.co.in/services/website-development',
     futurePage: '/services/website-development'
   },
   {
@@ -1619,7 +1619,7 @@ export const SERVICES = [
       { q: 'Which payment gateways can you integrate?', a: 'We can integrate any major payment gateway, including Razorpay, Paytm, Instamojo, Stripe, and PayPal.' },
       { q: 'Can I manage products myself?', a: 'Yes, we provide a user-friendly admin dashboard where you can easily add, edit, or remove products and track orders.' }
     ],
-    canonicalSlug: 'https://clearfiling.in/services/ecommerce-website-development',
+    canonicalSlug: 'https://www.clearfiling.co.in/services/ecommerce-website-development',
     futurePage: '/services/ecommerce-website-development'
   },
   {
@@ -1651,7 +1651,7 @@ export const SERVICES = [
       { q: 'What technology stack do you use?', a: 'We typically use modern, reliable stacks like MERN (MongoDB, Express, React, Node.js) or standard SQL backends for high performance.' },
       { q: 'Do you offer post-development support?', a: 'Yes, we offer ongoing maintenance and support packages to keep your custom application secure and up to date.' }
     ],
-    canonicalSlug: 'https://clearfiling.in/services/custom-web-applications',
+    canonicalSlug: 'https://www.clearfiling.co.in/services/custom-web-applications',
     futurePage: '/services/custom-web-applications'
   },
   {
@@ -1660,7 +1660,7 @@ export const SERVICES = [
     category: 'Loan Services',
     title: 'Personal Loan',
     shortDescription: 'Unsecured personal financing to meet immediate individual capital requirements with flexible repayment options.',
-    description: 'Obtain quick personal financing for personal, medical, or urgent needs. Hassle-free online verification and quick disbursal.',
+    description: 'Explore personal financing options for personal, medical, or urgent needs. Guidance with applications and documentation.',
     iconName: 'UserCheck',
     processingTime: '2 - 4 Business Days',
     keywords: ['personal loan', 'unsecured loan', 'personal finance', 'quick loan'],
@@ -1679,7 +1679,7 @@ export const SERVICES = [
     faqReference: [
       { q: 'What is the minimum credit score for a Personal Loan?', a: 'Most banks prefer a credit score of 750 or above for unsecured personal loans.' }
     ],
-    canonicalSlug: 'https://clearfiling.in/services/personal-loan',
+    canonicalSlug: 'https://www.clearfiling.co.in/services/personal-loan',
     futurePage: '/services/personal-loan'
   },
   {
@@ -1707,7 +1707,7 @@ export const SERVICES = [
     faqReference: [
       { q: 'Can I get tax benefits on a Home Loan?', a: 'Yes, you can claim deductions on principal under Section 80C and interest under Section 24.' }
     ],
-    canonicalSlug: 'https://clearfiling.in/services/home-loan',
+    canonicalSlug: 'https://www.clearfiling.co.in/services/home-loan',
     futurePage: '/services/home-loan'
   },
   {
@@ -1716,7 +1716,7 @@ export const SERVICES = [
     category: 'Loan Services',
     title: 'Business Loan',
     shortDescription: 'Customized funding solutions for company expansion, commercial upgrades, and inventory investment.',
-    description: 'Secure capital for corporate expansion, technology upgrades, working capital, or inventory purchase. ClearFiling helps you prepare project reports, assess eligibility, and process loan applications with leading banks.',
+    description: 'Secure capital for corporate expansion, technology upgrades, working capital, or inventory purchase. Assistance with business loan applications and documentation.',
     iconName: 'Landmark',
     featured: true,
     processingTime: '7 - 14 Business Days',
@@ -1742,7 +1742,7 @@ export const SERVICES = [
       { id: 'msme-registration', title: 'MSME Registration' },
       { id: 'private-limited-company', title: 'Private Limited Company' }
     ],
-    canonicalSlug: 'https://clearfiling.in/services/business-loan',
+    canonicalSlug: 'https://www.clearfiling.co.in/services/business-loan',
     futurePage: '/services/business-loan'
   },
   {
@@ -1751,7 +1751,7 @@ export const SERVICES = [
     category: 'Loan Services',
     title: 'MSME Loan',
     shortDescription: 'Specialized government-backed credit schemes to support micro, small, and medium enterprises.',
-    description: 'Avail government-backed schemes like CGTMSE, PMEGP, or Mudra loans. Specially designed to boost the MSME sector with low interest rates.',
+    description: 'Avail government-backed schemes like CGTMSE, PMEGP, or Mudra loans. Explore financing options for eligible MSMEs.',
     iconName: 'Briefcase',
     processingTime: '5 - 10 Business Days',
     keywords: ['msme loan', 'cgtmse', 'mudra loan', 'small business loan', 'government loan'],
@@ -1770,7 +1770,7 @@ export const SERVICES = [
     faqReference: [
       { q: 'Is Udyam Registration mandatory for MSME loans?', a: 'Yes, a valid Udyam Registration Certificate is required to claim MSME interest subsidies.' }
     ],
-    canonicalSlug: 'https://clearfiling.in/services/msme-loan',
+    canonicalSlug: 'https://www.clearfiling.co.in/services/msme-loan',
     futurePage: '/services/msme-loan'
   },
   {
@@ -1798,7 +1798,7 @@ export const SERVICES = [
     faqReference: [
       { q: 'Can a newly registered company apply for a startup loan?', a: 'Yes, startup-specific credit schemes evaluate business feasibility and promoter profile rather than historic financials.' }
     ],
-    canonicalSlug: 'https://clearfiling.in/services/startup-loan',
+    canonicalSlug: 'https://www.clearfiling.co.in/services/startup-loan',
     futurePage: '/services/startup-loan'
   },
   {
@@ -1826,7 +1826,7 @@ export const SERVICES = [
     faqReference: [
       { q: 'What is the limit based on?', a: 'The limit is calculated using the holding period of inventory, debtors, and creditors.' }
     ],
-    canonicalSlug: 'https://clearfiling.in/services/working-capital-loan',
+    canonicalSlug: 'https://www.clearfiling.co.in/services/working-capital-loan',
     futurePage: '/services/working-capital-loan'
   },
   {
@@ -1854,7 +1854,7 @@ export const SERVICES = [
     faqReference: [
       { q: 'When does the repayment start?', a: 'Repayment typically begins 6 months to 1 year after course completion or upon securing a job, whichever is earlier.' }
     ],
-    canonicalSlug: 'https://clearfiling.in/services/education-loan',
+    canonicalSlug: 'https://www.clearfiling.co.in/services/education-loan',
     futurePage: '/services/education-loan'
   },
   {
@@ -1882,7 +1882,7 @@ export const SERVICES = [
     faqReference: [
       { q: 'Is collateral needed for a vehicle loan?', a: 'No, the vehicle itself acts as hypothecated collateral for the bank.' }
     ],
-    canonicalSlug: 'https://clearfiling.in/services/vehicle-loan',
+    canonicalSlug: 'https://www.clearfiling.co.in/services/vehicle-loan',
     futurePage: '/services/vehicle-loan'
   },
   {
@@ -1909,7 +1909,7 @@ export const SERVICES = [
     faqReference: [
       { q: 'Can I get a loan for a used car?', a: 'Yes, pre-owned car financing is widely available at slightly different rates.' }
     ],
-    canonicalSlug: 'https://clearfiling.in/services/car-loan',
+    canonicalSlug: 'https://www.clearfiling.co.in/services/car-loan',
     futurePage: '/services/car-loan'
   },
   {
@@ -1918,7 +1918,7 @@ export const SERVICES = [
     category: 'Loan Services',
     title: 'Bike Loan',
     shortDescription: 'Quick and hassle-free two-wheeler finance solutions with minimal documentation requirements.',
-    description: 'Get instant approvals on two-wheeler loans. Cover sports bikes, commuter motorbikes, and electric scooters.',
+    description: 'Assistance with two-wheeler loan applications for sports bikes, commuter motorcycles, and electric scooters.',
     iconName: 'Award',
     processingTime: '1 - 2 Business Days',
     keywords: ['bike loan', 'two wheeler loan', 'scooter finance', 'motorcycle loan'],
@@ -1936,7 +1936,7 @@ export const SERVICES = [
     faqReference: [
       { q: 'Can I buy an electric scooter with a bike loan?', a: 'Yes, modern green vehicle loans cover electric two-wheelers.' }
     ],
-    canonicalSlug: 'https://clearfiling.in/services/bike-loan',
+    canonicalSlug: 'https://www.clearfiling.co.in/services/bike-loan',
     futurePage: '/services/bike-loan'
   },
   {
@@ -1945,7 +1945,7 @@ export const SERVICES = [
     category: 'Loan Services',
     title: 'Gold Loan',
     shortDescription: 'Instant liquidity options by securing loans against gold ornaments with competitive rate margins.',
-    description: 'Instant liquidity against gold jewelry. Fast evaluations, maximum per-gram value, and low interest rates.',
+    description: 'Instant liquidity against gold jewelry. Guidance on gold loan applications and lender terms.',
     iconName: 'DollarSign',
     processingTime: '1 Business Day',
     keywords: ['gold loan', 'loan against gold', 'instant gold finance', 'jewel loan'],
@@ -1963,7 +1963,7 @@ export const SERVICES = [
     faqReference: [
       { q: 'What gold purity is accepted?', a: 'Banks accept gold ornaments with purity ranging from 18 to 22 karats.' }
     ],
-    canonicalSlug: 'https://clearfiling.in/services/gold-loan',
+    canonicalSlug: 'https://www.clearfiling.co.in/services/gold-loan',
     futurePage: '/services/gold-loan'
   },
   {
@@ -1972,7 +1972,7 @@ export const SERVICES = [
     category: 'Loan Services',
     title: 'Loan Against Property',
     shortDescription: 'Unlocking equity value from commercial or residential properties for major capital needs.',
-    description: 'Leverage the value of your commercial or residential property to raise high-value long-term funds at lower rates.',
+    description: 'Leverage the value of your commercial or residential property to raise high-value long-term funds. Explore loan-against-property financing options.',
     iconName: 'Building2',
     processingTime: '10 - 20 Business Days',
     keywords: ['loan against property', 'lap', 'property mortgage', 'secured finance'],
@@ -1991,7 +1991,7 @@ export const SERVICES = [
     faqReference: [
       { q: 'Which properties are eligible?', a: 'Clear, freehold, and non-disputed residential, commercial, or industrial properties are eligible.' }
     ],
-    canonicalSlug: 'https://clearfiling.in/services/loan-against-property',
+    canonicalSlug: 'https://www.clearfiling.co.in/services/loan-against-property',
     futurePage: '/services/loan-against-property'
   },
   {
@@ -2019,7 +2019,7 @@ export const SERVICES = [
     faqReference: [
       { q: 'Can I finance imported machinery?', a: 'Yes, we facilitate Letter of Credit (LC) and trade finance for imported industrial machinery.' }
     ],
-    canonicalSlug: 'https://clearfiling.in/services/machinery-loan',
+    canonicalSlug: 'https://www.clearfiling.co.in/services/machinery-loan',
     futurePage: '/services/machinery-loan'
   },
   {
@@ -2046,7 +2046,7 @@ export const SERVICES = [
     faqReference: [
       { q: 'Is there a lease option available?', a: 'Yes, we advise on both equipment lease models and direct purchase finance.' }
     ],
-    canonicalSlug: 'https://clearfiling.in/services/equipment-finance',
+    canonicalSlug: 'https://www.clearfiling.co.in/services/equipment-finance',
     futurePage: '/services/equipment-finance'
   },
   {
@@ -2074,7 +2074,7 @@ export const SERVICES = [
     faqReference: [
       { q: 'What is a TEV study?', a: 'Techno-Economic Viability (TEV) study validates the technical feasibility and financial success of the project.' }
     ],
-    canonicalSlug: 'https://clearfiling.in/services/project-loan',
+    canonicalSlug: 'https://www.clearfiling.co.in/services/project-loan',
     futurePage: '/services/project-loan'
   },
   {
@@ -2102,7 +2102,7 @@ export const SERVICES = [
     faqReference: [
       { q: 'How is the draw-down limit calculated?', a: 'It is based on the value of paid stock plus debtors, minus a specified margin.' }
     ],
-    canonicalSlug: 'https://clearfiling.in/services/cash-credit',
+    canonicalSlug: 'https://www.clearfiling.co.in/services/cash-credit',
     futurePage: '/services/cash-credit'
   },
   {
@@ -2129,7 +2129,7 @@ export const SERVICES = [
     faqReference: [
       { q: 'Can I get an OD without security?', a: 'Yes, clean overdraft limits are offered based on current account transaction volume.' }
     ],
-    canonicalSlug: 'https://clearfiling.in/services/overdraft-facility',
+    canonicalSlug: 'https://www.clearfiling.co.in/services/overdraft-facility',
     futurePage: '/services/overdraft-facility'
   },
   {
@@ -2156,7 +2156,7 @@ export const SERVICES = [
     faqReference: [
       { q: 'Who is eligible for a Professional Loan?', a: 'Practicing doctors, CAs, CSs, and architects with valid license to practice are eligible.' }
     ],
-    canonicalSlug: 'https://clearfiling.in/services/professional-loan',
+    canonicalSlug: 'https://www.clearfiling.co.in/services/professional-loan',
     futurePage: '/services/professional-loan'
   },
   {
@@ -2184,7 +2184,7 @@ export const SERVICES = [
     faqReference: [
       { q: 'Are pre-owned commercial vehicles financed?', a: 'Yes, pre-owned trucks and buses can be financed based on their age and condition.' }
     ],
-    canonicalSlug: 'https://clearfiling.in/services/commercial-vehicle-loan',
+    canonicalSlug: 'https://www.clearfiling.co.in/services/commercial-vehicle-loan',
     futurePage: '/services/commercial-vehicle-loan'
   },
   {
@@ -2212,7 +2212,7 @@ export const SERVICES = [
     faqReference: [
       { q: 'How are disbursements handled?', a: 'Funds are disbursed in phases, corresponding directly with progress verified by bank engineers.' }
     ],
-    canonicalSlug: 'https://clearfiling.in/services/construction-loan',
+    canonicalSlug: 'https://www.clearfiling.co.in/services/construction-loan',
     futurePage: '/services/construction-loan'
   }
 ];

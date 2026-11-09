@@ -17,14 +17,19 @@ const BUSINESS = {
   // Metrics (update as firm grows)
   stats: {
     clientsServed: '10,000+',
-    yearsExperience: '6+',
+    filingsCompleted: '10,000+',
+    clientSatisfaction: '99.4%',
+    qualifiedProfessionals: 5,
     professionals: 5,
+    yearsExperience: '6+',
     officesCount: 3,
+    officesLocations: 'Delhi, Deoria, Gorakhpur',
+    servicesCount: '60+',
   },
 
   // SEO / Schema
-  url: 'https://clearfiling.in',
-  logoUrl: 'https://clearfiling.in/logo.png', // update when available
+  url: 'https://www.clearfiling.co.in',
+  logoUrl: 'https://www.clearfiling.co.in/favicon.svg', // vector favicon
   priceRange: '₹₹',
   currenciesAccepted: 'INR',
   paymentAccepted: 'Bank Transfer, UPI, Cheque',

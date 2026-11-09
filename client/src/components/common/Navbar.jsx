@@ -1,11 +1,12 @@
-import React, { useState, useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
+import React, { useState, useEffect, useRef } from 'react';
+import { useLocation, useNavigationType } from 'react-router-dom';
 import Logo from './Logo';
 import NavLink from './NavLink';
 import CTAButtons from './CTAButtons';
 import MobileMenu from './MobileMenu';
 import MobileDrawer from './MobileDrawer';
 import MaxWidthContainer from '../ui/MaxWidthContainer';
+import { smoothScrollTo } from '../../utils/scroll';
 
 const NAV_LINKS = [
   { label: 'Home', targetId: 'home' },
@@ -23,78 +24,153 @@ const Navbar = () => {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('home');
   const location = useLocation();
+  const navigationType = useNavigationType();
+  const lastHandledHashRef = useRef('');
 
-  // Scroll detection to transition header background
-  useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 20);
-    };
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  // Cached section bounds to avoid synchronous layout thrashing (offsetTop/offsetHeight) on every scroll event
+  const sectionBoundsRef = useRef([]);
 
-  // Intersection observer or scroll position check to update active link
+  // Consolidated & RAF-throttled scroll handler for header transition and active-section detection
   useEffect(() => {
-    if (location.pathname !== '/') {
+    const isHome = location.pathname === '/';
+    if (!isHome) {
       setActiveSection('');
-      return;
     }
 
-    const handleScrollActive = () => {
-      const scrollPosition = window.scrollY + 100; // offset header height + margin
-
-      // At top
-      if (window.scrollY < 50) {
-        setActiveSection('home');
-        return;
-      }
-
-      // Check current section heights
+    // Safely measure and cache section positions on mount and layout changes
+    const updateSectionBounds = () => {
+      if (!isHome) return;
+      const bounds = [];
       for (const link of NAV_LINKS) {
         const section = document.getElementById(link.targetId);
         if (section) {
-          const top = section.offsetTop;
-          const height = section.offsetHeight;
-          
-          if (scrollPosition >= top && scrollPosition < top + height) {
-            setActiveSection(link.targetId);
+          bounds.push({
+            id: link.targetId,
+            top: section.offsetTop,
+            height: section.offsetHeight,
+          });
+        }
+      }
+      sectionBoundsRef.current = bounds;
+    };
+
+    // Initial measurement
+    updateSectionBounds();
+
+    let rafId = null;
+    let ticking = false;
+
+    const onScroll = () => {
+      if (!ticking) {
+        ticking = true;
+        rafId = requestAnimationFrame(() => {
+          ticking = false;
+          const scrollY = window.scrollY;
+
+          // 1. Transition header background (consolidated from former standalone listener)
+          const scrolled = scrollY > 20;
+          setIsScrolled((prev) => (prev !== scrolled ? scrolled : prev));
+
+          // 2. Active section detection (homepage only)
+          if (!isHome) return;
+
+          if (scrollY < 50) {
+            setActiveSection((prev) => (prev !== 'home' ? 'home' : prev));
             return;
           }
-        }
+
+          // If bounds were not ready on mount, measure once
+          if (sectionBoundsRef.current.length === 0) {
+            updateSectionBounds();
+          }
+
+          const scrollPosition = scrollY + 100;
+          for (const section of sectionBoundsRef.current) {
+            if (scrollPosition >= section.top && scrollPosition < section.top + section.height) {
+              setActiveSection((prev) => (prev !== section.id ? section.id : prev));
+              return;
+            }
+          }
+        });
       }
     };
 
-    window.addEventListener('scroll', handleScrollActive);
-    // Initial trigger
-    handleScrollActive();
-    return () => window.removeEventListener('scroll', handleScrollActive);
+    // Run once on mount to synchronize header state
+    onScroll();
+
+    // Listen to scroll with passive flag
+    window.addEventListener('scroll', onScroll, { passive: true });
+    // Update cached bounds when window resizes
+    window.addEventListener('resize', updateSectionBounds, { passive: true });
+
+    // Detect content-size changes to refresh section bounds
+    let resizeObserver = null;
+    if (typeof ResizeObserver !== 'undefined' && isHome) {
+      resizeObserver = new ResizeObserver(() => {
+        updateSectionBounds();
+      });
+      if (document.body) {
+        resizeObserver.observe(document.body);
+      }
+    }
+
+    return () => {
+      if (rafId) {
+        cancelAnimationFrame(rafId);
+      }
+      window.removeEventListener('scroll', onScroll);
+      window.removeEventListener('resize', updateSectionBounds);
+      if (resizeObserver) {
+        resizeObserver.disconnect();
+      }
+    };
   }, [location.pathname]);
 
-  // Handle hash scrolling on page load (if navigated from subpage)
+  // Handle cross-page hash navigation (navigated from another route with a hash target)
   useEffect(() => {
-    if (location.hash) {
-      const id = location.hash.replace('#', '');
-      let scrollAttempts = 0;
-      
-      const scrollToSection = () => {
-        const element = document.getElementById(id);
-        if (element) {
-          const headerOffset = 80;
-          const elementPosition = element.getBoundingClientRect().top;
-          const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
-          window.scrollTo({
-            top: offsetPosition,
-            behavior: 'smooth',
-          });
-        } else if (scrollAttempts < 6) {
-          scrollAttempts++;
-          setTimeout(scrollToSection, 150);
-        }
-      };
-      
-      scrollToSection();
+    // 1. If back/forward navigation (POP), preserve native browser scroll restoration
+    if (navigationType === 'POP') {
+      return;
     }
-  }, [location.pathname, location.hash]);
+
+    if (!location.hash) {
+      lastHandledHashRef.current = '';
+      return;
+    }
+
+    const hashKey = `${location.pathname}${location.hash}`;
+    // Execute exactly once per route+hash transition
+    if (lastHandledHashRef.current === hashKey) {
+      return;
+    }
+
+    const id = location.hash.replace('#', '');
+    let rafId = null;
+    let attempts = 0;
+
+    const tryScrollToSection = () => {
+      const element = document.getElementById(id);
+      if (element) {
+        lastHandledHashRef.current = hashKey;
+        const headerOffset = 72;
+        const elementPosition = element.getBoundingClientRect().top;
+        const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+        smoothScrollTo(offsetPosition);
+      } else if (attempts < 10) {
+        attempts++;
+        rafId = requestAnimationFrame(tryScrollToSection);
+      }
+    };
+
+    // Frame-aligned execution: allows destination route to paint at top: 0 first
+    rafId = requestAnimationFrame(tryScrollToSection);
+
+    return () => {
+      if (rafId) {
+        cancelAnimationFrame(rafId);
+      }
+    };
+  }, [location.pathname, location.hash, navigationType]);
 
   return (
     <>
