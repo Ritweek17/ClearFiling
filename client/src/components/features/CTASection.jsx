@@ -76,18 +76,20 @@ const CTASection = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.45, delay: 0.15 }}
-          className="flex flex-col sm:flex-row items-center gap-3 w-full sm:w-auto"
+          className="flex flex-col sm:flex-row items-center justify-center gap-4 w-full sm:w-auto"
         >
           {/* Primary CTA */}
           <Button
             variant="primary"
             size="lg"
             onClick={handleWhatsApp}
-            className="w-full sm:w-auto px-7 py-4 bg-brand-primary text-white font-bold rounded-xl shadow-lg shadow-brand-primary/30 flex items-center justify-center gap-2.5"
+            className="w-full sm:w-auto h-16 min-h-[64px] px-6 sm:px-8 bg-brand-primary text-white font-bold rounded-xl shadow-lg shadow-brand-primary/30 flex items-center justify-center [&>span]:inline-flex [&>span]:items-center [&>span]:justify-center [&>span]:gap-2.5"
           >
-            <MessageSquare className="w-4 h-4" />
-            <span>Request Free Consultation</span>
-            <ArrowRight className="w-4 h-4" />
+            <span className="inline-flex items-center justify-center gap-2.5 whitespace-nowrap">
+              <MessageSquare className="w-4 h-4 sm:w-5 sm:h-5 shrink-0" />
+              <span className="text-sm sm:text-base font-bold">Request Free Consultation</span>
+              <ArrowRight className="w-4 h-4 shrink-0" />
+            </span>
           </Button>
 
           {/* Secondary CTA */}
@@ -95,10 +97,12 @@ const CTASection = () => {
             variant="outlineDark"
             size="lg"
             onClick={handlePhoneCall}
-            className="w-full sm:w-auto px-7 py-4 border-white/20 text-white hover:bg-white/8 rounded-xl font-bold flex items-center justify-center gap-2.5"
+            className="w-full sm:w-auto h-16 min-h-[64px] px-6 sm:px-8 border-white/20 text-white hover:bg-white/8 rounded-xl font-bold flex items-center justify-center [&>span]:inline-flex [&>span]:items-center [&>span]:justify-center [&>span]:gap-2.5"
           >
-            <Phone className="w-4 h-4" />
-            <span>Call Now</span>
+            <span className="inline-flex items-center justify-center gap-2.5 whitespace-nowrap">
+              <Phone className="w-4 h-4 sm:w-5 sm:h-5 shrink-0" />
+              <span className="text-sm sm:text-base font-bold">Call Now</span>
+            </span>
           </Button>
         </motion.div>
 
