@@ -617,9 +617,16 @@ const Contact = () => {
                   )}
                 </div>
 
-                <Button type="submit" variant="primary" className="w-full h-[52px] font-bold rounded-xl flex items-center justify-center gap-2 text-sm" disabled={submitting}>
-                  <Send className="w-4 h-4" />
-                  <span>{submitting ? 'Submitting...' : 'Submit Inquiry'}</span>
+                <Button
+                  type="submit"
+                  variant="primary"
+                  className="w-full h-[52px] font-bold rounded-xl flex items-center justify-center gap-2.5 text-sm shadow-md shadow-brand-primary/20 cursor-pointer [&>span]:inline-flex [&>span]:items-center [&>span]:justify-center [&>span]:gap-2.5 [&>span]:flex-row"
+                  disabled={submitting}
+                >
+                  <span className="inline-flex items-center justify-center gap-2.5 flex-row whitespace-nowrap">
+                    <Send className="w-4 h-4 shrink-0" />
+                    <span>{submitting ? 'Submitting...' : 'Submit Inquiry'}</span>
+                  </span>
                 </Button>
 
                 <p className="text-[10px] text-slate-400 text-center font-sans">
