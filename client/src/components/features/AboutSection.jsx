@@ -8,6 +8,10 @@ import Card from '../ui/Card';
 import Grid from '../ui/Grid';
 import Spacer from '../ui/Spacer';
 import { COMPANY_INFO } from '../../data/companyInfo';
+import BUSINESS from '../../config/business.js';
+
+const officeCityNames = COMPANY_INFO.officeCities;
+const officeCitySummary = `${officeCityNames.slice(0, -1).join(', ')} & ${officeCityNames[officeCityNames.length - 1]}`;
 
 const AboutSection = () => {
   return (
@@ -23,13 +27,13 @@ const AboutSection = () => {
           
           <div className="space-y-4">
             <Badge variant="light" className="bg-brand-bg text-brand-primary border-brand-primary/10 px-3 py-1 font-bold tracking-wider">
-              About Clear Filing
+              About {BUSINESS.primaryBrandName}
             </Badge>
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold font-heading text-brand-secondary leading-tight tracking-tight">
               Helping Businesses Grow with Confidence Since 2020
             </h2>
             <p className="text-slate-600 font-sans text-base leading-relaxed">
-              Clear Filing & Compliance LLP (brand name **ClearFiling**) is a premier CA, legal, and corporate compliance firm. We simplify the regulatory landscape for companies in India, enabling you to focus fully on operational growth.
+              {COMPANY_INFO.brandName} (also known as {COMPANY_INFO.alternateBrandName}), operated by {COMPANY_INFO.legalName}, is a premier CA, legal, and corporate compliance firm. We simplify the regulatory landscape for companies in India, enabling you to focus fully on operational growth.
             </p>
             <p className="text-slate-600 font-sans text-base leading-relaxed">
               By combining specialized professional expertise with a modern, tech-enabled document workflow, we complete registrations, tax returns, and licensing filings efficiently, transparently, and securely.
@@ -96,7 +100,7 @@ const AboutSection = () => {
                 <div className="text-[10px] text-slate-400 font-bold uppercase tracking-wider mt-1">Qualified Professionals</div>
               </div>
               <div className="p-4 bg-slate-50 rounded-xl border border-slate-100 col-span-2 sm:col-span-1">
-                <div className="text-sm font-black font-heading text-brand-primary leading-none mt-1.5">Delhi, Deoria & Gorakhpur</div>
+                <div className="text-sm font-black font-heading text-brand-primary leading-none mt-1.5">{officeCitySummary}</div>
                 <div className="text-[10px] text-slate-400 font-bold uppercase tracking-wider mt-2.5">Active Offices</div>
               </div>
             </div>

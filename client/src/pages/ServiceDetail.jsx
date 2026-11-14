@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useParams, Link, useNavigate } from 'react-router-dom';
+import { useParams, Link, Navigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { 
   Phone, 
@@ -23,6 +23,7 @@ import {
 } from 'lucide-react';
 
 import { SERVICES, ICON_MAP } from '../data/services';
+import { isServiceIndexable, getRedirectTarget } from '../data/serviceRegistry';
 import { sendInquiry } from '../services/emailService';
 import MaxWidthContainer from '../components/ui/MaxWidthContainer';
 import SectionContainer from '../components/ui/SectionContainer';
@@ -36,10 +37,11 @@ import Breadcrumbs from '../components/seo/Breadcrumbs';
 import SEOHead from '../components/seo/SEOHead';
 import JsonLd from '../components/seo/JsonLd';
 import { generateServiceSchema, generateFAQSchema } from '../components/seo/SchemaHelpers';
+import { getBreadcrumbSchema } from '../config/seo';
+import CONTACT from '../config/contact.js';
 
 const ServiceDetail = () => {
   const { slug } = useParams();
-  const navigate = useNavigate();
   const [activeFaq, setActiveFaq] = useState(null);
   
   // Lead Consultation Form State
@@ -60,51 +62,30 @@ const ServiceDetail = () => {
     setActiveFaq(null);
   }, [slug]);
 
+  // Redirect deprecated/consolidated slugs to canonical destination
+  const redirectTarget = getRedirectTarget(slug);
+  if (redirectTarget) {
+    return <Navigate to={redirectTarget} replace />;
+  }
+
   // Find target service
-  const service = SERVICES.find(s => s.slug === slug);
-  const LOAN_SLUGS = [
-    'personal-loan',
-    'home-loan',
-    'business-loan',
-    'msme-loan',
-    'startup-loan',
-    'working-capital-loan',
-    'education-loan',
-    'vehicle-loan',
-    'car-loan',
-    'bike-loan',
-    'gold-loan',
-    'loan-against-property',
-    'machinery-loan',
-    'equipment-finance',
-    'project-loan',
-    'cash-credit',
-    'overdraft-facility',
-    'professional-loan',
-    'commercial-vehicle-loan',
-    'construction-loan'
-  ];
+  const service = SERVICES.find((s) => s.slug === slug);
 
-  const activeSlugs = [
-    'private-limited-company',
-    'gst-registration',
-    'trademark-registration',
-    ...LOAN_SLUGS
-  ];
-
-  // Check if service is within active services, otherwise render NotFound / fallback
-  if (!service || !activeSlugs.includes(slug)) {
+  // Unknown service route fallback
+  if (!service) {
     return (
       <SectionContainer className="py-32 bg-white text-center min-h-[60vh] flex flex-col items-center justify-center">
         <SEOHead
-          title="Service Coming Soon | ClearFiling"
-          description="The page for this service is currently being drafted by our corporate advisory team."
-          canonical={`https://www.clearfiling.co.in/services/${slug}`}
+          title="Service Not Found | ClearFiling"
+          description="The requested service could not be found on ClearFiling."
+          noindex={true}
+          nofollow={false}
+          canonical={null}
         />
         <ShieldCheck className="w-16 h-16 text-slate-300 mb-6" />
-        <h1 className="text-3xl font-extrabold text-brand-secondary font-heading mb-4">Service Page Coming Soon</h1>
+        <h1 className="text-3xl font-extrabold text-brand-secondary font-heading mb-4">Service Not Found</h1>
         <p className="text-slate-500 max-w-md mx-auto mb-8 font-sans">
-          The page for this service is currently being drafted by our corporate advisory team. Please check back later.
+          The requested service page does not exist or may have moved. Browse all ClearFiling services below.
         </p>
         <Link to="/services">
           <Button variant="primary" className="font-bold flex items-center gap-2">
@@ -220,12 +201,12 @@ const ServiceDetail = () => {
   };
 
   const handlePhoneCall = () => {
-    window.location.href = 'tel:+919250201718';
+    window.location.href = CONTACT.mobile.href;
   };
 
   const handleWhatsApp = () => {
     const text = encodeURIComponent(`Hi ClearFiling, I would like to consult regarding ${service.title}.`);
-    window.open(`https://wa.me/919250201718?text=${text}`, '_blank');
+    window.open(`https://wa.me/${CONTACT.whatsapp.number}?text=${text}`, '_blank');
   };
 
   const scrollToSection = (id) => {
@@ -241,12 +222,239 @@ const ServiceDetail = () => {
     }
   };
 
+  // A service renders Coming Soon only if it is not indexable AND its detailed content has not been authored
+  const isComingSoon = !isServiceIndexable(service.slug) && !service.longDescription;
+
+  if (isComingSoon) {
+    return (
+      <div className="bg-brand-bg relative min-h-screen pt-24 font-sans text-left">
+        <SEOHead
+          title={`${service.title} | ClearFiling`}
+          description={service.metaDescription || service.shortDescription || service.description || `ClearFiling provides professional ${service.title} advisory and documentation support across India.`}
+          noindex={true}
+          nofollow={false}
+          canonical={null}
+        />
+
+        <MaxWidthContainer size="xl" className="px-4 md:px-8 py-4">
+          <Breadcrumbs items={[{ label: 'Services', to: '/services' }, { label: service.title }]} />
+        </MaxWidthContainer>
+
+        <SectionContainer bgType="default" animate={false} className="py-12 md:py-20 bg-brand-bg">
+          <MaxWidthContainer size="xl" className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center px-4 md:px-8">
+            <div className="lg:col-span-7 space-y-6">
+              <Badge variant="light" className="bg-brand-primary/5 text-brand-primary border-brand-primary/10 py-1.5 px-3 font-bold tracking-wider rounded-md text-xs">
+                {service.category}
+              </Badge>
+
+              <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold font-heading text-brand-secondary leading-tight tracking-tight">
+                {service.title}
+              </h1>
+
+              <p className="text-slate-600 text-base md:text-lg leading-relaxed font-sans max-w-2xl">
+                {service.shortDescription || service.description || `ClearFiling provides end-to-end consulting, legal advisory, and documentation support for ${service.title}.`}
+              </p>
+
+              <div className="p-4 bg-amber-50/70 border border-amber-200/60 rounded-xl text-amber-900 text-xs sm:text-sm leading-relaxed max-w-xl">
+                Our detailed self-service guide and online documentation portal for <strong>{service.title}</strong> is currently being prepared by our corporate compliance team. In the meantime, our experienced Chartered Accountants and corporate advisors are actively assisting clients with this service.
+              </div>
+
+              <div className="flex flex-wrap gap-3 pt-2">
+                <Button
+                  variant="outline"
+                  onClick={handlePhoneCall}
+                  className="py-3 px-4 border-slate-200 text-slate-700 bg-white text-sm font-bold rounded-xl flex items-center gap-1.5"
+                >
+                  <Phone className="w-4 h-4 text-brand-primary" />
+                  <span>Call {CONTACT.mobile.display}</span>
+                </Button>
+                <Button
+                  variant="outline"
+                  onClick={handleWhatsApp}
+                  className="py-3 px-4 border-slate-200 text-slate-700 bg-white text-sm font-bold rounded-xl flex items-center gap-1.5"
+                >
+                  <MessageSquare className="w-4 h-4 text-brand-success" />
+                  <span>WhatsApp Inquiry</span>
+                </Button>
+                <Link to="/services">
+                  <Button
+                    variant="outline"
+                    className="py-3 px-4 border-slate-200 text-slate-600 bg-white text-sm font-semibold rounded-xl flex items-center gap-1.5"
+                  >
+                    <ArrowLeft className="w-4 h-4" />
+                    <span>All Services</span>
+                  </Button>
+                </Link>
+              </div>
+            </div>
+
+            {/* Inquiry Form Column */}
+            <div id="lead-consultation-form" className="lg:col-span-5 w-full max-w-md mx-auto">
+              <Card className="bg-white border border-slate-200/80 shadow-[0_12px_40px_rgba(15,23,42,0.04)] rounded-2xl p-6 md:p-8 relative">
+                <div className="absolute top-0 left-0 right-0 h-[4px] bg-brand-primary" />
+                <div className="text-left mb-6 space-y-1">
+                  <span className="text-[10px] font-bold text-brand-accent uppercase tracking-widest flex items-center gap-1">
+                    <Sparkles className="w-3.5 h-3.5 text-brand-primary animate-pulse" />
+                    <span>Direct Consultation</span>
+                  </span>
+                  <h3 className="text-lg font-bold font-heading text-brand-secondary">Request Expert Consultation</h3>
+                  <p className="text-xs text-slate-400 font-sans">Speak directly with a compliance advisor about {service.title}.</p>
+                </div>
+
+                <form onSubmit={handleFormSubmit} className="space-y-4 text-left" noValidate>
+                  <div className="hidden" aria-hidden="true">
+                    <label htmlFor="service-hp-field-cs">Leave this empty</label>
+                    <input
+                      type="text"
+                      id="service-hp-field-cs"
+                      name="service-hp-field"
+                      tabIndex={-1}
+                      autoComplete="off"
+                      value={honeypot}
+                      onChange={(e) => setHoneypot(e.target.value)}
+                    />
+                  </div>
+
+                  {submitError && (
+                    <div
+                      className="p-3.5 bg-red-50 border border-red-200 text-red-600 text-xs font-semibold rounded-xl flex items-center gap-2"
+                      role="alert"
+                    >
+                      <AlertCircle className="w-4 h-4 flex-shrink-0" />
+                      <span>{submitError}</span>
+                    </div>
+                  )}
+
+                  <div className="space-y-1">
+                    <label htmlFor="cs-name" className="text-xs font-bold text-slate-500 uppercase tracking-wide">
+                      Full Name *
+                    </label>
+                    <input
+                      type="text"
+                      id="cs-name"
+                      name="name"
+                      required
+                      disabled={submitting}
+                      value={formData.name}
+                      onChange={handleFormChange}
+                      placeholder="Enter your name"
+                      className="w-full bg-slate-50 border border-slate-200 focus:border-brand-primary focus:ring-4 focus:ring-brand-primary/10 rounded-xl px-4 py-3 text-sm text-slate-800 outline-none transition-all placeholder-slate-400 disabled:opacity-60 disabled:cursor-not-allowed"
+                    />
+                  </div>
+
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div className="space-y-1">
+                      <label htmlFor="cs-phone" className="text-xs font-bold text-slate-500 uppercase tracking-wide">
+                        Phone Number *
+                      </label>
+                      <input
+                        type="tel"
+                        id="cs-phone"
+                        name="phone"
+                        required
+                        disabled={submitting}
+                        value={formData.phone}
+                        onChange={handleFormChange}
+                        placeholder="10-digit mobile"
+                        className="w-full bg-slate-50 border border-slate-200 focus:border-brand-primary focus:ring-4 focus:ring-brand-primary/10 rounded-xl px-4 py-3 text-sm text-slate-800 outline-none transition-all placeholder-slate-400 disabled:opacity-60 disabled:cursor-not-allowed"
+                      />
+                    </div>
+                    <div className="space-y-1">
+                      <label htmlFor="cs-email" className="text-xs font-bold text-slate-500 uppercase tracking-wide">
+                        Email Address
+                      </label>
+                      <input
+                        type="email"
+                        id="cs-email"
+                        name="email"
+                        disabled={submitting}
+                        value={formData.email}
+                        onChange={handleFormChange}
+                        placeholder="name@company.com"
+                        className="w-full bg-slate-50 border border-slate-200 focus:border-brand-primary focus:ring-4 focus:ring-brand-primary/10 rounded-xl px-4 py-3 text-sm text-slate-800 outline-none transition-all placeholder-slate-400 disabled:opacity-60 disabled:cursor-not-allowed"
+                      />
+                    </div>
+                  </div>
+
+                  <div className="space-y-1">
+                    <label htmlFor="cs-message" className="text-xs font-bold text-slate-500 uppercase tracking-wide">
+                      Your Requirement
+                    </label>
+                    <textarea
+                      id="cs-message"
+                      name="message"
+                      rows="3"
+                      disabled={submitting}
+                      value={formData.message}
+                      onChange={handleFormChange}
+                      placeholder={`e.g. Assistance needed with ${service.title}`}
+                      className="w-full bg-slate-50 border border-slate-200 focus:border-brand-primary focus:ring-4 focus:ring-brand-primary/10 rounded-xl px-4 py-3 text-sm text-slate-800 outline-none transition-all placeholder-slate-400 resize-none disabled:opacity-60 disabled:cursor-not-allowed"
+                    />
+                  </div>
+
+                  <Button
+                    type="submit"
+                    variant="primary"
+                    isDisabled={submitting}
+                    className="w-full flex items-center justify-center gap-2 py-3.5 font-bold rounded-xl shadow-md"
+                  >
+                    {submitting ? (
+                      <>
+                        <Loader2 className="w-4 h-4 animate-spin text-white" />
+                        <span>Submitting...</span>
+                      </>
+                    ) : (
+                      <>
+                        <Send className="w-4 h-4" />
+                        <span>Submit Consultation Request</span>
+                      </>
+                    )}
+                  </Button>
+                </form>
+
+                <AnimatePresence>
+                  {formSubmitted && (
+                    <motion.div
+                      initial={{ opacity: 0, y: 10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: 10 }}
+                      role="status"
+                      aria-live="polite"
+                      className="absolute inset-0 bg-white/95 rounded-2xl flex flex-col items-center justify-center p-6 text-center z-10"
+                    >
+                      <div className="p-3 bg-brand-success/15 text-brand-success rounded-full mb-4">
+                        <Check className="w-8 h-8" />
+                      </div>
+                      <h3 className="text-base font-extrabold text-brand-secondary font-heading">Inquiry Submitted Successfully</h3>
+                      <p className="text-xs text-slate-500 font-sans mt-2 max-w-xs">
+                        Thank you! Our senior advisors will contact you shortly regarding {service.title}.
+                      </p>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </Card>
+            </div>
+          </MaxWidthContainer>
+        </SectionContainer>
+      </div>
+    );
+  }
+
   // SEO schemas
   const serviceSchema = generateServiceSchema(service);
   const faqs = service.faqs || service.faqReference;
   const faqSchema = generateFAQSchema(faqs);
+  const breadcrumbSchema = getBreadcrumbSchema([
+    { name: 'Services', path: '/services' },
+    { name: service.title, path: `/services/${service.slug}` },
+  ]);
 
   const ServiceIcon = ICON_MAP[service.iconName] || FileText;
+
+  const isIndexable = isServiceIndexable(service.slug);
+  const canonicalUrl = isIndexable
+    ? (service.canonicalSlug || `https://www.clearfiling.co.in/services/${service.slug}`)
+    : null;
 
   return (
     <div className="bg-brand-bg relative min-h-screen pt-24 font-sans text-left">
@@ -254,13 +462,16 @@ const ServiceDetail = () => {
       <SEOHead
         title={service.metaTitle || `${service.title} | ClearFiling`}
         description={service.metaDescription || service.description || service.shortDescription}
-        canonical={service.canonicalSlug || `https://www.clearfiling.co.in/services/${service.slug}`}
+        canonical={canonicalUrl}
         keywords={Array.isArray(service.keywords) ? service.keywords.join(', ') : service.keywords}
+        noindex={!isIndexable}
+        nofollow={false}
       />
 
       {/* Dynamic JSON-LD Schemas */}
+      <JsonLd schema={breadcrumbSchema} />
       <JsonLd schema={serviceSchema} />
-      <JsonLd schema={faqSchema} />
+      {faqSchema && <JsonLd schema={faqSchema} />}
 
       {/* 1. Breadcrumbs Navigation */}
       <MaxWidthContainer size="xl" className="px-4 md:px-8 py-4">
@@ -297,7 +508,11 @@ const ServiceDetail = () => {
               </div>
               <div className="flex items-center gap-2 text-xs font-semibold text-slate-700 bg-white border border-slate-200/60 px-3.5 py-2 rounded-xl shadow-sm">
                 <ShieldCheck className="w-4 h-4 text-brand-primary flex-shrink-0" />
-                <span>CA & CS Verified Approval</span>
+                <span>
+                  {service.category === 'Loan Services'
+                    ? 'Financial Documentation & Advisory Support'
+                    : 'CA & CS Verified Approval'}
+                </span>
               </div>
             </div>
 
@@ -747,11 +962,14 @@ const ServiceDetail = () => {
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-left">
               {service.relatedServices.map((rel) => {
                 // Try finding matches to extract descriptors, or use generic
-                const detail = SERVICES.find(s => s.id === rel.id) || rel;
+                const detail = SERVICES.find((s) => s.id === rel.id || s.slug === rel.id || s.slug === rel.slug) || rel;
+                const rawSlug = detail.slug || detail.id;
+                const targetSlug = getRedirectTarget(rawSlug) || rawSlug;
+                const isTargetActive = isServiceIndexable(targetSlug);
                 return (
                   <Link 
-                    key={rel.id} 
-                    to={activeSlugs.includes(detail.slug) ? `/services/${detail.slug}` : '/services'}
+                    key={rel.id || rel.slug || rel.title} 
+                    to={isTargetActive ? `/services/${targetSlug}` : '/services'}
                     className="block group"
                   >
                     <Card
@@ -809,7 +1027,7 @@ const ServiceDetail = () => {
               className="px-6 py-3.5 border-white/20 hover:border-white/40 hover:bg-white/5 rounded-xl font-bold flex items-center justify-center gap-2"
             >
               <Phone className="w-4 h-4 text-white" />
-              <span>Call +91 9250201718</span>
+              <span>Call {CONTACT.mobile.display}</span>
             </Button>
             <Button
               variant="primary"

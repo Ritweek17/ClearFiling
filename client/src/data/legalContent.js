@@ -3,6 +3,17 @@
  * Centralized content for Privacy Policy, Terms & Conditions, and Disclaimer.
  * LegalPageLayout renders these data objects. Update here to change content.
  */
+import BUSINESS from '../config/business.js';
+import CONTACT from '../config/contact.js';
+import OFFICE_LOCATIONS from './officeLocations.js';
+
+const WEBSITE_DOMAIN = new URL(BUSINESS.websiteUrl).hostname.replace(/^www\./, '');
+
+const LEGAL_CONTACT_LINES = [
+  `Email: ${CONTACT.email.display} / ${CONTACT.email2.display}`,
+  `Phone: ${CONTACT.mobile.display} | Landline: ${CONTACT.landline.display} | Gorakhpur: ${CONTACT.gorakhpur.display}`,
+  ...OFFICE_LOCATIONS.map((office) => `${office.label.replace(' Office', '')} Office: ${office.legalAddress}`),
+];
 
 // ─── PRIVACY POLICY ───────────────────────────────────────────────────────────
 export const PRIVACY_POLICY = {
@@ -10,9 +21,9 @@ export const PRIVACY_POLICY = {
   badge: 'Legal Document',
   lastUpdated: '1 July 2026',
   effectiveDate: '1 July 2026',
-  metaTitle: 'Privacy Policy | ClearFiling & Compliance LLP',
-  metaDescription: 'Read the ClearFiling privacy policy to understand how we collect, use, and protect your personal information.',
-  intro: 'ClearFiling & Compliance LLP ("ClearFiling", "we", "our", or "us") is committed to protecting your privacy. This Privacy Policy explains how we collect, use, disclose, and safeguard your personal information when you visit our website clearfiling.co.in or engage with our services. Please read this policy carefully. By using this website, you agree to the terms described herein.',
+  metaTitle: `Privacy Policy | ${BUSINESS.legalName}`,
+  metaDescription: `Read the ${BUSINESS.primaryBrandName} privacy policy to understand how we collect, use, and protect your personal information.`,
+  intro: `${BUSINESS.legalName} ("${BUSINESS.primaryBrandName}", "we", "our", or "us") is committed to protecting your privacy. This Privacy Policy explains how we collect, use, disclose, and safeguard your personal information when you visit our website ${WEBSITE_DOMAIN} or engage with our services. Please read this policy carefully. By using this website, you agree to the terms described herein.`,
   sections: [
     {
       heading: 'Information We Collect',
@@ -32,7 +43,7 @@ export const PRIVACY_POLICY = {
     {
       heading: 'Information Sharing & Disclosure',
       content: [
-        'ClearFiling does not sell, rent, trade, or otherwise transfer your personal information to third parties without your consent, except in the following limited circumstances:',
+        `${BUSINESS.primaryBrandName} does not sell, rent, trade, or otherwise transfer your personal information to third parties without your consent, except in the following limited circumstances:`,
         ['With government portals or regulatory bodies as required by law to deliver our services (e.g., filing documents with MCA, GST portal, IP India)', 'With qualified professional associates bound by confidentiality obligations', 'Where required by a court order or applicable law in India'],
       ],
     },
@@ -65,7 +76,7 @@ export const PRIVACY_POLICY = {
     {
       heading: 'Your Rights',
       content: [
-        'You have the right to access, correct, or request deletion of your personal information held by us. To exercise any of these rights, please contact us at clearfiling@zohomail.in or support.clearfiling@gmail.com or call us at +91 9250201718. We will respond to your request within a reasonable timeframe.',
+        `You have the right to access, correct, or request deletion of your personal information held by us. To exercise any of these rights, please contact us at ${CONTACT.email.display} or ${CONTACT.email2.display} or call us at ${CONTACT.mobile.display}. We will respond to your request within a reasonable timeframe.`,
       ],
     },
     {
@@ -84,7 +95,7 @@ export const PRIVACY_POLICY = {
       heading: 'Contact Us',
       content: [
         'If you have any questions, concerns, or requests regarding this Privacy Policy, please contact us:',
-        ['Email: clearfiling@zohomail.in / support.clearfiling@gmail.com', 'Phone: +91 9250201718 | Landline: 05568-450351 | Gorakhpur: +91 9336379826', 'Delhi Office: E-20, Lajpat Nagar III, New Delhi – 110024', 'Deoria Office: Asha Complex, 30 Feet Road, Near Nahar, Bhikhampur Road, Deoria, Uttar Pradesh – 274001', 'Gorakhpur Office: 100D, Surajkund Colony, Gorakhpur, Uttar Pradesh – 273015'],
+        LEGAL_CONTACT_LINES,
       ],
     },
   ],
@@ -96,14 +107,14 @@ export const TERMS_CONDITIONS = {
   badge: 'Legal Document',
   lastUpdated: '1 July 2026',
   effectiveDate: '1 July 2026',
-  metaTitle: 'Terms & Conditions | ClearFiling & Compliance LLP',
-  metaDescription: 'Review the terms and conditions governing the use of ClearFiling services and this website.',
-  intro: 'These Terms & Conditions ("Terms") govern your access to and use of the website clearfiling.co.in and the professional advisory and compliance services provided by ClearFiling & Compliance LLP. By accessing this website or engaging our services, you agree to be bound by these Terms. If you do not agree, please do not use this website.',
+  metaTitle: `Terms & Conditions | ${BUSINESS.legalName}`,
+  metaDescription: `Review the terms and conditions governing the use of ${BUSINESS.primaryBrandName} services and this website.`,
+  intro: `These Terms & Conditions ("Terms") govern your access to and use of the website ${WEBSITE_DOMAIN} and the professional advisory and compliance services provided by ${BUSINESS.legalName}. By accessing this website or engaging our services, you agree to be bound by these Terms. If you do not agree, please do not use this website.`,
   sections: [
     {
       heading: 'Services Offered',
       content: [
-        'ClearFiling & Compliance LLP provides professional advisory and facilitation services in the following areas:',
+        `${BUSINESS.legalName} provides professional advisory and facilitation services in the following areas:`,
         ['Company and business entity registration', 'GST registration and return filing', 'Trademark and intellectual property filing', 'Income tax return preparation and filing', 'Annual ROC compliance and secretarial services', 'MSME, FSSAI, IEC and other government registrations', 'Business advisory and legal documentation'],
         'We act as facilitators and professional advisors. We do not provide legal representation in courts of law.',
       ],
@@ -112,7 +123,7 @@ export const TERMS_CONDITIONS = {
       heading: 'Professional Responsibility',
       content: [
         'All services are delivered by qualified Chartered Accountants (CAs), Company Secretaries (CSs), and legal professionals registered under the relevant Indian professional bodies. Our advice is based on current laws and regulations at the time of engagement.',
-        'Laws and government regulations change frequently. Clients are advised to seek updated advice for their specific situations. ClearFiling shall not be liable for changes in law that occur after the date of the advice provided.',
+        `Laws and government regulations change frequently. Clients are advised to seek updated advice for their specific situations. ${BUSINESS.primaryBrandName} shall not be liable for changes in law that occur after the date of the advice provided.`,
       ],
     },
     {
@@ -127,25 +138,25 @@ export const TERMS_CONDITIONS = {
       content: [
         'Service fees are communicated upfront during the free consultation phase. Government fees, stamp duties, and statutory charges are additional and billed at actuals.',
         'Fees once paid for professional services rendered are non-refundable unless the service has not been initiated. Refund requests must be made in writing within 48 hours of payment.',
-        'ClearFiling reserves the right to revise service fees with notice. Existing engagement fees are not affected retroactively.',
+        `${BUSINESS.primaryBrandName} reserves the right to revise service fees with notice. Existing engagement fees are not affected retroactively.`,
       ],
     },
     {
       heading: 'Timelines & Delays',
       content: [
-        'Processing timelines provided are indicative estimates based on normal government processing speeds. ClearFiling is not responsible for delays caused by government processing backlogs, technical issues on government portals, or failure by the client to provide required documents on time.',
+        `Processing timelines provided are indicative estimates based on normal government processing speeds. ${BUSINESS.primaryBrandName} is not responsible for delays caused by government processing backlogs, technical issues on government portals, or failure by the client to provide required documents on time.`,
       ],
     },
     {
       heading: 'Intellectual Property',
       content: [
-        'All content on this website, including text, graphics, logos, images, and downloadable materials, is the intellectual property of ClearFiling & Compliance LLP unless otherwise stated. You may not copy, reproduce, distribute, or create derivative works without our prior written consent.',
+        `All content on this website, including text, graphics, logos, images, and downloadable materials, is the intellectual property of ${BUSINESS.legalName} unless otherwise stated. You may not copy, reproduce, distribute, or create derivative works without our prior written consent.`,
       ],
     },
     {
       heading: 'Limitation of Liability',
       content: [
-        'ClearFiling\'s liability in connection with any service shall not exceed the fees paid by the client for that specific service. We shall not be liable for any indirect, consequential, or punitive damages arising from the use of this website or our services.',
+        `${BUSINESS.primaryBrandName}'s liability in connection with any service shall not exceed the fees paid by the client for that specific service. We shall not be liable for any indirect, consequential, or punitive damages arising from the use of this website or our services.`,
       ],
     },
     {
@@ -169,7 +180,7 @@ export const TERMS_CONDITIONS = {
     {
       heading: 'Contact for Legal Queries',
       content: [
-        ['Email: clearfiling@zohomail.in / support.clearfiling@gmail.com', 'Phone: +91 9250201718 | Landline: 05568-450351 | Gorakhpur: +91 9336379826', 'Delhi Office: E-20, Lajpat Nagar III, New Delhi – 110024', 'Deoria Office: Asha Complex, 30 Feet Road, Near Nahar, Bhikhampur Road, Deoria, Uttar Pradesh – 274001', 'Gorakhpur Office: 100D, Surajkund Colony, Gorakhpur, Uttar Pradesh – 273015'],
+        LEGAL_CONTACT_LINES,
       ],
     },
   ],
@@ -181,9 +192,9 @@ export const DISCLAIMER = {
   badge: 'Legal Notice',
   lastUpdated: '1 July 2026',
   effectiveDate: '1 July 2026',
-  metaTitle: 'Disclaimer | ClearFiling & Compliance LLP',
-  metaDescription: 'Read the ClearFiling legal disclaimer covering professional advisory limitations and website content usage.',
-  intro: 'The information provided on this website (clearfiling.co.in) and by ClearFiling & Compliance LLP is for general informational and educational purposes only. It does not constitute formal legal, tax, or financial advice. Please read this disclaimer carefully before relying on any content from this website.',
+  metaTitle: `Disclaimer | ${BUSINESS.legalName}`,
+  metaDescription: `Read the ${BUSINESS.primaryBrandName} legal disclaimer covering professional advisory limitations and website content usage.`,
+  intro: `The information provided on this website (${WEBSITE_DOMAIN}) and by ${BUSINESS.legalName} is for general informational and educational purposes only. It does not constitute formal legal, tax, or financial advice. Please read this disclaimer carefully before relying on any content from this website.`,
   sections: [
     {
       heading: 'Not a Substitute for Professional Advice',
@@ -195,7 +206,7 @@ export const DISCLAIMER = {
     {
       heading: 'Accuracy of Information',
       content: [
-        'We make every reasonable effort to ensure that the information on this website is accurate and up to date. However, laws, regulations, and government procedures in India change frequently. ClearFiling does not warrant that all information on this website is complete, accurate, or current at the time of your reading.',
+        `We make every reasonable effort to ensure that the information on this website is accurate and up to date. However, laws, regulations, and government procedures in India change frequently. ${BUSINESS.primaryBrandName} does not warrant that all information on this website is complete, accurate, or current at the time of your reading.`,
         'Users are advised to independently verify critical regulatory information from official government sources such as MCA21, the GST Portal, IP India, and the Income Tax Department website.',
       ],
     },
@@ -208,13 +219,13 @@ export const DISCLAIMER = {
     {
       heading: 'Government Portal Dependencies',
       content: [
-        'ClearFiling provides facilitation and advisory services for government registrations. Processing timelines and outcomes depend on government portals, regulatory authorities, and applicable laws — all of which are beyond our control. We do not guarantee specific approval outcomes.',
+        `${BUSINESS.primaryBrandName} provides facilitation and advisory services for government registrations. Processing timelines and outcomes depend on government portals, regulatory authorities, and applicable laws — all of which are beyond our control. We do not guarantee specific approval outcomes.`,
       ],
     },
     {
       heading: 'External Links',
       content: [
-        'This website may link to external government portals, third-party resources, or reference materials for your convenience. ClearFiling does not endorse, verify, or take responsibility for the content or policies of any external websites.',
+        `This website may link to external government portals, third-party resources, or reference materials for your convenience. ${BUSINESS.primaryBrandName} does not endorse, verify, or take responsibility for the content or policies of any external websites.`,
       ],
     },
     {
@@ -226,7 +237,7 @@ export const DISCLAIMER = {
     {
       heading: 'Limitation of Liability',
       content: [
-        'ClearFiling & Compliance LLP, its partners, employees, and associates shall not be held liable for any loss, damage, or harm arising directly or indirectly from the use of information published on this website or from reliance on any content herein without independent professional verification.',
+        `${BUSINESS.legalName}, its partners, employees, and associates shall not be held liable for any loss, damage, or harm arising directly or indirectly from the use of information published on this website or from reliance on any content herein without independent professional verification.`,
       ],
     },
     {

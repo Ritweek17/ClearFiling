@@ -1,9 +1,25 @@
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
+import { renderRouteSeoTags } from './src/utils/routeSeo.js';
+
+const businessSeoMetadata = () => ({
+  name: 'clearfiling-business-seo-metadata',
+  transformIndexHtml: {
+    order: 'pre',
+    handler(html, context) {
+      const route = context?.path && context.path !== '/index.html' ? context.path : '/';
+      const tags = renderRouteSeoTags(route);
+      return html.replace(
+        /<!--clearfiling-seo:start-->[\s\S]*?<!--clearfiling-seo:end-->/,
+        `<!--clearfiling-seo:start-->\n    ${tags}\n    <!--clearfiling-seo:end-->`,
+      );
+    },
+  },
+});
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [react()],
+  plugins: [react(), businessSeoMetadata()],
   server: {
     port: 5173,
     proxy: {

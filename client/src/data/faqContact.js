@@ -3,12 +3,17 @@
  * Update this file to add, remove, or edit FAQs. Components never need editing.
  */
 
+import CONTACT from '../config/contact.js';
+import OFFICE_LOCATIONS from './officeLocations.js';
+
+const officeCities = OFFICE_LOCATIONS.map(({ city }) => city).join(', ');
+
 const FAQ_CONTACT = [
   {
     id: 'response-time',
     question: 'How quickly will I receive a response to my inquiry?',
     answer:
-      'We respond to WhatsApp inquiries within 30 minutes during business hours. Email and other inquiries are answered within 2–4 business hours during office hours (9 AM – 9 PM, 7 days a week). Phone and landline calls are answered immediately during working hours.',
+      `We respond to WhatsApp inquiries ${CONTACT.responseCopy.whatsappDuringHours}. Email and other inquiries are answered ${CONTACT.responseCopy.inquiries} during office hours (${CONTACT.hours.faqLong}). Phone and landline calls are answered immediately during working hours.`,
   },
   {
     id: 'visit-office',
@@ -26,7 +31,7 @@ const FAQ_CONTACT = [
     id: 'areas-served',
     question: 'What areas and states do you serve?',
     answer:
-      'Clear Filing serves clients across all states and union territories of India. Our primary offices are in New Delhi, Deoria, and Gorakhpur (Uttar Pradesh), but we operate digitally nationwide. Clients from Mumbai, Bangalore, Chennai, Hyderabad, and other cities regularly engage our services.',
+      `ClearFiling (also known as Clear Filing) serves clients across all states and union territories of India. Our primary offices are in ${officeCities} (Uttar Pradesh), but we operate digitally nationwide. Clients from Mumbai, Bangalore, Chennai, Hyderabad, and other cities regularly engage our services.`,
   },
   {
     id: 'urgent',

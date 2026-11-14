@@ -29,7 +29,7 @@ const CONTACT = {
   // WhatsApp
   whatsapp: {
     number: '919250201718',
-    defaultMessage: 'Hi Clear Filing, I need compliance assistance for my business.',
+    defaultMessage: 'Hi ClearFiling, I need compliance assistance for my business.',
     get href() {
       return `https://wa.me/${this.number}?text=${encodeURIComponent(this.defaultMessage)}`;
     },
@@ -51,12 +51,24 @@ const CONTACT = {
     display: '9:00 AM – 9:00 PM',
     note: 'Open 7 Days a Week',
     full: '9:00 AM – 9:00 PM, Monday to Sunday',
+    // Existing wording used in public FAQs and SEO copy.
+    faqShort: '9 AM – 9 PM, 7 days',
+    faqLong: '9 AM – 9 PM, 7 days a week',
+    companyInfoDisplay: '9:00 AM – 9:00 PM, Open 7 Days',
+    schema: 'Mo-Su 09:00-21:00',
   },
 
   // Response SLA
   responseSLA: '2–4 business hours',
   whatsappSLA: 'Within 30 minutes',
   otherSLA: '2–4 business hours',
+  responseCopy: {
+    whatsappDuringHours: 'within 30 minutes during business hours',
+    inquiries: 'within 2–4 business hours',
+    typical: 'Response within 2–4 business hours',
+    badge: 'Response in 2–4 Hours',
+    cta: 'typically replied within 30 minutes during business hours',
+  },
 };
 
 export default CONTACT;

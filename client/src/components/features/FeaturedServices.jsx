@@ -27,22 +27,25 @@ import MaxWidthContainer from '../ui/MaxWidthContainer';
 import SectionContainer from '../ui/SectionContainer';
 import SectionHeading from '../ui/SectionHeading';
 import Spacer from '../ui/Spacer';
+import CONTACT from '../../config/contact.js';
 
 // SEO Helpers
 import JsonLd from '../seo/JsonLd';
 import { generateServiceSchema, generateFAQSchema } from '../seo/SchemaHelpers';
 
-// Precompute lowercase search text for all services once at module initialization
-const SERVICES_SEARCH_CACHE = SERVICES.map(s => ({
-  service: s,
-  searchText: [
-    s.title.toLowerCase(),
-    s.category.toLowerCase(),
-    (s.subtitle || '').toLowerCase(),
-    s.description.toLowerCase(),
-    ...(s.keywords || []).map(k => (typeof k === 'string' ? k.toLowerCase() : ''))
-  ].join(' ')
-}));
+// Precompute lowercase search text for all canonical services once at module initialization
+const SERVICES_SEARCH_CACHE = SERVICES
+  .filter(s => !s.redirectTo)
+  .map(s => ({
+    service: s,
+    searchText: [
+      s.title.toLowerCase(),
+      s.category.toLowerCase(),
+      (s.subtitle || '').toLowerCase(),
+      s.description.toLowerCase(),
+      ...(s.keywords || []).map(k => (typeof k === 'string' ? k.toLowerCase() : ''))
+    ].join(' ')
+  }));
 
 const FeaturedServices = () => {
   const [activeCategory, setActiveCategory] = useState('All');
@@ -93,10 +96,15 @@ const FeaturedServices = () => {
     
     // Filter by Category Chip
     if (activeCategory !== 'All') {
-      candidates = candidates.filter(item => item.service.category === activeCategory);
+      candidates = candidates.filter(
+        item =>
+          item.service.category === activeCategory ||
+          (Array.isArray(item.service.secondaryCategories) &&
+            item.service.secondaryCategories.includes(activeCategory))
+      );
     } else if (searchQuery.trim() === '') {
       // Default view when 'All' is selected and no search query: show only featured services
-      return SERVICES.filter(s => s.featured);
+      return SERVICES.filter(s => !s.redirectTo && s.featured);
     }
     
     // Fuzzy Query match
@@ -165,7 +173,7 @@ const FeaturedServices = () => {
       suggestionsList.push({ type: 'Consultant', label: 'Consult with Company Secretary (CS)', id: 'cs' });
     }
 
-    SERVICES.forEach(s => {
+    SERVICES.filter(s => !s.redirectTo).forEach(s => {
       if (s.title.toLowerCase().includes(q)) {
         suggestionsList.push({ type: 'Service', label: s.title, id: s.id });
       }
@@ -207,7 +215,7 @@ const FeaturedServices = () => {
   };
 
   const handlePhoneCall = () => {
-    window.location.href = 'tel:+919250201718';
+    window.location.href = CONTACT.mobile.href;
   };
 
   const handleWhatsApp = (serviceTitle = '') => {
@@ -216,12 +224,12 @@ const FeaturedServices = () => {
         ? `Hi ClearFiling, I'm interested in ${serviceTitle} service. Please guide me.`
         : "Hi ClearFiling, I'd like to get a free consultation for corporate advisory and filings."
     );
-    window.open(`https://wa.me/919250201718?text=${text}`, '_blank');
+    window.open(`https://wa.me/${CONTACT.whatsapp.number}?text=${text}`, '_blank');
   };
 
   const handleWhatsAppConsultant = (whatsappText) => {
     const text = encodeURIComponent(whatsappText);
-    window.open(`https://wa.me/919250201718?text=${text}`, '_blank');
+    window.open(`https://wa.me/${CONTACT.whatsapp.number}?text=${text}`, '_blank');
   };
 
   const handleConsultation = () => {
@@ -835,7 +843,7 @@ const FeaturedServices = () => {
                 onClick={handlePhoneCall}
                 className="px-6 py-3.5 font-bold border-white/20 hover:border-white/40 hover:bg-white/5 rounded-xl transition-all"
               >
-                Call +91 9250201718
+                Call {CONTACT.mobile.display}
               </Button>
               <Button
                 variant="primary"

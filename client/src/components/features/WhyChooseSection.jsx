@@ -8,6 +8,7 @@ import SectionContainer from '../ui/SectionContainer';
 import MaxWidthContainer from '../ui/MaxWidthContainer';
 import Badge from '../ui/Badge';
 import Card from '../ui/Card';
+import BUSINESS from '../../config/business.js';
 
 const WHY_CHOOSE_ITEMS = [
   {
@@ -56,7 +57,7 @@ const WHY_CHOOSE_ITEMS = [
     icon: Star,
     title: 'Trusted Since 2020',
     description:
-      'Built on the values of integrity, sincerity, and dedication — ClearFiling has earned a reputation as one of the most reliable compliance LLPs in North India.',
+      `Built on the values of integrity, sincerity, and dedication — ${BUSINESS.primaryBrandName} has earned a reputation as one of the most reliable compliance LLPs in North India.`,
   },
 ];
 
@@ -109,10 +110,10 @@ const WhyChooseSection = () => {
         {/* Section Header */}
         <div className="text-center space-y-4 max-w-2xl mx-auto">
           <Badge variant="light" className="font-bold tracking-wider text-[10px] py-1 px-3.5">
-            Why ClearFiling
+            Why {BUSINESS.primaryBrandName}
           </Badge>
           <h2 className="text-3xl sm:text-4xl font-extrabold font-heading text-brand-secondary tracking-tight leading-tight">
-            Why Businesses Choose ClearFiling
+            Why Businesses Choose {BUSINESS.primaryBrandName}
           </h2>
           <p className="text-slate-500 font-sans text-base leading-relaxed">
             We combine deep professional expertise with a transparent, client-first approach to deliver compliance outcomes that truly support your growth.

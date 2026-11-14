@@ -29,6 +29,7 @@ import {
   FOOTER_RESOURCES,
   FOOTER_LEGAL,
 } from '../../data/footerConfig';
+import { isServiceIndexable } from '../../data/serviceRegistry';
 
 // ─── Icon map for social media (only icons used in footerConfig) ──────────────
 const SOCIAL_ICON_MAP = { Facebook, Instagram };
@@ -66,10 +67,11 @@ const FooterNavLink = ({ label, to, section, slug, title }) => {
 
   // Service page link
   if (slug) {
+    const isIndexable = isServiceIndexable(slug);
     return (
       <li>
         <Link
-          to={`/services/${slug}`}
+          to={isIndexable ? `/services/${slug}` : '/services'}
           className={baseClass}
           title={title || label}
         >
@@ -161,7 +163,7 @@ const SocialButton = ({ href, icon: iconName, label }) => {
   return (
     <a
       href={href}
-      aria-label={`Follow ClearFiling on ${label}`}
+      aria-label={`Follow ${FOOTER_COMPANY.brandName} on ${label}`}
       target="_blank"
       rel="noopener noreferrer"
       className="w-8 h-8 rounded-lg bg-slate-800 border border-slate-700/60 hover:bg-brand-primary hover:border-brand-primary flex items-center justify-center text-slate-400 hover:text-white transition-all duration-200"
@@ -179,20 +181,14 @@ const Footer = () => {
   return (
     <footer
       className="bg-brand-secondary text-slate-400 border-t border-slate-800"
-      aria-label="ClearFiling site footer"
-      itemScope
-      itemType="https://schema.org/WPFooter"
+      aria-label={`${FOOTER_COMPANY.brandName} site footer`}
     >
       {/* ── Main Grid ── */}
       <div className="max-w-screen-xl mx-auto px-4 md:px-8 py-14 md:py-16">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-12 gap-10 lg:gap-12">
 
           {/* ── Col 1: Company info + Contact + Social (spans 3 of 12) ── */}
-          <div
-            className="sm:col-span-2 lg:col-span-3 space-y-6"
-            itemScope
-            itemType="https://schema.org/Organization"
-          >
+          <div className="sm:col-span-2 lg:col-span-3 space-y-6">
             {/* Brand */}
             <div>
               <Link
@@ -207,10 +203,7 @@ const Footer = () => {
                   <span className="text-white font-black text-sm font-heading">CF</span>
                 </div>
                 <div>
-                  <div
-                    className="text-white font-extrabold text-base font-heading leading-none"
-                    itemProp="name"
-                  >
+                  <div className="text-white font-extrabold text-base font-heading leading-none">
                     {FOOTER_COMPANY.brandName}
                   </div>
                   <div className="text-[9px] text-slate-500 uppercase tracking-widest mt-0.5">
@@ -226,25 +219,17 @@ const Footer = () => {
             </p>
 
             {/* Description */}
-            <p
-              className="text-xs text-slate-400 font-sans leading-relaxed"
-              itemProp="description"
-            >
+            <p className="text-xs text-slate-400 font-sans leading-relaxed">
               {FOOTER_COMPANY.description}
             </p>
 
             {/* Contact Methods */}
-            <div
-              className="space-y-2.5"
-              itemScope
-              itemType="https://schema.org/ContactPoint"
-            >
+            <div className="space-y-2.5">
               {/* Mobile */}
               <a
                 href={FOOTER_CONTACT.mobile.href}
                 className="flex items-center gap-2.5 text-xs text-slate-300 hover:text-white transition-colors group"
                 aria-label={`Call us: ${FOOTER_CONTACT.mobile.display}`}
-                itemProp="telephone"
               >
                 <div className="w-7 h-7 rounded-lg bg-slate-800 border border-slate-700/60 group-hover:bg-brand-primary group-hover:border-brand-primary flex items-center justify-center transition-all duration-200">
                   <Phone className="w-3 h-3" aria-hidden="true" />
@@ -291,7 +276,6 @@ const Footer = () => {
                         href={emailObj.href}
                         className="hover:text-white transition-colors block"
                         aria-label={`Email us at ${emailObj.display}`}
-                        itemProp="email"
                       >
                         {emailObj.display}
                       </a>
@@ -301,7 +285,6 @@ const Footer = () => {
                       href={FOOTER_CONTACT.email.href}
                       className="hover:text-white transition-colors block"
                       aria-label={`Email us at ${FOOTER_CONTACT.email.display}`}
-                      itemProp="email"
                     >
                       {FOOTER_CONTACT.email.display}
                     </a>
@@ -381,8 +364,6 @@ const Footer = () => {
                   <address
                     key={office.id}
                     className="not-italic space-y-1"
-                    itemScope
-                    itemType="https://schema.org/PostalAddress"
                   >
                     <div className="text-[10px] font-bold text-brand-primary uppercase tracking-widest">
                       {office.label}
@@ -392,7 +373,7 @@ const Footer = () => {
                         className="w-3 h-3 text-slate-500 mt-0.5 flex-shrink-0"
                         aria-hidden="true"
                       />
-                      <div className="text-xs text-slate-400 font-sans leading-relaxed" itemProp="streetAddress">
+                      <div className="text-xs text-slate-400 font-sans leading-relaxed">
                         {office.lines.map((line, i) => (
                           <span key={i} className="block">{line}</span>
                         ))}
@@ -430,7 +411,7 @@ const Footer = () => {
         <div className="max-w-screen-xl mx-auto px-4 md:px-8 py-4 md:py-5 flex flex-col sm:flex-row items-center justify-between gap-3">
           <p className="text-[11px] text-slate-500 font-sans text-center sm:text-left">
             © {currentYear}{' '}
-            <span itemProp="legalName">{FOOTER_COMPANY.legalName}</span>. All Rights Reserved.
+            <span>{FOOTER_COMPANY.legalName}</span>. All Rights Reserved.
             &nbsp;Est. {FOOTER_COMPANY.established}.
           </p>
 

@@ -1,11 +1,12 @@
 import { useEffect } from 'react';
+import { SEO_BASE } from '../../config/seo.js';
 
-const DEFAULT_TITLE = 'ClearFiling | Premium Business Registration & Tax Compliance India';
-const DEFAULT_DESCRIPTION = 'ClearFiling provides professional corporate compliance, tax filing, GST registration, company incorporation, and financial advisory services in India.';
-const DEFAULT_CANONICAL = 'https://www.clearfiling.co.in/';
-const DEFAULT_KEYWORDS = 'company registration, GST filing, ITR filing, trademark registration, business consultancy India, ClearFiling';
-const DEFAULT_SITE_NAME = 'Clear Filing & Compliance LLP';
-const DEFAULT_LOCALE = 'en_IN';
+const DEFAULT_TITLE = SEO_BASE.defaultTitle;
+const DEFAULT_DESCRIPTION = SEO_BASE.defaultDescription;
+const DEFAULT_CANONICAL = SEO_BASE.siteUrl;
+const DEFAULT_KEYWORDS = SEO_BASE.defaultKeywords;
+const DEFAULT_SITE_NAME = SEO_BASE.siteName;
+const DEFAULT_LOCALE = SEO_BASE.locale;
 
 // Helper to set or update meta tag, cleaning up any duplicate tags
 const setMeta = (attr, key, content) => {
@@ -73,6 +74,7 @@ const SEOHead = ({
   ogImage,
   keywords,
   noindex = false,
+  nofollow = false,
 }) => {
   useEffect(() => {
     const activeTitle = title || DEFAULT_TITLE;
@@ -91,7 +93,7 @@ const SEOHead = ({
 
     // Robots indexing control
     if (noindex) {
-      setMeta('name', 'robots', 'noindex, nofollow');
+      setMeta('name', 'robots', nofollow ? 'noindex, nofollow' : 'noindex, follow');
     } else {
       removeMeta('name', 'robots');
     }
@@ -146,7 +148,7 @@ const SEOHead = ({
       setMeta('name', 'twitter:description', DEFAULT_DESCRIPTION);
       removeMeta('name', 'robots');
     };
-  }, [title, description, canonical, ogType, ogImage, keywords, noindex]);
+  }, [title, description, canonical, ogType, ogImage, keywords, noindex, nofollow]);
 
   return null;
 };

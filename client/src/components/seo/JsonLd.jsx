@@ -1,37 +1,34 @@
-import { useEffect } from 'react';
+import React from 'react';
 
-/**
- * JsonLd component dynamically injects JSON-LD structured schemas into the document head on mount,
- * and cleans them up on unmount to support dynamic SEO configurations.
- * Prevents duplicate ID collisions by managing the DOM node directly.
- */
+const stableSchemaId = (schema, explicitId) => {
+  if (explicitId) return explicitId;
+  if (schema?.['@id']) return `clearfiling-schema-${String(schema['@id']).replace(/[^a-zA-Z0-9_-]/g, '-')}`;
+
+  const serialized = JSON.stringify(schema);
+  let hash = 2166136261;
+  for (let index = 0; index < serialized.length; index += 1) {
+    hash ^= serialized.charCodeAt(index);
+    hash = Math.imul(hash, 16777619);
+  }
+  return `clearfiling-schema-${(Array.isArray(schema?.['@type']) ? schema['@type'].join('-') : schema?.['@type'] || 'schema').toLowerCase()}-${(hash >>> 0).toString(36)}`;
+};
+
+/** Render structured data as React markup so it exists in static HTML and hydrates once. */
 const JsonLd = ({ schema, id }) => {
-  useEffect(() => {
-    if (!schema) return;
+  if (!schema) return null;
 
-    // Create the script tag
-    const script = document.createElement('script');
-    script.type = 'application/ld+json';
-    const schemaType = schema['@type'] ? String(schema['@type']).toLowerCase() : 'schema';
-    script.dataset.schema = schemaType;
-    if (id) {
-      script.id = id;
-    }
-    // Defensively escape '<' to prevent script-tag breakouts and assign via textContent
-    script.textContent = JSON.stringify(schema).replace(/</g, '\\u003c');
-    
-    // Append to head
-    document.head.appendChild(script);
+  const schemaType = schema['@type']
+    ? (Array.isArray(schema['@type']) ? schema['@type'] : [schema['@type']]).join(',').toLowerCase()
+    : 'schema';
 
-    // Cleanup script on unmount using direct element reference
-    return () => {
-      if (script && script.parentNode) {
-        script.parentNode.removeChild(script);
-      }
-    };
-  }, [schema, id]);
-
-  return null;
+  return (
+    <script
+      id={stableSchemaId(schema, id)}
+      type="application/ld+json"
+      data-schema={schemaType}
+      dangerouslySetInnerHTML={{ __html: JSON.stringify(schema).replace(/</g, '\\u003c') }}
+    />
+  );
 };
 
 export default JsonLd;

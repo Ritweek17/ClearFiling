@@ -13,6 +13,8 @@ import Badge from '../components/ui/Badge';
 import Card from '../components/ui/Card';
 import Breadcrumbs from '../components/seo/Breadcrumbs';
 import SEOHead from '../components/seo/SEOHead';
+import { isServiceIndexable } from '../data/serviceRegistry';
+import CONTACT from '../config/contact.js';
 
 const ResourcePageLayout = ({ resource }) => {
   const [openFaq, setOpenFaq] = React.useState(0);
@@ -21,7 +23,7 @@ const ResourcePageLayout = ({ resource }) => {
 
   const handleWhatsApp = () => {
     const text = encodeURIComponent(`Hi ClearFiling, I need help with ${resource.title}.`);
-    window.open(`https://wa.me/919250201718?text=${text}`, '_blank');
+    window.open(`https://wa.me/${CONTACT.whatsapp.number}?text=${text}`, '_blank');
   };
 
   return (
@@ -139,8 +141,8 @@ const ResourcePageLayout = ({ resource }) => {
                 className="w-full flex items-center justify-center gap-2 bg-brand-primary text-white rounded-xl py-3 text-xs font-bold hover:bg-brand-primary/90 transition-colors">
                 <ArrowRight className="w-3.5 h-3.5" />Request Free Consultation
               </button>
-              <a href="tel:+919250201718" className="flex items-center justify-center text-xs text-slate-300 hover:text-white transition-colors">
-                Or call +91 9250201718
+              <a href={CONTACT.mobile.href} className="flex items-center justify-center text-xs text-slate-300 hover:text-white transition-colors">
+                Or call {CONTACT.mobile.display}
               </a>
             </Card>
 
@@ -164,12 +166,15 @@ const ResourcePageLayout = ({ resource }) => {
               <Card className="p-6 space-y-4 rounded-2xl">
                 <h3 className="text-sm font-extrabold font-heading text-brand-secondary">Related Services</h3>
                 <div className="space-y-2.5">
-                  {resource.relatedServices.map(s => (
-                    <Link key={s.slug} to={s.slug ? `/services/${s.slug}` : '/services'}
-                      className="flex items-center gap-2 text-xs text-brand-primary hover:text-brand-accent transition-colors group">
-                      <ArrowRight className="w-3 h-3 group-hover:translate-x-0.5 transition-transform" />{s.title}
-                    </Link>
-                  ))}
+                  {resource.relatedServices.map(s => {
+                    const isIndexable = s.slug && isServiceIndexable(s.slug);
+                    return (
+                      <Link key={s.slug || s.title} to={isIndexable ? `/services/${s.slug}` : '/services'}
+                        className="flex items-center gap-2 text-xs text-brand-primary hover:text-brand-accent transition-colors group">
+                        <ArrowRight className="w-3 h-3 group-hover:translate-x-0.5 transition-transform" />{s.title}
+                      </Link>
+                    );
+                  })}
                 </div>
               </Card>
             )}

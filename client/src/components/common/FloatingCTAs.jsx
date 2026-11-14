@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Phone, MessageSquare, X } from 'lucide-react';
-import { FOOTER_CONTACT } from '../../data/footerConfig';
+import { FOOTER_COMPANY, FOOTER_CONTACT } from '../../data/footerConfig';
 
 const FloatingCTAs = () => {
   const [isExpanded, setIsExpanded] = useState(false);
@@ -21,7 +21,7 @@ const FloatingCTAs = () => {
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.5, y: 10 }}
               transition={{ duration: 0.2, delay: 0.05 }}
-              aria-label="Contact ClearFiling via WhatsApp"
+              aria-label={`Contact ${FOOTER_COMPANY.brandName} via WhatsApp`}
               className="flex items-center gap-2.5 bg-brand-success text-white px-4 py-2.5 rounded-full shadow-lg shadow-brand-success/30 text-xs font-bold hover:bg-brand-success/90 transition-colors"
             >
               <MessageSquare className="w-4 h-4" aria-hidden="true" />
@@ -36,7 +36,7 @@ const FloatingCTAs = () => {
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.5, y: 10 }}
               transition={{ duration: 0.2 }}
-              aria-label={`Call ClearFiling: ${FOOTER_CONTACT.mobile.display}`}
+              aria-label={`Call ${FOOTER_COMPANY.brandName}: ${FOOTER_CONTACT.mobile.display}`}
               className="flex items-center gap-2.5 bg-brand-primary text-white px-4 py-2.5 rounded-full shadow-lg shadow-brand-primary/30 text-xs font-bold hover:bg-brand-primary/90 transition-colors"
             >
               <Phone className="w-4 h-4" aria-hidden="true" />

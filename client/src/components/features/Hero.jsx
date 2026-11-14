@@ -9,6 +9,7 @@ import Stack from '../ui/Stack';
 import Button from '../ui/Button';
 import Badge from '../ui/Badge';
 import HeroIllustration from './HeroIllustration';
+import BUSINESS from '../../config/business.js';
 
 const TRUST_POINTS = [
   { icon: Briefcase, label: 'Company Registration' },
@@ -100,7 +101,7 @@ const Hero = () => {
             variants={itemVariants}
             className="text-base sm:text-lg text-slate-500 max-w-xl leading-relaxed mb-8"
           >
-            ClearFiling is India's premium corporate advisory firm. We help entrepreneurs, 
+            {BUSINESS.primaryBrandName} (also known as {BUSINESS.alternateBrandName}) is India's corporate advisory firm. We help entrepreneurs, 
             MSMEs, and enterprises manage company incorporation, GST registrations, 
             trademarks, and taxation with transparent processing.
           </motion.p>
