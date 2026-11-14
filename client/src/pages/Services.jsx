@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
 import { ArrowRight, Search, Filter } from 'lucide-react';
 import { motion } from 'framer-motion';
@@ -30,10 +30,16 @@ const CARD_TRANSITIONS = Array.from({ length: 6 }, (_, i) => ({
 const Services = () => {
   const [searchParams] = useSearchParams();
   const [search, setSearch] = useState('');
-  const categoryParam = searchParams.get('category');
-  const [activeCategory, setActiveCategory] = useState(
-    categoryParam && ALL_CATEGORIES.includes(categoryParam) ? categoryParam : 'All'
-  );
+  // Keep the first client render aligned with the statically rendered "All" state.
+  // The effect below applies valid URL query filters immediately after hydration.
+  const [activeCategory, setActiveCategory] = useState('All');
+
+  useEffect(() => {
+    const cat = searchParams.get('category');
+    if (cat && ALL_CATEGORIES.includes(cat)) {
+      setActiveCategory(cat);
+    }
+  }, [searchParams]);
 
   const filtered = useMemo(() => {
     const normalizedSearch = search.trim().toLowerCase();
