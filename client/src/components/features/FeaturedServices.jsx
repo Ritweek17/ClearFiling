@@ -28,6 +28,7 @@ import SectionContainer from '../ui/SectionContainer';
 import SectionHeading from '../ui/SectionHeading';
 import Spacer from '../ui/Spacer';
 import CONTACT from '../../config/contact.js';
+import { loadLoanFeaturedFaqs } from '../../utils/loadLoanFeaturedFaqs.js';
 
 // SEO Helpers
 import JsonLd from '../seo/JsonLd';
@@ -56,6 +57,7 @@ const FeaturedServices = () => {
   
   // Dynamic Featured Card Selector State
   const [activeFeaturedId, setActiveFeaturedId] = useState('private-limited-company');
+  const [loanFeaturedFaqs, setLoanFeaturedFaqs] = useState({ slug: null, faqs: null });
   const [activeAccordion, setActiveAccordion] = useState(null);
   const searchRef = useRef(null);
   const categoriesRef = useRef(null);
@@ -160,6 +162,22 @@ const FeaturedServices = () => {
   const activeFeaturedService = useMemo(() => {
     return SERVICES.find(s => s.id === activeFeaturedId) || SERVICES[0];
   }, [activeFeaturedId]);
+
+  useEffect(() => {
+    if (activeFeaturedService.category !== 'Loan Services') return undefined;
+
+    let cancelled = false;
+    loadLoanFeaturedFaqs(activeFeaturedService.slug).then((faqs) => {
+      if (!cancelled) {
+        setLoanFeaturedFaqs({
+          slug: activeFeaturedService.slug,
+          faqs,
+        });
+      }
+    });
+
+    return () => { cancelled = true; };
+  }, [activeFeaturedService.category, activeFeaturedService.slug]);
 
   // Suggestions Autocomplete dropdown - Memoized
   const suggestions = useMemo(() => {
@@ -272,7 +290,10 @@ const FeaturedServices = () => {
 
   // Schema generation for SEO-First architecture
   const serviceSchema = generateServiceSchema(activeFeaturedService);
-  const faqSchema = generateFAQSchema(activeFeaturedService.faqReference);
+  const featuredFaqs = activeFeaturedService.category === 'Loan Services'
+    ? (loanFeaturedFaqs.slug === activeFeaturedService.slug ? loanFeaturedFaqs.faqs : null)
+    : activeFeaturedService.faqReference;
+  const faqSchema = generateFAQSchema(featuredFaqs);
 
   return (
     <SectionContainer id="services" bgType="default" animate={false} className="py-24 bg-brand-bg select-none">
@@ -537,7 +558,9 @@ const FeaturedServices = () => {
                         {activeFeaturedService.category}
                       </Badge>
                       <h3 className="text-2xl md:text-3xl font-extrabold font-heading text-brand-secondary mt-1 tracking-tight">
-                        {activeFeaturedService.title} {activeFeaturedService.subtitle || 'Registration'}
+                        {activeFeaturedService.category === 'Loan Services'
+                          ? activeFeaturedService.title
+                          : `${activeFeaturedService.title} ${activeFeaturedService.subtitle || 'Registration'}`}
                       </h3>
                     </div>
                   </div>
@@ -545,6 +568,24 @@ const FeaturedServices = () => {
                   <p className="text-sm md:text-base text-slate-600 leading-relaxed font-sans pt-1">
                     {activeFeaturedService.description}
                   </p>
+
+                  {activeFeaturedService.category === 'Loan Services' && featuredFaqs?.length > 0 && (
+                    <div className="space-y-3 pt-3">
+                      <h4 className="text-sm font-bold font-heading text-brand-secondary">Common questions</h4>
+                      <div className="space-y-2 text-left">
+                        {featuredFaqs.map((faq, idx) => (
+                          <details key={idx} open className="bg-white border border-slate-200/80 rounded-xl overflow-hidden">
+                            <summary className="cursor-pointer p-4 text-sm font-bold text-brand-secondary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-primary/50">
+                              {faq.q || faq.question}
+                            </summary>
+                            <div className="border-t border-slate-100 bg-slate-50/50 p-4 text-sm leading-relaxed text-slate-600">
+                              {faq.a || faq.answer}
+                            </div>
+                          </details>
+                        ))}
+                      </div>
+                    </div>
+                  )}
 
                   {/* Core Benefits */}
                   {activeFeaturedService.benefits && (
@@ -587,12 +628,14 @@ const FeaturedServices = () => {
                 <div className="space-y-5">
                   {activeFeaturedService.requiredDocuments && (
                     <div className="space-y-2.5">
-                      <span className="text-[11px] font-bold text-slate-400 uppercase tracking-widest block font-heading">Required Documents</span>
+                      <span className="text-[11px] font-bold text-slate-400 uppercase tracking-widest block font-heading">
+                        {activeFeaturedService.category === 'Loan Services' ? 'Example Documents a Lender May Request' : 'Required Documents'}
+                      </span>
                       <ul className="space-y-2">
                         {activeFeaturedService.requiredDocuments.map((doc, idx) => (
                           <li key={idx} className="text-xs text-slate-600 flex items-start gap-2 font-sans leading-tight">
                             <FileText className="w-3.5 h-3.5 text-slate-400 mt-0.5 flex-shrink-0" />
-                            <span>{doc}</span>
+                            <span>{doc}{activeFeaturedService.category === 'Loan Services' ? ' (requirements vary)' : ''}</span>
                           </li>
                         ))}
                       </ul>
@@ -608,10 +651,10 @@ const FeaturedServices = () => {
                   )}
 
                   {/* Expert Advice Tag */}
-                  <div className="flex items-center gap-2.5 bg-brand-primary/5 border border-brand-primary/10 px-3 py-2 rounded-lg text-[11px] text-brand-primary font-bold">
+                  {activeFeaturedService.category !== 'Loan Services' && <div className="flex items-center gap-2.5 bg-brand-primary/5 border border-brand-primary/10 px-3 py-2 rounded-lg text-[11px] text-brand-primary font-bold">
                     <ShieldCheck className="w-4 h-4 flex-shrink-0 text-brand-primary" />
                     <span>Includes Chartered Accountant / CS Verification</span>
-                  </div>
+                  </div>}
                 </div>
 
                 {/* Direct Action CTAs */}
