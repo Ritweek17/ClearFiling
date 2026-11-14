@@ -2,7 +2,12 @@ import React from 'react';
 import PageContainer from '../components/ui/PageContainer';
 import SEOHead from '../components/seo/SEOHead';
 import JsonLd from '../components/seo/JsonLd';
-import { PAGE_SEO, getOrganizationSchema, getLocalBusinessSchema } from '../config/seo';
+import {
+  PAGE_SEO,
+  getWebsiteSchema,
+  getOrganizationSchema,
+  getLocalBusinessSchema,
+} from '../config/seo';
 
 // Existing approved sections
 import Hero from '../components/features/Hero';
@@ -29,6 +34,7 @@ const Home = () => {
         canonical={PAGE_SEO.home.canonical}
         keywords={PAGE_SEO.home.keywords}
       />
+      <JsonLd schema={getWebsiteSchema()} />
       <JsonLd schema={getOrganizationSchema()} />
       <JsonLd schema={getLocalBusinessSchema()} />
 

@@ -3,6 +3,8 @@
  * Update this file when team members change. Components never need editing.
  */
 
+import CONTACT from '../config/contact.js';
+
 export const CONSULTANT_TYPES = [
   {
     id: 'ca',
@@ -48,7 +50,7 @@ export const CONSULTANT_TYPES = [
 
 export const CONSULTATION_BENEFITS = [
   'Free initial consultation — no commitment',
-  'Response within 2–4 business hours',
+  CONTACT.responseCopy.typical,
   'Transparent flat-rate pricing, no hidden fees',
   'Dedicated advisor for your complete journey',
   'Post-registration support included',

@@ -26,6 +26,18 @@
       ]
     }
   ],
+  "redirects": [
+    {
+      "source": "/services/udyam-registration",
+      "destination": "/services/msme-registration",
+      "statusCode": 301
+    },
+    {
+      "source": "/services/import-export-code",
+      "destination": "/services/iec-registration",
+      "statusCode": 301
+    }
+  ],
   "rewrites": [
     {
       "source": "/(.*)",

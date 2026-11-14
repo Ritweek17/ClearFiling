@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo } from 'react';
+import React, { useState, useMemo } from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
 import { ArrowRight, Search, Filter } from 'lucide-react';
 import { motion } from 'framer-motion';
@@ -10,39 +10,13 @@ import Breadcrumbs from '../components/seo/Breadcrumbs';
 import SEOHead from '../components/seo/SEOHead';
 import { PAGE_SEO } from '../config/seo';
 import { SERVICES, ICON_MAP } from '../data/services';
+import { isServiceIndexable } from '../data/serviceRegistry';
+
+// Canonical catalogue excluding redirected slugs
+const CANONICAL_SERVICES = SERVICES.filter((s) => !s.redirectTo);
 
 // Get unique categories
-const ALL_CATEGORIES = ['All', ...Array.from(new Set(SERVICES.map(s => s.category)))];
-
-const LOAN_SLUGS = [
-  'personal-loan',
-  'home-loan',
-  'business-loan',
-  'msme-loan',
-  'startup-loan',
-  'working-capital-loan',
-  'education-loan',
-  'vehicle-loan',
-  'car-loan',
-  'bike-loan',
-  'gold-loan',
-  'loan-against-property',
-  'machinery-loan',
-  'equipment-finance',
-  'project-loan',
-  'cash-credit',
-  'overdraft-facility',
-  'professional-loan',
-  'commercial-vehicle-loan',
-  'construction-loan'
-];
-
-const ACTIVE_SLUGS = [
-  'private-limited-company',
-  'gst-registration',
-  'trademark-registration',
-  ...LOAN_SLUGS
-];
+const ALL_CATEGORIES = ['All', ...Array.from(new Set(CANONICAL_SERVICES.map(s => s.category)))];
 
 // Hoisted static animation configs for services grid cards
 const CARD_INITIAL = { opacity: 0, y: 16 };
@@ -55,23 +29,19 @@ const CARD_TRANSITIONS = Array.from({ length: 6 }, (_, i) => ({
 
 const Services = () => {
   const [searchParams] = useSearchParams();
-  const categoryParam = searchParams.get('category');
   const [search, setSearch] = useState('');
+  const categoryParam = searchParams.get('category');
   const [activeCategory, setActiveCategory] = useState(
     categoryParam && ALL_CATEGORIES.includes(categoryParam) ? categoryParam : 'All'
   );
 
-  useEffect(() => {
-    const cat = searchParams.get('category');
-    if (cat && ALL_CATEGORIES.includes(cat)) {
-      setActiveCategory(cat);
-    }
-  }, [searchParams]);
-
   const filtered = useMemo(() => {
     const normalizedSearch = search.trim().toLowerCase();
-    return SERVICES.filter((s) => {
-      const matchCat = activeCategory === 'All' || s.category === activeCategory;
+    return CANONICAL_SERVICES.filter((s) => {
+      const matchCat =
+        activeCategory === 'All' ||
+        s.category === activeCategory ||
+        (Array.isArray(s.secondaryCategories) && s.secondaryCategories.includes(activeCategory));
       if (!matchCat) return false;
       if (!normalizedSearch) return true;
       return (
@@ -158,7 +128,7 @@ const Services = () => {
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
                 {filtered.map((service, idx) => {
                   const IconComponent = ICON_MAP[service.iconName];
-                  const isActive = ACTIVE_SLUGS.includes(service.slug);
+                  const isActive = isServiceIndexable(service.slug);
                   return (
                     <motion.div
                       key={service.id}

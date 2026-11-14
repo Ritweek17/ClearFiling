@@ -11,6 +11,7 @@ import PageContainer from '../components/ui/PageContainer';
 import Badge from '../components/ui/Badge';
 import Breadcrumbs from '../components/seo/Breadcrumbs';
 import SEOHead from '../components/seo/SEOHead';
+import BUSINESS from '../config/business';
 
 const LegalPageLayout = ({ title, badge, lastUpdated, effectiveDate, intro, sections, children }) => {
   const location = useLocation();
@@ -19,9 +20,9 @@ const LegalPageLayout = ({ title, badge, lastUpdated, effectiveDate, intro, sect
     <PageContainer animate>
       {/* Route-level SEO Metadata */}
       <SEOHead
-        title={`${title} | ClearFiling & Compliance LLP`}
-        description={intro || `Review the official ${title} for ClearFiling & Compliance LLP.`}
-        canonical={`https://www.clearfiling.co.in${location.pathname}`}
+        title={`${title} | ${BUSINESS.legalName}`}
+        description={intro || `Review the official ${title} for ${BUSINESS.legalName}.`}
+        canonical={`${BUSINESS.url}${location.pathname}`}
       />
 
       {/* Hero Banner */}

@@ -2,6 +2,10 @@
  * SchemaHelpers.js
  * Generates valid JSON-LD schema objects to inject into documents.
  */
+import BUSINESS from '../../config/business.js';
+import { ORGANIZATION_ID } from '../../config/seo.js';
+import OFFICE_LOCATIONS from '../../data/officeLocations.js';
+import CONTACT from '../../config/contact.js';
 
 /**
  * Generates an FAQPage schema.
@@ -30,31 +34,42 @@ export const generateFAQSchema = (faqs = []) => {
  */
 export const generateServiceSchema = (service) => {
   if (!service) return null;
+  const hq = OFFICE_LOCATIONS[0];
+  const serviceUrl = service.slug
+    ? `${BUSINESS.url}/services/${service.slug}`
+    : `${BUSINESS.url}/services`;
 
   return {
     '@context': 'https://schema.org',
     '@type': 'Service',
+    '@id': `${serviceUrl}#service`,
+    'name': service.title,
+    'url': serviceUrl,
     'serviceType': service.title,
     'provider': {
-      '@type': 'LocalBusiness',
-      'name': 'Clear Filing & Compliance LLP',
-      'image': 'https://www.clearfiling.co.in/favicon.svg',
+      '@type': 'LegalService',
+      '@id': ORGANIZATION_ID,
+      'name': BUSINESS.primaryBrandName,
+      'legalName': BUSINESS.legalName,
+      'alternateName': BUSINESS.alternateBrandName,
+      'url': BUSINESS.websiteUrl,
+      'image': BUSINESS.logoUrl,
       'address': {
         '@type': 'PostalAddress',
-        'streetAddress': 'E-20, Lajpat Nagar III',
-        'addressLocality': 'New Delhi',
-        'addressRegion': 'Delhi',
-        'postalCode': '110024',
-        'addressCountry': 'IN'
+        'streetAddress': hq.schema.streetAddress,
+        'addressLocality': hq.schema.addressLocality,
+        'addressRegion': hq.state,
+        'postalCode': hq.schema.postalCode,
+        'addressCountry': hq.countryCode
       }
     },
     'description': service.shortDescription || service.description,
-    'areaServed': 'IN',
+    'areaServed': BUSINESS.serviceArea,
     'offers': {
       '@type': 'Offer',
-      'priceCurrency': 'INR',
-      'price': 'Contact for Quote',
-      'availability': 'https://schema.org/InStock'
+      'priceCurrency': BUSINESS.currenciesAccepted,
+      'availability': 'https://schema.org/InStock',
+      'url': serviceUrl
     }
   };
 };
@@ -69,20 +84,22 @@ export const generateLocalBusinessSchema = (companyInfo) => {
   return {
     '@context': 'https://schema.org',
     '@type': 'LegalService',
-    'name': companyInfo.name,
-    'alternateName': companyInfo.brandName,
-    'logo': 'https://www.clearfiling.co.in/favicon.svg',
-    'telephone': companyInfo.contact.mobile?.display || '+91 9250201718',
-    'email': companyInfo.contact.email?.display || 'clearfiling@zohomail.in',
-    'url': 'https://www.clearfiling.co.in',
+    '@id': ORGANIZATION_ID,
+    'name': companyInfo.brandName || companyInfo.name || BUSINESS.primaryBrandName,
+    'legalName': companyInfo.legalName || BUSINESS.legalName,
+    'alternateName': companyInfo.alternateBrandName || BUSINESS.alternateBrandName,
+    'logo': BUSINESS.logoUrl,
+    'telephone': companyInfo.contact.mobile?.display || CONTACT.mobile.display,
+    'email': companyInfo.contact.email?.display || CONTACT.email.display,
+    'url': BUSINESS.websiteUrl,
     'address': companyInfo.offices.map(office => ({
       '@type': 'PostalAddress',
       'addressLocality': office.city,
       'addressCountry': 'IN',
       'streetAddress': office.address
     })),
-    'openingHours': 'Mo-Su 09:00-21:00',
-    'priceRange': '₹₹'
+    'openingHours': CONTACT.hours.schema,
+    'priceRange': BUSINESS.priceRange
   };
 };
 

@@ -9,6 +9,7 @@ import Card from '../components/ui/Card';
 import Breadcrumbs from '../components/seo/Breadcrumbs';
 import SEOHead from '../components/seo/SEOHead';
 import { PAGE_SEO } from '../config/seo';
+import CONTACT from '../config/contact.js';
 import { BLOG_POSTS, getBlogPostBySlug } from '../data/blogContent';
 
 // ─── Category color map ───────────────────────────────────────────────────────
@@ -115,7 +116,7 @@ const BlogPost = () => {
 
   const handleWhatsApp = () => {
     const text = encodeURIComponent(`Hi ClearFiling, I read your article on "${post.title}" and would like a free consultation.`);
-    window.open(`https://wa.me/919250201718?text=${text}`, '_blank');
+    window.open(`https://wa.me/${CONTACT.whatsapp.number}?text=${text}`, '_blank');
   };
 
   const relatedPosts = BLOG_POSTS.filter(p => post.relatedPosts?.includes(p.slug)).slice(0, 3);
@@ -231,8 +232,8 @@ const BlogPost = () => {
                 className="w-full flex items-center justify-center gap-2 bg-brand-primary text-white rounded-xl py-3 text-xs font-bold hover:bg-brand-primary/90 transition-colors">
                 <ArrowRight className="w-3.5 h-3.5" />Request Consultation
               </button>
-              <a href="tel:+919250201718" className="flex items-center justify-center text-xs text-slate-300 hover:text-white transition-colors">
-                Or call +91 9250201718
+              <a href={CONTACT.mobile.href} className="flex items-center justify-center text-xs text-slate-300 hover:text-white transition-colors">
+                Or call {CONTACT.mobile.display}
               </a>
             </Card>
 

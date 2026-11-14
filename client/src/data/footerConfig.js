@@ -5,63 +5,42 @@
  * Update this file to change any footer content, links, or contact info.
  */
 
+import BUSINESS from '../config/business.js';
+import CONTACT from '../config/contact.js';
+import OFFICE_LOCATIONS from './officeLocations.js';
+
 // ─── COMPANY ──────────────────────────────────────────────────────────────────
 export const FOOTER_COMPANY = {
-  brandName: 'ClearFiling',
-  legalName: 'ClearFiling & Compliance LLP',
-  tagline: 'Integrity • Sanctity • Dedication',
-  established: 2020,
-  description:
-    'Clear Filing is a modern corporate advisory and compliance firm helping startups, MSMEs and enterprises with company registration, taxation, legal compliance and business advisory services across India.',
+  brandName: BUSINESS.primaryBrandName,
+  alternateBrandName: BUSINESS.alternateBrandName,
+  legalName: BUSINESS.legalName,
+  tagline: BUSINESS.tagline,
+  established: BUSINESS.established,
+  description: BUSINESS.description,
 };
 
 // ─── CONTACT ──────────────────────────────────────────────────────────────────
 export const FOOTER_CONTACT = {
-  mobile: { display: '+91 9250201718', href: 'tel:+919250201718' },
-  landline: { display: '05568-450351', href: 'tel:05568450351' },
-  gorakhpur: { display: '+91 9336379826', href: 'tel:+919336379826' },
-  email: { display: 'clearfiling@zohomail.in', href: 'mailto:clearfiling@zohomail.in' },
-  emails: [
-    { display: 'clearfiling@zohomail.in', href: 'mailto:clearfiling@zohomail.in' },
-    { display: 'support.clearfiling@gmail.com', href: 'mailto:support.clearfiling@gmail.com' }
-  ],
+  mobile: CONTACT.mobile,
+  landline: CONTACT.landline,
+  gorakhpur: CONTACT.gorakhpur,
+  email: CONTACT.email,
+  emails: [CONTACT.email, CONTACT.email2],
   whatsapp: {
-    href: 'https://wa.me/919250201718?text=Hi%20ClearFiling%2C%20I%20need%20compliance%20assistance%20for%20my%20business.',
+    href: CONTACT.whatsapp.href,
     display: 'WhatsApp Inquiry',
   },
-  hours: { display: '9:00 AM – 9:00 PM', note: 'Open 7 Days a Week' },
+  hours: { display: CONTACT.hours.display, note: CONTACT.hours.note },
 };
 
 // ─── OFFICES ──────────────────────────────────────────────────────────────────
-export const FOOTER_OFFICES = [
-  {
-    id: 'delhi',
-    label: 'Delhi Office',
-    lines: ['E-20, Lajpat Nagar III,', 'New Delhi – 110024, India'],
-    // Future: mapsUrl: 'https://maps.google.com/?q=...'
-    mapsUrl: null,
-  },
-  {
-    id: 'deoria',
-    label: 'Deoria Office',
-    lines: [
-      'Asha Complex, 30 Feet Road,',
-      'Near Nahar, Bhikhampur Road,',
-      'Deoria, Uttar Pradesh – 274001',
-    ],
-    mapsUrl: null,
-  },
-  {
-    id: 'gorakhpur',
-    label: 'Gorakhpur Office',
-    phone: '+91 9336379826',
-    lines: [
-      '100D, Surajkund Colony,',
-      'Gorakhpur, Uttar Pradesh – 273015',
-    ],
-    mapsUrl: null,
-  },
-];
+export const FOOTER_OFFICES = OFFICE_LOCATIONS.map((office) => ({
+  id: office.id,
+  label: office.label,
+  ...(office.footerPhone ? { phone: office.footerPhone } : {}),
+  lines: office.companyLines,
+  mapsUrl: office.mapsUrl,
+}));
 
 // ─── SOCIAL ───────────────────────────────────────────────────────────────────
 // Only include verified social accounts. Hidden if href is null.
@@ -114,17 +93,17 @@ export const FOOTER_LOANS = [
 // slug: null    → links to /services (services listing page)
 export const FOOTER_SERVICES = [
   { label: 'Private Limited Company',  slug: 'private-limited-company' },
-  { label: 'LLP Registration',          slug: null },
-  { label: 'One Person Company',        slug: null },
+  { label: 'LLP Registration',          slug: 'llp-registration' },
+  { label: 'One Person Company',        slug: 'opc-registration' },
   { label: 'GST Registration',          slug: 'gst-registration' },
   { label: 'Trademark Registration',    slug: 'trademark-registration' },
-  { label: 'MSME Registration',         slug: null },
-  { label: 'IEC Registration',          slug: null },
-  { label: 'FSSAI Registration',        slug: null },
-  { label: 'Income Tax Filing',         slug: null },
-  { label: 'Annual Compliance',         slug: null },
+  { label: 'MSME Registration',         slug: 'msme-registration' },
+  { label: 'IEC Registration',          slug: 'iec-registration' },
+  { label: 'FSSAI Registration',        slug: 'fssai-registration' },
+  { label: 'Income Tax Filing',         slug: 'income-tax-filing' },
+  { label: 'Annual Compliance',         slug: 'annual-compliance' },
   { label: 'Business Advisory',         slug: null },
-  { label: 'Digital Signature',         slug: null },
+  { label: 'Digital Signature',         slug: 'digital-signature' },
 ];
 
 // ─── RESOURCES ────────────────────────────────────────────────────────────────

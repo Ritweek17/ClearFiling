@@ -55,7 +55,7 @@ export const BLOG_POSTS = [
       { q: 'How many shareholders can a Pvt Ltd company have?', a: 'A Private Limited Company can have a minimum of 2 shareholders and a maximum of 200 shareholders.' },
     ],
     cta: { text: 'Register Your Company Today', service: 'private-limited-company' },
-    relatedPosts: ['gst-registration-guide', 'annual-compliance-pvt-ltd', 'startup-india-recognition'],
+    relatedPosts: ['gst-registration-guide', 'annual-compliance-pvt-ltd', 'trademark-registration-brand-protection'],
   },
 
   {
@@ -109,7 +109,7 @@ export const BLOG_POSTS = [
       { q: 'Can I trademark a logo without a company registration?', a: 'Yes, trademarks can be registered by individuals, sole proprietors, partnerships, and companies. You do not need a company registration to file a trademark application.' },
     ],
     cta: { text: 'Register Your Trademark', service: 'trademark-registration' },
-    relatedPosts: ['how-to-register-private-limited-company-india', 'startup-india-recognition'],
+    relatedPosts: ['how-to-register-private-limited-company-india', 'gst-registration-guide'],
   },
 
   {
@@ -162,7 +162,7 @@ export const BLOG_POSTS = [
       { q: 'Can a company already registered on MCA also get MSME registration?', a: 'Yes, any Private Limited Company, LLP, Partnership, or Proprietorship that meets the MSME criteria can register on the Udyam portal. Both registrations are independent and complementary.' },
     ],
     cta: { text: 'Get MSME Registration', service: null },
-    relatedPosts: ['how-to-register-private-limited-company-india', 'startup-india-recognition'],
+    relatedPosts: ['how-to-register-private-limited-company-india', 'annual-compliance-pvt-ltd'],
   },
 
   {

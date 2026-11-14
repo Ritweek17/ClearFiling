@@ -6,6 +6,7 @@ import SectionContainer from '../ui/SectionContainer';
 import MaxWidthContainer from '../ui/MaxWidthContainer';
 import Badge from '../ui/Badge';
 import Button from '../ui/Button';
+import CONTACT from '../../config/contact.js';
 
 const CTASection = () => {
   const navigate = useNavigate();
@@ -15,14 +16,14 @@ const CTASection = () => {
   };
 
   const handlePhoneCall = () => {
-    window.location.href = 'tel:+919250201718';
+    window.location.href = CONTACT.mobile.href;
   };
 
   const handleWhatsApp = () => {
     const text = encodeURIComponent(
       'Hi ClearFiling, I would like to get a free consultation for my business compliance needs.'
     );
-    window.open(`https://wa.me/919250201718?text=${text}`, '_blank');
+    window.open(`https://wa.me/${CONTACT.whatsapp.number}?text=${text}`, '_blank');
   };
 
   return (
@@ -115,7 +116,7 @@ const CTASection = () => {
           className="text-slate-400 text-xs font-sans flex items-center justify-center gap-2"
         >
           <MessageSquare className="w-3.5 h-3.5 text-brand-success" />
-          <span>Or chat directly on WhatsApp — typically replied within 30 minutes during business hours.</span>
+          <span>Or chat directly on WhatsApp — {CONTACT.responseCopy.cta}.</span>
         </motion.p>
 
       </MaxWidthContainer>
