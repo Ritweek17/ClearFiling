@@ -147,12 +147,16 @@ describe('Task B: Locked Decisions & Consolidations (CD-1 through CD-4)', () => 
     assert.equal(iecRedirect.statusCode, 301);
   });
 
-  it('CD-4: Vehicle Loan reframed as corporate fleet hub and keyword overlap stripped', () => {
+  it('CD-4: Vehicle Loan serves general use and remains distinct from commercial vehicle finance', () => {
     const vehicleLoan = SERVICES.find((s) => s.slug === 'vehicle-loan');
     assert.ok(vehicleLoan);
-    assert.match(vehicleLoan.description, /fleet|transportation|utility vehicles/i);
+    assert.match(vehicleLoan.description, /personal|general vehicle/i);
     assert.ok(!vehicleLoan.keywords.includes('car finance'));
     assert.ok(!vehicleLoan.keywords.includes('commercial vehicle'));
+
+    const commercialVehicleLoan = SERVICES.find((s) => s.slug === 'commercial-vehicle-loan');
+    assert.ok(commercialVehicleLoan);
+    assert.match(commercialVehicleLoan.description, /business|commercial/i);
 
     // Separate loan services remain distinct
     assert.ok(SERVICES.some((s) => s.slug === 'car-loan'));
@@ -172,7 +176,7 @@ describe('Task B: Locked Decisions & Consolidations (CD-1 through CD-4)', () => 
 });
 
 describe('Task C & D: ServiceDetail SSR & Indexability Controls', () => {
-  it('renders indexable Loan Service with Financial Documentation badge (CD-5)', async () => {
+  it('renders indexable Loan Service with lender-neutral educational notice (CD-5)', async () => {
     const outFile = path.join(__dirname, `.tmp-svc-loan-${Date.now()}.mjs`);
     const entryFile = path.join(__dirname, `.tmp-svc-loan-entry-${Date.now()}.js`);
 
@@ -223,8 +227,11 @@ describe('Task C & D: ServiceDetail SSR & Indexability Controls', () => {
         )
       );
 
-      // Verify Loan badge correction (CD-5)
-      assert.match(loanHtml, /Financial Documentation &amp; Advisory Support|Financial Documentation & Advisory Support/);
+      // Loan pages provide neutral education and do not claim advisory or lending capabilities.
+      assert.match(loanHtml, /General information only/);
+      assert.match(loanHtml, /ClearFiling is not a lender/);
+      assert.match(loanHtml, /<h2[^>]*>Questions about this guide<\/h2>/);
+      assert.doesNotMatch(loanHtml, /Financial Documentation &amp; Advisory Support|End-to-End Application Assistance|Request Free Consultation/);
       assert.doesNotMatch(loanHtml, /CA &amp; CS Verified Approval/);
 
       // Render private-limited-company (Corporate Services category)

@@ -23,6 +23,7 @@ import {
 } from 'lucide-react';
 
 import { SERVICES, ICON_MAP } from '../data/services';
+import { LOAN_SERVICE_CONTENT } from '../data/loanServiceContent.js';
 import { isServiceIndexable, getRedirectTarget } from '../data/serviceRegistry';
 import { sendInquiry } from '../services/emailService';
 import MaxWidthContainer from '../components/ui/MaxWidthContainer';
@@ -69,7 +70,10 @@ const ServiceDetail = () => {
   }
 
   // Find target service
-  const service = SERVICES.find((s) => s.slug === slug);
+  const catalogueService = SERVICES.find((s) => s.slug === slug);
+  const service = catalogueService
+    ? { ...catalogueService, ...(LOAN_SERVICE_CONTENT[slug] || {}) }
+    : null;
 
   // Unknown service route fallback
   if (!service) {
@@ -96,6 +100,8 @@ const ServiceDetail = () => {
       </SectionContainer>
     );
   }
+
+  const isLoanService = service.category === 'Loan Services';
 
   const handleFormChange = (e) => {
     const { name, value } = e.target;
@@ -295,10 +301,12 @@ const ServiceDetail = () => {
                 <div className="text-left mb-6 space-y-1">
                   <span className="text-[10px] font-bold text-brand-accent uppercase tracking-widest flex items-center gap-1">
                     <Sparkles className="w-3.5 h-3.5 text-brand-primary animate-pulse" />
-                    <span>Direct Consultation</span>
+                    <span>{isLoanService ? 'General Information' : 'Direct Consultation'}</span>
                   </span>
-                  <h3 className="text-lg font-bold font-heading text-brand-secondary">Request Expert Consultation</h3>
-                  <p className="text-xs text-slate-400 font-sans">Speak directly with a compliance advisor about {service.title}.</p>
+                  <h3 className="text-lg font-bold font-heading text-brand-secondary">{isLoanService ? 'Ask a question about this guide' : 'Request Expert Consultation'}</h3>
+                  <p className="text-xs text-slate-400 font-sans">{isLoanService
+                    ? 'Send a general question. Do not include sensitive financial information.'
+                    : `Speak directly with a compliance advisor about ${service.title}.`}</p>
                 </div>
 
                 <form onSubmit={handleFormSubmit} className="space-y-4 text-left" noValidate>
@@ -406,7 +414,7 @@ const ServiceDetail = () => {
                     ) : (
                       <>
                         <Send className="w-4 h-4" />
-                        <span>Submit Consultation Request</span>
+                        <span>{isLoanService ? 'Send Inquiry' : 'Submit Consultation Request'}</span>
                       </>
                     )}
                   </Button>
@@ -427,7 +435,9 @@ const ServiceDetail = () => {
                       </div>
                       <h3 className="text-base font-extrabold text-brand-secondary font-heading">Inquiry Submitted Successfully</h3>
                       <p className="text-xs text-slate-500 font-sans mt-2 max-w-xs">
-                        Thank you! Our senior advisors will contact you shortly regarding {service.title}.
+                        {isLoanService
+                          ? 'Your inquiry has been submitted.'
+                          : `Thank you! Our senior advisors will contact you shortly regarding ${service.title}.`}
                       </p>
                     </motion.div>
                   )}
@@ -502,15 +512,15 @@ const ServiceDetail = () => {
 
             {/* Quick Metrics tags */}
             <div className="flex flex-wrap gap-4 py-2">
-              <div className="flex items-center gap-2 text-xs font-semibold text-slate-700 bg-white border border-slate-200/60 px-3.5 py-2 rounded-xl shadow-sm">
+              {!isLoanService && <div className="flex items-center gap-2 text-xs font-semibold text-slate-700 bg-white border border-slate-200/60 px-3.5 py-2 rounded-xl shadow-sm">
                 <Clock className="w-4 h-4 text-brand-primary flex-shrink-0" />
                 <span>Timeline: <strong className="text-brand-secondary">{service.processingTime}</strong></span>
-              </div>
+              </div>}
               <div className="flex items-center gap-2 text-xs font-semibold text-slate-700 bg-white border border-slate-200/60 px-3.5 py-2 rounded-xl shadow-sm">
                 <ShieldCheck className="w-4 h-4 text-brand-primary flex-shrink-0" />
                 <span>
                   {service.category === 'Loan Services'
-                    ? 'Financial Documentation & Advisory Support'
+                    ? 'General educational information'
                     : 'CA & CS Verified Approval'}
                 </span>
               </div>
@@ -523,7 +533,7 @@ const ServiceDetail = () => {
                 onClick={() => scrollToSection('lead-consultation-form')}
                 className="py-3.5 px-6 font-bold flex items-center justify-center gap-2 rounded-xl shadow-md shadow-brand-primary/10"
               >
-                <span>Request Free Consultation</span>
+                <span>{isLoanService ? 'Ask a question' : 'Request Free Consultation'}</span>
                 <ArrowRight className="w-4 h-4" />
               </Button>
               <div className="flex gap-2">
@@ -555,10 +565,16 @@ const ServiceDetail = () => {
               <div className="text-left mb-6 space-y-1">
                 <span className="text-[10px] font-bold text-brand-accent uppercase tracking-widest flex items-center gap-1">
                   <Sparkles className="w-3.5 h-3.5 text-brand-primary animate-pulse" />
-                  <span>Instant Lead Request</span>
+                  <span>{isLoanService ? 'General questions' : 'Instant Lead Request'}</span>
                 </span>
-                <h3 className="text-lg font-bold font-heading text-brand-secondary">Get Free Expert Advice</h3>
-                <p className="text-xs text-slate-400 font-sans">No signup. No upfront fees. Free consultation call.</p>
+                {isLoanService ? (
+                  <h2 className="text-lg font-bold font-heading text-brand-secondary">Questions about this guide</h2>
+                ) : (
+                  <h3 className="text-lg font-bold font-heading text-brand-secondary">Get Free Expert Advice</h3>
+                )}
+                <p className="text-xs text-slate-400 font-sans">{isLoanService
+                  ? 'Lenders set their own product terms and make credit decisions.'
+                  : 'No signup. No upfront fees. Free consultation call.'}</p>
               </div>
 
               <form onSubmit={handleFormSubmit} className="space-y-4 text-left" noValidate>
@@ -648,7 +664,9 @@ const ServiceDetail = () => {
                     disabled={submitting}
                     value={formData.message}
                     onChange={handleFormChange}
-                    placeholder={`e.g. Need assistance with registering a ${service.title}`}
+                    placeholder={isLoanService
+                      ? 'Ask a general question. Do not include sensitive financial information.'
+                      : `e.g. Need assistance with registering a ${service.title}`}
                     className="w-full bg-slate-50 border border-slate-200 focus:border-brand-primary focus:ring-4 focus:ring-brand-primary/10 rounded-xl px-4 py-3 text-sm text-slate-800 outline-none transition-all placeholder-slate-400 resize-none disabled:opacity-60 disabled:cursor-not-allowed"
                   />
                 </div>
@@ -689,7 +707,9 @@ const ServiceDetail = () => {
                     </div>
                     <h3 className="text-base font-extrabold text-brand-secondary font-heading">Inquiry Submitted Successfully</h3>
                     <p className="text-xs text-slate-500 font-sans mt-2 max-w-xs">
-                      Thank you! Our senior compliance advisors will call you shortly regarding {service.title}.
+                      {isLoanService
+                        ? 'Your inquiry has been submitted.'
+                        : `Thank you! Our senior compliance advisors will call you shortly regarding ${service.title}.`}
                     </p>
                   </motion.div>
                 )}
@@ -704,7 +724,7 @@ const ServiceDetail = () => {
       <SectionContainer bgType="white" animate={false} className="py-20 bg-white border-t border-slate-100/50">
         <MaxWidthContainer size="lg" className="px-4 md:px-8">
           <div className="grid grid-cols-1 md:grid-cols-12 gap-10 items-start">
-            <div className="md:col-span-8 space-y-6 text-left">
+            <div className={`${isLoanService ? 'md:col-span-12' : 'md:col-span-8'} space-y-6 text-left`}>
               <h2 className="text-2xl sm:text-3xl font-extrabold font-heading text-brand-secondary tracking-tight">
                 Overview of {service.title} Services
               </h2>
@@ -713,7 +733,7 @@ const ServiceDetail = () => {
               </p>
             </div>
             
-            <div className="md:col-span-4 bg-slate-50 p-6 rounded-2xl border border-slate-100 flex flex-col justify-between space-y-6 text-left">
+            {!isLoanService && <div className="md:col-span-4 bg-slate-50 p-6 rounded-2xl border border-slate-100 flex flex-col justify-between space-y-6 text-left">
               <div>
                 <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest block mb-2">Target Timeline</span>
                 <div className="flex items-center gap-2.5">
@@ -732,13 +752,48 @@ const ServiceDetail = () => {
                   </span>
                 </div>
               </div>
-            </div>
+            </div>}
           </div>
         </MaxWidthContainer>
       </SectionContainer>
 
+      {isLoanService && service.educationalSections?.length > 0 && (
+        <SectionContainer bgType="default" animate={false} className="py-16 bg-slate-50/60 border-t border-slate-100">
+          <MaxWidthContainer size="lg" className="px-4 md:px-8 space-y-12">
+            <aside className="rounded-xl border border-sky-200 bg-sky-50 p-5 text-sm leading-relaxed text-sky-950" aria-label="Financial information notice">
+              <strong>General information only.</strong> ClearFiling is not a lender. Lenders determine product availability, eligibility, terms, and credit decisions. This page is not individualized financial or tax advice.
+            </aside>
+            {service.educationalSections.map((contentSection) => (
+              <section key={contentSection.title} className="space-y-4">
+                <h2 className="text-2xl sm:text-3xl font-extrabold font-heading text-brand-secondary tracking-tight">{contentSection.title}</h2>
+                <p className="text-sm md:text-base leading-relaxed text-slate-600">{contentSection.body}</p>
+                {contentSection.points?.length > 0 && (
+                  <ul className="list-disc space-y-2 pl-6 text-sm leading-relaxed text-slate-600">
+                    {contentSection.points.map((point) => <li key={point}>{point}</li>)}
+                  </ul>
+                )}
+              </section>
+            ))}
+            {service.relatedResources?.length > 0 && (
+              <nav aria-label="Related guides" className="border-t border-slate-200 pt-8">
+                <h2 className="mb-4 text-xl font-bold font-heading text-brand-secondary">Related guides</h2>
+                <ul className="flex flex-wrap gap-x-6 gap-y-3 text-sm">
+                  {service.relatedResources.map((resource) => (
+                    <li key={resource.slug}>
+                      <Link className="font-semibold text-brand-primary underline-offset-4 hover:underline" to={`/resources/${resource.slug}`}>
+                        {resource.title}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </nav>
+            )}
+          </MaxWidthContainer>
+        </SectionContainer>
+      )}
+
       {/* 4. Benefits Section */}
-      {service.benefits && (
+      {!isLoanService && service.benefits && (
         <SectionContainer bgType="default" animate={false} className="py-20 bg-slate-50/50 border-t border-slate-100">
           <MaxWidthContainer size="xl" className="px-4 md:px-8 text-center space-y-12">
             <div className="space-y-3">
@@ -820,7 +875,7 @@ const ServiceDetail = () => {
                 Checklist Requirements
               </Badge>
               <h2 className="text-2xl sm:text-3xl font-extrabold font-heading text-brand-secondary tracking-tight">
-                {service.category === 'Loan Services' ? 'Documents Required for Application' : 'Documents Required for Registration'}
+                {isLoanService ? 'Examples of Documents a Lender May Request' : 'Documents Required for Registration'}
               </h2>
             </div>
 
@@ -832,7 +887,9 @@ const ServiceDetail = () => {
                   </div>
                   <div>
                     <span className="text-sm font-semibold text-slate-700 font-sans">{doc}</span>
-                    <span className="text-[10px] text-slate-400 font-sans block mt-0.5">Digital scanned copies are acceptable</span>
+                    <span className="text-[10px] text-slate-400 font-sans block mt-0.5">{isLoanService
+                      ? 'Requirements and submission formats vary; check the lender’s current checklist.'
+                      : 'Digital scanned copies are acceptable'}</span>
                   </div>
                 </div>
               ))}
@@ -907,6 +964,18 @@ const ServiceDetail = () => {
             <div className="space-y-3 w-full text-left">
               {faqs.map((faq, idx) => {
                 const isOpen = activeFaq === idx;
+                if (isLoanService) {
+                  return (
+                    <details key={idx} open className="bg-white border border-slate-200/80 rounded-xl overflow-hidden shadow-sm">
+                      <summary className="cursor-pointer p-5 text-sm font-bold text-brand-secondary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-primary/50">
+                        {faq.q || faq.question}
+                      </summary>
+                      <div className="border-t border-slate-100 bg-slate-50/50 p-5 text-sm leading-relaxed text-slate-600">
+                        {faq.a || faq.answer}
+                      </div>
+                    </details>
+                  );
+                }
                 return (
                   <div key={idx} className="bg-white border border-slate-200/80 rounded-xl overflow-hidden shadow-sm">
                     <button

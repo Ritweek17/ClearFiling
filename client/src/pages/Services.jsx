@@ -158,7 +158,7 @@ const Services = () => {
                             </h2>
                             <p className="text-xs text-slate-500 font-sans leading-relaxed flex-1">{service.shortDescription}</p>
                             <div className="flex items-center justify-between pt-2 border-t border-slate-100 mt-auto">
-                              <span className="text-[10px] text-slate-400">{service.processingTime}</span>
+                              {service.processingTime && <span className="text-[10px] text-slate-400">{service.processingTime}</span>}
                               <span className="flex items-center gap-1 text-xs text-brand-primary font-bold group-hover:gap-1.5 transition-all">
                                 View Details <ArrowRight className="w-3.5 h-3.5" />
                               </span>

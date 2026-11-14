@@ -22,6 +22,7 @@ import {
   Code
 } from 'lucide-react';
 import { INDEXABLE_SERVICE_SLUGS } from './serviceRegistry.js';
+import { LOAN_SERVICE_INDEX } from './loanServiceIndex.js';
 
 export const CATEGORIES = [
   'Business Formation',
@@ -4609,6 +4610,13 @@ export const SERVICES = [
     futurePage: '/services/construction-loan'
   }
 ];
+
+// Keep lightweight loan metadata and card fields in the shared catalogue.
+// Educational sections and FAQs are loaded by the lazy service-detail route.
+for (const service of SERVICES) {
+  const loanContent = LOAN_SERVICE_INDEX[service.slug];
+  if (loanContent) Object.assign(service, loanContent);
+}
 
 export const CONSULTANTS = [
   {
