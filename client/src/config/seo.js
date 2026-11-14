@@ -6,13 +6,28 @@
 
 import BUSINESS from './business.js';
 import CONTACT from './contact.js';
+import OFFICE_LOCATIONS from '../data/officeLocations.js';
+
+export const ORGANIZATION_ID = `${BUSINESS.websiteUrl}#organization`;
+export const WEBSITE_ID = `${BUSINESS.websiteUrl}#website`;
+
+export const HOME_TITLE = `${BUSINESS.primaryBrandName} (${BUSINESS.alternateBrandName}) | Business Registration, GST & Tax Compliance India`;
+export const HOME_DESCRIPTION =
+  `${BUSINESS.primaryBrandName} (also known as ${BUSINESS.alternateBrandName}) provides corporate compliance, company registration, GST filing, income tax, and trademark services across India.`;
+export const HOME_KEYWORDS =
+  `${BUSINESS.primaryBrandName}, ${BUSINESS.alternateBrandName}, ${BUSINESS.legalName}, company registration India, GST filing, ITR filing, trademark registration, business compliance India`;
+
+const officeCityNames = BUSINESS.physicalOfficeCities;
+const officeCitiesOxford = `${officeCityNames.slice(0, -1).join(', ')}, and ${officeCityNames[officeCityNames.length - 1]}`;
+const officeCitiesAmpersand = `${officeCityNames.slice(0, -1).join(', ')} & ${officeCityNames[officeCityNames.length - 1]}`;
 
 // ── Base site-level config ───────────────────────────────────────────────────
 export const SEO_BASE = {
-  siteName: BUSINESS.legalName,
-  siteUrl: BUSINESS.url,
-  defaultTitle: `${BUSINESS.name} | CA, Legal & Corporate Compliance Services`,
-  defaultDescription: BUSINESS.description,
+  siteName: BUSINESS.primaryBrandName,
+  siteUrl: BUSINESS.websiteUrl,
+  defaultTitle: HOME_TITLE,
+  defaultDescription: HOME_DESCRIPTION,
+  defaultKeywords: HOME_KEYWORDS,
   locale: 'en_IN',
   twitterHandle: '@clearfilingllp',
   ogImage: `${BUSINESS.url}/og-image.jpg`,
@@ -21,35 +36,35 @@ export const SEO_BASE = {
 // ── Page-level SEO ───────────────────────────────────────────────────────────
 export const PAGE_SEO = {
   home: {
-    title: `${BUSINESS.name} | Company Registration, GST, Trademark & Compliance Services`,
-    description: 'Expert CA, legal, and compliance services across India. Company registration, GST, trademark, income tax, annual ROC compliance. Free consultation available.',
-    canonical: BUSINESS.url,
-    keywords: 'company registration India, GST registration, trademark registration, CA firm Delhi, compliance services',
+    title: HOME_TITLE,
+    description: HOME_DESCRIPTION,
+    canonical: BUSINESS.websiteUrl,
+    keywords: HOME_KEYWORDS,
   },
   about: {
-    title: `About Clear Filing | Trusted CA, CS & Legal Advisory Firm Since 2020`,
-    description: 'Clear Filing & Compliance LLP is a premium corporate advisory firm with offices in Delhi, Deoria, and Gorakhpur. Expert CAs, CSs, and legal advisors serving 10,000+ clients.',
+    title: `About ${BUSINESS.primaryBrandName} (${BUSINESS.alternateBrandName}) | Trusted CA, CS & Legal Advisory Firm Since 2020`,
+    description: `${BUSINESS.legalName} (${BUSINESS.primaryBrandName} / ${BUSINESS.alternateBrandName}) is a corporate advisory firm with offices in ${officeCitiesOxford}. Expert CAs, CSs, and legal advisors serving 10,000+ clients.`,
     canonical: `${BUSINESS.url}/about`,
   },
   contact: {
-    title: `Contact Clear Filing | CA, CS & Compliance Advisory — Delhi, Deoria & Gorakhpur`,
-    description: 'Get in touch with Clear Filing\'s compliance experts. Call +91 9250201718, WhatsApp, or email clearfiling@zohomail.in / support.clearfiling@gmail.com. Free consultation, 9 AM – 9 PM, 7 days.',
+    title: `Contact ${BUSINESS.primaryBrandName} (${BUSINESS.alternateBrandName}) | ${officeCitiesAmpersand}`,
+    description: `Get in touch with ${BUSINESS.primaryBrandName} (${BUSINESS.alternateBrandName}) compliance experts. Call ${CONTACT.mobile.display}, WhatsApp, or email ${CONTACT.email.display} / ${CONTACT.email2.display}. Free consultation, ${CONTACT.hours.faqShort}.`,
     canonical: `${BUSINESS.url}/contact`,
-    keywords: 'contact CA firm Delhi, compliance advisor contact, company registration help, GST expert contact',
+    keywords: `contact CA firm Delhi, compliance advisor contact, company registration help, GST expert contact, ${BUSINESS.primaryBrandName}, ${BUSINESS.alternateBrandName}`,
     ogImage: `${BUSINESS.url}/og-contact.jpg`,
   },
   services: {
-    title: `Business Registration & Compliance Services India | Clear Filing`,
+    title: `Business Registration & Compliance Services India | ${BUSINESS.primaryBrandName}`,
     description: 'Explore 60+ professional compliance services including company registration, GST, trademark, income tax, annual returns, MSME, IEC, FSSAI and more.',
     canonical: `${BUSINESS.url}/services`,
   },
   blog: {
-    title: `Compliance Blog & Business Guides | Clear Filing`,
-    description: 'Expert articles on company registration, GST, trademark, income tax, and business compliance in India — written by CAs and CSs at Clear Filing.',
+    title: `Compliance Blog & Business Guides | ${BUSINESS.primaryBrandName}`,
+    description: `Expert articles on company registration, GST, trademark, income tax, and business compliance in India — written by CAs and CSs at ${BUSINESS.primaryBrandName}.`,
     canonical: `${BUSINESS.url}/blog`,
   },
   resources: {
-    title: `Business Resource Guides | Clear Filing Knowledge Centre`,
+    title: `Business Resource Guides | ${BUSINESS.primaryBrandName} Knowledge Centre`,
     description: 'Free guides on company registration, GST, trademark, annual compliance, and startup recognition for Indian businesses.',
     canonical: `${BUSINESS.url}/resources`,
   },
@@ -58,44 +73,44 @@ export const PAGE_SEO = {
 // ── JSON-LD Schema Generators ─────────────────────────────────────────────────
 
 /**
- * Organization schema — used on every page
+ * WebSite schema — used on homepage
+ */
+export const getWebsiteSchema = () => ({
+  '@context': 'https://schema.org',
+  '@type': 'WebSite',
+  '@id': WEBSITE_ID,
+  url: BUSINESS.websiteUrl,
+  name: BUSINESS.primaryBrandName,
+  alternateName: BUSINESS.alternateBrandName,
+  publisher: {
+    '@id': ORGANIZATION_ID,
+  },
+});
+
+/**
+ * Organization schema — single canonical brand entity
  */
 export const getOrganizationSchema = () => ({
   '@context': 'https://schema.org',
-  '@type': 'LegalService',
-  name: BUSINESS.legalName,
-  alternateName: BUSINESS.name,
-  url: BUSINESS.url,
+  '@type': ['Organization', 'LegalService'],
+  '@id': ORGANIZATION_ID,
+  name: BUSINESS.primaryBrandName,
+  legalName: BUSINESS.legalName,
+  alternateName: BUSINESS.alternateBrandName,
+  url: BUSINESS.websiteUrl,
   logo: BUSINESS.logoUrl,
   description: BUSINESS.description,
   foundingDate: String(BUSINESS.established),
   telephone: CONTACT.mobile.display,
   email: CONTACT.email.display,
-  address: [
-    {
-      '@type': 'PostalAddress',
-      streetAddress: 'E-20, Lajpat Nagar III',
-      addressLocality: 'New Delhi',
-      postalCode: '110024',
-      addressCountry: 'IN',
-    },
-    {
-      '@type': 'PostalAddress',
-      streetAddress: 'Asha Complex, 30 Feet Road, Near Nahar, Bhikhampur Road',
-      addressLocality: 'Deoria',
-      addressRegion: 'Uttar Pradesh',
-      postalCode: '274001',
-      addressCountry: 'IN',
-    },
-    {
-      '@type': 'PostalAddress',
-      streetAddress: '100D, Surajkund Colony',
-      addressLocality: 'Gorakhpur',
-      addressRegion: 'Uttar Pradesh',
-      postalCode: '273015',
-      addressCountry: 'IN',
-    },
-  ],
+  address: OFFICE_LOCATIONS.map((office) => ({
+    '@type': 'PostalAddress',
+    streetAddress: office.schema.streetAddress,
+    addressLocality: office.schema.addressLocality,
+    ...(office.schema.addressRegion ? { addressRegion: office.schema.addressRegion } : {}),
+    postalCode: office.schema.postalCode,
+    addressCountry: office.countryCode,
+  })),
   sameAs: [
     'https://www.facebook.com/share/1BZxGC9K7z/?mibextid=wwXIfr',
     'https://www.instagram.com/clearfilingllp',
@@ -105,59 +120,40 @@ export const getOrganizationSchema = () => ({
 });
 
 /**
- * LocalBusiness schema — for all three offices
+ * LocalBusiness schema — for all three offices linked to main Organization
  */
-export const getLocalBusinessSchema = () => [
-  {
+export const getLocalBusinessSchema = () =>
+  OFFICE_LOCATIONS.map((office) => ({
     '@context': 'https://schema.org',
     '@type': 'AccountingService',
-    name: BUSINESS.legalName,
-    url: BUSINESS.url,
-    telephone: CONTACT.mobile.display,
-    email: CONTACT.email.display,
-    openingHours: 'Mo-Su 09:00-21:00',
+    '@id': `${BUSINESS.websiteUrl}#office-${office.id}`,
+    name: `${BUSINESS.primaryBrandName} — ${office.city}`,
+    alternateName: BUSINESS.alternateBrandName,
+    url: BUSINESS.websiteUrl,
+    telephone: office.phone,
+    email: office.email,
+    openingHours: CONTACT.hours.schema,
+    parentOrganization: {
+      '@id': ORGANIZATION_ID,
+    },
     address: {
       '@type': 'PostalAddress',
-      streetAddress: 'E-20, Lajpat Nagar III',
-      addressLocality: 'New Delhi',
-      postalCode: '110024',
-      addressCountry: 'IN',
+      streetAddress: office.schema.streetAddress,
+      addressLocality: office.schema.addressLocality,
+      ...(office.schema.addressRegion ? { addressRegion: office.schema.addressRegion } : {}),
+      postalCode: office.schema.postalCode,
+      addressCountry: office.countryCode,
     },
-    geo: { '@type': 'GeoCoordinates', latitude: 28.5659, longitude: 77.2433 },
-  },
-  {
-    '@context': 'https://schema.org',
-    '@type': 'AccountingService',
-    name: `${BUSINESS.legalName} — Deoria`,
-    url: BUSINESS.url,
-    telephone: CONTACT.landline.display,
-    openingHours: 'Mo-Su 09:00-21:00',
-    address: {
-      '@type': 'PostalAddress',
-      streetAddress: 'Asha Complex, 30 Feet Road, Near Nahar, Bhikhampur Road',
-      addressLocality: 'Deoria',
-      addressRegion: 'Uttar Pradesh',
-      postalCode: '274001',
-      addressCountry: 'IN',
-    },
-  },
-  {
-    '@context': 'https://schema.org',
-    '@type': 'AccountingService',
-    name: `${BUSINESS.legalName} — Gorakhpur`,
-    url: BUSINESS.url,
-    telephone: CONTACT.gorakhpur.display,
-    openingHours: 'Mo-Su 09:00-21:00',
-    address: {
-      '@type': 'PostalAddress',
-      streetAddress: '100D, Surajkund Colony',
-      addressLocality: 'Gorakhpur',
-      addressRegion: 'Uttar Pradesh',
-      postalCode: '273015',
-      addressCountry: 'IN',
-    },
-  },
-];
+    ...(office.geo
+      ? {
+          geo: {
+            '@type': 'GeoCoordinates',
+            latitude: office.geo.lat,
+            longitude: office.geo.lng,
+          },
+        }
+      : {}),
+  }));
 
 /**
  * ContactPage schema
@@ -165,7 +161,7 @@ export const getLocalBusinessSchema = () => [
 export const getContactPageSchema = () => ({
   '@context': 'https://schema.org',
   '@type': 'ContactPage',
-  name: `Contact ${BUSINESS.name}`,
+  name: `Contact ${BUSINESS.primaryBrandName}`,
   url: `${BUSINESS.url}/contact`,
   description: PAGE_SEO.contact.description,
   mainEntity: getOrganizationSchema(),
@@ -178,7 +174,7 @@ export const getBreadcrumbSchema = (items) => ({
   '@context': 'https://schema.org',
   '@type': 'BreadcrumbList',
   itemListElement: [
-    { '@type': 'ListItem', position: 1, name: 'Home', item: BUSINESS.url },
+    { '@type': 'ListItem', position: 1, name: 'Home', item: BUSINESS.websiteUrl },
     ...items.map((item, i) => ({
       '@type': 'ListItem',
       position: i + 2,

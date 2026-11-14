@@ -11,6 +11,7 @@ import SEOHead from '../components/seo/SEOHead';
 import JsonLd from '../components/seo/JsonLd';
 import { PAGE_SEO, getContactPageSchema } from '../config/seo';
 import { COMPANY_INFO } from '../data/companyInfo';
+import CONTACT from '../config/contact.js';
 import { sendContactEmail } from '../services/emailService';
 import { INDIAN_STATES, getCitiesForState } from '../data/indianLocations';
 import {
@@ -120,7 +121,7 @@ export const validateMessage = (input) => {
 };
 
 const CONTACT_FAQS = [
-  { q: 'How quickly will I receive a response to my inquiry?', a: 'We respond to WhatsApp inquiries within 30 minutes during business hours. Email and other inquiries are answered within 2–4 business hours (office hours: 9 AM – 9 PM, 7 days). Phone and landline calls are answered immediately during working hours.' },
+  { q: 'How quickly will I receive a response to my inquiry?', a: `We respond to WhatsApp inquiries ${CONTACT.responseCopy.whatsappDuringHours}. Email and other inquiries are answered ${CONTACT.responseCopy.inquiries} (office hours: ${CONTACT.hours.faqShort}). Phone and landline calls are answered immediately during working hours.` },
   { q: 'Do I need to visit your office to get started?', a: 'No. All our services are delivered digitally. Documents are collected via email or WhatsApp, and registrations are filed online. You do not need to visit our office in person.' },
   { q: 'Is the first consultation free?', a: 'Yes, the initial consultation is completely free. We discuss your requirements, recommend the appropriate service, and provide a transparent pricing quote — with no obligation.' },
   { q: 'What areas do you serve across India?', a: 'ClearFiling serves clients across all states and union territories of India. Our primary offices are in Delhi, Deoria, and Gorakhpur (UP), but we operate digitally nationwide.' },
@@ -397,7 +398,7 @@ const Contact = () => {
                   </div>
                   <div>
                     <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider block">Typical SLA</span>
-                    <span className="text-xs font-bold text-slate-700">Response within 2–4 business hours</span>
+                    <span className="text-xs font-bold text-slate-700">{CONTACT.responseCopy.typical}</span>
                   </div>
                 </div>
               </div>
@@ -650,7 +651,7 @@ const Contact = () => {
                     </div>
                     <h3 className="text-xl font-extrabold font-heading text-brand-secondary mb-2">Inquiry Received!</h3>
                     <p className="text-sm text-slate-500 max-w-xs leading-relaxed font-sans">
-                      Your inquiry has been successfully sent. Our advisor will review and contact you within 2–4 business hours.
+                      Your inquiry has been successfully sent. Our advisor will review and contact you {CONTACT.responseCopy.inquiries}.
                     </p>
                   </motion.div>
                 )}
@@ -721,7 +722,7 @@ const Contact = () => {
         <MaxWidthContainer size="md" className="text-center space-y-6 relative z-10">
           <h2 className="text-2xl sm:text-3xl font-extrabold font-heading text-white">Prefer to Connect Directly?</h2>
           <p className="text-slate-300 text-sm max-w-md mx-auto font-sans leading-relaxed">
-            Call us or send a WhatsApp message — our senior advisors respond to WhatsApp enquiries within 30 minutes during business hours (other enquiries: 2–4 business hours).
+            Call us or send a WhatsApp message — our senior advisors respond to WhatsApp enquiries {CONTACT.responseCopy.whatsappDuringHours} (other enquiries: {CONTACT.otherSLA}).
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-3 pt-2">
             <a href={COMPANY_INFO.contact.mobile.href}

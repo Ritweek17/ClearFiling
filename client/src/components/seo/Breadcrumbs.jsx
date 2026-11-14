@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { ChevronRight, Home } from 'lucide-react';
 
 /**
@@ -7,6 +7,7 @@ import { ChevronRight, Home } from 'lucide-react';
  * Renders SEO-friendly navigation paths with structural microdata schemas.
  */
 const Breadcrumbs = ({ items = [] }) => {
+  const location = useLocation();
   return (
     <nav 
       aria-label="Breadcrumb" 
@@ -39,7 +40,7 @@ const Breadcrumbs = ({ items = [] }) => {
         {items.map((item, index) => {
           const position = index + 2;
           const isLast = index === items.length - 1;
-          const cleanPath = typeof window !== 'undefined' ? window.location.pathname : '';
+          const cleanPath = location.pathname;
           const itemUrl = isLast 
             ? `https://www.clearfiling.co.in${cleanPath}` 
             : `https://www.clearfiling.co.in${item.to || ''}`;

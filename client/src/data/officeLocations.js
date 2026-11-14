@@ -9,6 +9,8 @@
  *   landmark   — Nearby landmark for easy navigation.
  */
 
+import CONTACT from '../config/contact.js';
+
 const OFFICE_LOCATIONS = [
   {
     id: 'delhi',
@@ -25,13 +27,15 @@ const OFFICE_LOCATIONS = [
     state: 'Delhi',
     country: 'India',
     countryCode: 'IN',
-    phone: '+91 9250201718',
-    phoneHref: 'tel:+919250201718',
-    email: 'clearfiling@zohomail.in',
-    emails: [
-      'clearfiling@zohomail.in',
-      'support.clearfiling@gmail.com'
-    ],
+    phone: CONTACT.mobile.display,
+    phoneHref: CONTACT.mobile.href,
+    email: CONTACT.email.display,
+    emails: [CONTACT.email.display, CONTACT.email2.display],
+    // Existing display formats retained for compatibility adapters.
+    companyAddress: 'E-20, Lajpat Nagar III, New Delhi – 110024, India',
+    companyLines: ['E-20, Lajpat Nagar III,', 'New Delhi – 110024, India'],
+    legalAddress: 'E-20, Lajpat Nagar III, New Delhi – 110024',
+    footerPhone: null,
     // Geo coordinates — update when confirmed
     geo: { lat: 28.5659, lng: 77.2433 },
     // Google Maps — set to real URL when client provides
@@ -58,13 +62,18 @@ const OFFICE_LOCATIONS = [
     state: 'Uttar Pradesh',
     country: 'India',
     countryCode: 'IN',
-    phone: '05568-450351',
-    phoneHref: 'tel:05568450351',
-    email: 'clearfiling@zohomail.in',
-    emails: [
-      'clearfiling@zohomail.in',
-      'support.clearfiling@gmail.com'
+    phone: CONTACT.landline.display,
+    phoneHref: CONTACT.landline.href,
+    email: CONTACT.email.display,
+    emails: [CONTACT.email.display, CONTACT.email2.display],
+    companyAddress: 'Asha Complex, 30 Feet Road, Near Nahar, Bhikhampur Road, Deoria, Uttar Pradesh – 274001',
+    companyLines: [
+      'Asha Complex, 30 Feet Road,',
+      'Near Nahar, Bhikhampur Road,',
+      'Deoria, Uttar Pradesh – 274001',
     ],
+    legalAddress: 'Asha Complex, 30 Feet Road, Near Nahar, Bhikhampur Road, Deoria, Uttar Pradesh – 274001',
+    footerPhone: null,
     geo: { lat: 26.5028, lng: 83.7804 },
     mapsUrl: null,
     mapsEmbed: null,
@@ -90,13 +99,17 @@ const OFFICE_LOCATIONS = [
     state: 'Uttar Pradesh',
     country: 'India',
     countryCode: 'IN',
-    phone: '+91 9336379826',
-    phoneHref: 'tel:+919336379826',
-    email: 'clearfiling@zohomail.in',
-    emails: [
-      'clearfiling@zohomail.in',
-      'support.clearfiling@gmail.com'
+    phone: CONTACT.gorakhpur.display,
+    phoneHref: CONTACT.gorakhpur.href,
+    email: CONTACT.email.display,
+    emails: [CONTACT.email.display, CONTACT.email2.display],
+    companyAddress: '100D, Surajkund Colony, Gorakhpur, Uttar Pradesh – 273015',
+    companyLines: [
+      '100D, Surajkund Colony,',
+      'Gorakhpur, Uttar Pradesh – 273015',
     ],
+    legalAddress: '100D, Surajkund Colony, Gorakhpur, Uttar Pradesh – 273015',
+    footerPhone: CONTACT.gorakhpur.display,
     geo: { lat: 26.7606, lng: 83.3731 },
     mapsUrl: null,
     mapsEmbed: null,

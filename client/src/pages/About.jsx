@@ -11,6 +11,8 @@ import Badge from '../components/ui/Badge';
 import Card from '../components/ui/Card';
 import Breadcrumbs from '../components/seo/Breadcrumbs';
 import SEOHead from '../components/seo/SEOHead';
+import BUSINESS from '../config/business';
+import CONTACT from '../config/contact.js';
 import { PAGE_SEO } from '../config/seo';
 import { COMPANY_INFO } from '../data/companyInfo';
 
@@ -29,7 +31,7 @@ const TEAM = [
 ];
 
 const JOURNEY = [
-  { year: '2020', title: 'Firm Founded', desc: 'ClearFiling & Compliance LLP was established in Delhi with a core team of 2 CAs and 1 CS, focusing on company registrations and ROC compliance.' },
+  { year: '2020', title: 'Firm Founded', desc: `${BUSINESS.legalName} was established in Delhi with a core team of 2 CAs and 1 CS, focusing on company registrations and ROC compliance.` },
   { year: '2021', title: 'GST & Tax Practice Launched', desc: 'Expanded services to include GST registration, monthly return filing, and income tax advisory for businesses.' },
   { year: '2022', title: 'Trademark & Legal Team Added', desc: 'Onboarded qualified legal advisors and expanded services to trademark registration, copyright, and commercial agreements.' },
   { year: '2023', title: 'Deoria Office Opened', desc: 'Established our second office in Deoria, Uttar Pradesh to serve clients in the eastern UP region with the same quality of service.' },
@@ -44,11 +46,14 @@ const STATS = [
   { value: '3', label: 'Active Offices', icon: MapPin },
 ];
 
+const officeCityNames = COMPANY_INFO.offices.map((office) => office.city);
+const officeCitySummary = `${officeCityNames.slice(0, -1).join(', ')}, and ${officeCityNames.at(-1)}, Uttar Pradesh`;
+
 // ─── Component ──────────────────────────────────────────────────────────────
 const About = () => {
   const handleWhatsApp = () => {
     const text = encodeURIComponent('Hi ClearFiling, I would like to learn more about your services.');
-    window.open(`https://wa.me/919250201718?text=${text}`, '_blank');
+    window.open(`https://wa.me/${CONTACT.whatsapp.number}?text=${text}`, '_blank');
   };
 
   return (
@@ -66,13 +71,13 @@ const About = () => {
         <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-brand-primary/40 to-transparent" />
         <MaxWidthContainer size="xl" className="relative z-10 text-center space-y-6">
           <Badge variant="light" className="bg-brand-primary/20 text-brand-primary border-brand-primary/30 font-bold tracking-wider">
-            About ClearFiling
+            About {BUSINESS.primaryBrandName}
           </Badge>
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold font-heading tracking-tight text-white leading-tight max-w-4xl mx-auto">
-            Integrity. Sanctity. Dedication.
+            {BUSINESS.tagline}
           </h1>
           <p className="text-slate-300 max-w-2xl mx-auto text-base md:text-lg font-sans leading-relaxed">
-            Since 2020, ClearFiling & Compliance LLP has helped over 10,000 clients across India with company registration, taxation, trademark, and compliance advisory — with full transparency and expert precision.
+            Since 2020, {BUSINESS.primaryBrandName} ({BUSINESS.alternateBrandName}) — operated by {BUSINESS.legalName} — has helped over 10,000 clients across India with company registration, taxation, trademark, and compliance advisory with full transparency and expert precision.
           </p>
           <div className="flex items-center justify-center gap-3 flex-wrap pt-2">
             <Link to="/contact"
@@ -100,13 +105,13 @@ const About = () => {
           <div className="lg:col-span-7 space-y-6 text-left">
             <div className="space-y-3">
               <span className="text-[10px] font-bold text-brand-primary uppercase tracking-widest block">Our Background</span>
-              <h2 className="text-3xl md:text-4xl font-extrabold font-heading text-brand-secondary leading-tight">The Story Behind ClearFiling</h2>
+              <h2 className="text-3xl md:text-4xl font-extrabold font-heading text-brand-secondary leading-tight">The Story Behind {BUSINESS.primaryBrandName}</h2>
             </div>
             <p className="text-slate-600 font-sans text-base leading-relaxed">
-              ClearFiling & Compliance LLP was founded in 2020 with a clear purpose: to make corporate advisory, business registration, and regulatory compliance accessible, transparent, and professional for every Indian entrepreneur.
+              {BUSINESS.legalName} was founded in 2020 with a clear purpose: to make corporate advisory, business registration, and regulatory compliance accessible, transparent, and professional for every Indian entrepreneur.
             </p>
             <p className="text-slate-600 font-sans text-base leading-relaxed">
-              What began as a boutique firm serving early-stage startups and MSMEs in Delhi has grown into a full-service compliance practice with offices in New Delhi, Deoria, and Gorakhpur, Uttar Pradesh. Our panel now includes Chartered Accountants, Company Secretaries, legal advisors, merchant bankers, and cost accountants — each bringing deep domain expertise.
+              What began as a boutique firm serving early-stage startups and MSMEs in Delhi has grown into a full-service compliance practice with offices in {officeCitySummary}. Our panel now includes Chartered Accountants, Company Secretaries, legal advisors, merchant bankers, and cost accountants — each bringing deep domain expertise.
             </p>
             <p className="text-slate-600 font-sans text-base leading-relaxed">
               Over the past six years, we have guided more than 10,000 clients through company registrations, GST filings, trademark applications, and annual ROC compliance — with no hidden fees, no delays, and no confusion. Every client receives dedicated advisor support and regular status updates.

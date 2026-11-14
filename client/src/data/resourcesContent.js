@@ -88,8 +88,8 @@ export const RESOURCES = [
     ],
     relatedServices: [
       { slug: 'private-limited-company', title: 'Private Limited Company Registration' },
-      { slug: null, title: 'LLP Registration' },
-      { slug: null, title: 'OPC Registration' },
+      { slug: 'llp-registration', title: 'LLP Registration' },
+      { slug: 'opc-registration', title: 'OPC Registration' },
     ],
   },
 
@@ -180,7 +180,7 @@ export const RESOURCES = [
     ],
     relatedServices: [
       { slug: 'gst-registration', title: 'GST Registration' },
-      { slug: null, title: 'GST Return Filing' },
+      { slug: 'gst-return-filing', title: 'GST Return Filing' },
     ],
   },
 
@@ -252,7 +252,7 @@ export const RESOURCES = [
     ],
     relatedServices: [
       { slug: 'trademark-registration', title: 'Trademark Registration' },
-      { slug: null, title: 'Trademark Renewal' },
+      { slug: 'trademark-renewal', title: 'Trademark Renewal' },
     ],
   },
 
@@ -317,8 +317,8 @@ export const RESOURCES = [
       { slug: 'gst-guide', title: 'GST Guide' },
     ],
     relatedServices: [
-      { slug: null, title: 'Annual ROC Compliance' },
-      { slug: null, title: 'Income Tax Filing' },
+      { slug: 'annual-compliance', title: 'Annual ROC Compliance' },
+      { slug: 'income-tax-filing', title: 'Income Tax Filing' },
     ],
   },
 
@@ -380,7 +380,7 @@ export const RESOURCES = [
     ],
     relatedServices: [
       { slug: 'private-limited-company', title: 'Private Limited Company Registration' },
-      { slug: null, title: 'MSME Registration' },
+      { slug: 'msme-registration', title: 'MSME Registration' },
     ],
   },
 
@@ -437,7 +437,7 @@ export const RESOURCES = [
       { slug: 'gst-guide', title: 'GST Guide' },
     ],
     relatedServices: [
-      { slug: null, title: 'Annual ROC Compliance' },
+      { slug: 'annual-compliance', title: 'Annual ROC Compliance' },
       { slug: 'private-limited-company', title: 'Private Limited Company Registration' },
     ],
   },

@@ -66,7 +66,7 @@ const ContactHero = () => (
       >
         <a
           href={CONTACT.mobile.href}
-          aria-label={`Call Clear Filing: ${CONTACT.mobile.display}`}
+          aria-label={`Call ${BUSINESS.primaryBrandName}: ${CONTACT.mobile.display}`}
           className="flex items-center gap-2.5 bg-brand-primary text-white px-7 py-3.5 rounded-xl font-bold text-sm hover:bg-brand-primary/90 active:scale-[0.98] transition-all shadow-lg shadow-brand-primary/25"
         >
           <Phone className="w-4 h-4" aria-hidden="true" />
@@ -76,7 +76,7 @@ const ContactHero = () => (
           href={CONTACT.whatsapp.href}
           target="_blank"
           rel="noopener noreferrer"
-          aria-label="Chat with Clear Filing on WhatsApp"
+          aria-label={`Chat with ${BUSINESS.primaryBrandName} on WhatsApp`}
           className="flex items-center gap-2.5 border border-white/20 text-white px-7 py-3.5 rounded-xl font-bold text-sm hover:bg-white/8 active:scale-[0.98] transition-all"
         >
           <MessageSquare className="w-4 h-4 text-brand-success" aria-hidden="true" />
@@ -94,7 +94,7 @@ const ContactHero = () => (
         {[
           { label: 'Free Consultation' },
           { label: '10,000+ Clients Served' },
-          { label: 'Response in 2–4 Hours' },
+          { label: CONTACT.responseCopy.badge },
         ].map((item) => (
           <div key={item.label} className="flex items-center gap-1.5 text-xs text-slate-400 font-sans">
             <div className="w-1.5 h-1.5 rounded-full bg-brand-success" aria-hidden="true" />

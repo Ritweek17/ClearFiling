@@ -26,7 +26,7 @@ const CTAButtons = ({ className = '', showCall = true, buttonSize = 'sm', onCons
           size={buttonSize}
           icon={Phone}
           onClick={handleCall}
-          aria-label="Call ClearFiling"
+          aria-label={`Call ${COMPANY_INFO.brandName}`}
           className="font-medium text-slate-700 hover:text-brand-primary"
         >
           Call Now

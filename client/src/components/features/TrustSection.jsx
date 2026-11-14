@@ -8,6 +8,7 @@ import TrustFeatureCard from './TrustFeatureCard';
 import StatsStrip from './StatsStrip';
 import ProcessSteps from './ProcessSteps';
 import SecurityStrip from './SecurityStrip';
+import BUSINESS from '../../config/business.js';
 
 const TRUST_CARDS_DATA = [
   {
@@ -51,7 +52,7 @@ const TrustSection = () => {
 
       {/* 1. Header & Trust Heading (Matching rhythm of Hero Section) */}
       <SectionHeading
-        badge="About ClearFiling"
+        badge={`About ${BUSINESS.primaryBrandName}`}
         title="Trusted by Startups, MSMEs & Growing Businesses"
         description="We streamline legal setup, tax compliance, and finance workflows for businesses in India. Our emphasis on speed, professional precision, and complete clarity ensures you remain compliant always."
         align="center"
@@ -76,7 +77,7 @@ const TrustSection = () => {
       {/* 3. Statistics Section (Redesigned into Premium cards) */}
       <div className="w-full border-t border-slate-100 pt-16 mt-16">
         <SectionHeading
-          title="Why Clients Choose ClearFiling"
+          title={`Why Clients Choose ${BUSINESS.primaryBrandName}`}
           description="A visual look at our corporate milestones and core compliance metrics."
           align="center"
           className="mx-auto mb-12"
